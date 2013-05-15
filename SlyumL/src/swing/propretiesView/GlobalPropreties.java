@@ -7,7 +7,7 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 
 /**
  * This is a JPanel that is notified when an UML component is selected. When

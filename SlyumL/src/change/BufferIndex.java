@@ -4,7 +4,7 @@
  */
 package change;
 
-import classDiagram.IDiagramComponent;
+import classDiagram.IClassDiagramComponent;
 import java.util.LinkedList;
 
 /**
@@ -13,12 +13,12 @@ import java.util.LinkedList;
  */
 public class BufferIndex<T extends Object> implements Changeable
 {
-	private IDiagramComponent entity;
+	private IClassDiagramComponent entity;
 	private T o;
 	private int index;
 	private LinkedList<T> list;
 	
-	public BufferIndex(IDiagramComponent e, LinkedList<T> list, T o)
+	public BufferIndex(IClassDiagramComponent e, LinkedList<T> list, T o)
 	{
 		entity = e;
 		this.o = o;
@@ -29,13 +29,13 @@ public class BufferIndex<T extends Object> implements Changeable
 	@Override
 	public void restore()
 	{
-		IDiagramComponent i = (IDiagramComponent)o;
+		IClassDiagramComponent i = (IClassDiagramComponent)o;
 		list.remove(o);
 		list.add(index, o);
 		
 		entity.select();
 		entity.notifyObservers();
 		i.select();
-		i.notifyObservers(IDiagramComponent.UpdateMessage.SELECT);
+		i.notifyObservers(IClassDiagramComponent.UpdateMessage.SELECT);
 	}
 }

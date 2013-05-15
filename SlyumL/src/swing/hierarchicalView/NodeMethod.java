@@ -13,8 +13,8 @@ import swing.Slyum;
 import swing.hierarchicalView.IClassDiagramNode;
 import swing.hierarchicalView.ICustomizedIconNode;
 import utility.PersonalizedIcon;
-import classDiagram.IDiagramComponent;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Method;
 
 /**
@@ -58,7 +58,7 @@ public class NodeMethod extends DefaultMutableTreeNode implements Observer, ICla
 	}
 
 	@Override
-	public IDiagramComponent getAssociedComponent()
+	public IClassDiagramComponent getAssociedComponent()
 	{
 		return method;
 	}

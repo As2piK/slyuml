@@ -44,7 +44,7 @@ import swing.Slyum;
 import swing.propretiesView.GlobalPropreties;
 import utility.PersonalizedIcon;
 import utility.Utility;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Attribute;
 import classDiagram.components.Entity;
 import classDiagram.components.InterfaceEntity;

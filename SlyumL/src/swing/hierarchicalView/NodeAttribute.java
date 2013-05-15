@@ -11,8 +11,8 @@ import javax.swing.tree.TreePath;
 
 import swing.Slyum;
 import utility.PersonalizedIcon;
-import classDiagram.IDiagramComponent;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Attribute;
 
 /**
@@ -56,7 +56,7 @@ public class NodeAttribute extends DefaultMutableTreeNode implements ICustomized
 	}
 
 	@Override
-	public IDiagramComponent getAssociedComponent()
+	public IClassDiagramComponent getAssociedComponent()
 	{
 		return attribute;
 	}

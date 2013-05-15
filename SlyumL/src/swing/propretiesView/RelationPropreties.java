@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import swing.JPanelRounded;
 import swing.propretiesView.GlobalPropreties;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.relationships.Association;
 import classDiagram.relationships.Dependency;
 import classDiagram.relationships.Role;

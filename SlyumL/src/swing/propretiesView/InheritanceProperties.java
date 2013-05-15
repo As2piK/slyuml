@@ -1,6 +1,6 @@
 package swing.propretiesView;
 
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Entity;
 import classDiagram.components.InterfaceEntity;
 import classDiagram.relationships.Inheritance;

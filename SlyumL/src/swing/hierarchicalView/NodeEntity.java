@@ -9,8 +9,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import classDiagram.IDiagramComponent;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Attribute;
 import classDiagram.components.Entity;
 import classDiagram.components.Method;
@@ -63,7 +63,7 @@ public class NodeEntity extends DefaultMutableTreeNode implements Observer, ICla
 	}
 
 	@Override
-	public IDiagramComponent getAssociedComponent()
+	public IClassDiagramComponent getAssociedComponent()
 	{
 		return entity;
 	}

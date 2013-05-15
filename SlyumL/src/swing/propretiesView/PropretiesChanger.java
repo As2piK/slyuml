@@ -10,8 +10,8 @@ import javax.swing.SwingConstants;
 
 import swing.Slyum;
 import utility.PersonalizedIcon;
-import classDiagram.IComponentsObserver;
-import classDiagram.IDiagramComponent;
+import classDiagram.IClassComponentsObserver;
+import classDiagram.IClassDiagramComponent;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
@@ -35,7 +35,7 @@ import classDiagram.relationships.Role;
  * @version 1.0 - 28.07.2011
  */
 @SuppressWarnings("serial")
-public class PropretiesChanger extends JScrollPane implements IComponentsObserver
+public class PropretiesChanger extends JScrollPane implements IClassComponentsObserver
 {
 	private static PropretiesChanger instance = new PropretiesChanger();
 
@@ -152,7 +152,7 @@ public class PropretiesChanger extends JScrollPane implements IComponentsObserve
 	}
 
 	@Override
-	public void removeComponent(IDiagramComponent component)
+	public void removeComponent(IClassDiagramComponent component)
 	{
 		// no components saving in this view
 	}

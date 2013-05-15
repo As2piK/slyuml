@@ -10,8 +10,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import classDiagram.IDiagramComponent;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.relationships.Association;
 import classDiagram.relationships.Role;
 
@@ -92,7 +92,7 @@ public class NodeAssociation extends DefaultMutableTreeNode implements IClassDia
 	}
 
 	@Override
-	public IDiagramComponent getAssociedComponent()
+	public IClassDiagramComponent getAssociedComponent()
 	{
 		return association;
 	}

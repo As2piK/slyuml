@@ -8,7 +8,7 @@ import java.awt.BasicStroke;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 
 import swing.propretiesView.NoteProperties;
 import utility.SMessageDialog;

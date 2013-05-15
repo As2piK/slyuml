@@ -2,6 +2,9 @@ package classDiagram;
 
 import java.util.LinkedList;
 
+import abstractDiagram.AbstractDiagram;
+import abstractDiagram.AbstractIComponentsObserver;
+import abstractDiagram.AbstractIDiagramComponent;
 import utility.Utility;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
@@ -25,7 +28,7 @@ import classDiagram.relationships.Multi;
  * @version 1.0 - 24.07.201
  * 
  */
-public class ClassDiagram implements IComponentsObserver
+public class ClassDiagram extends AbstractDiagram implements AbstractIComponentsObserver, IClassComponentsObserver
 {
 	private static int currentID = 0;
 
@@ -34,10 +37,10 @@ public class ClassDiagram implements IComponentsObserver
 		return ++currentID;
 	}
 
-	LinkedList<IDiagramComponent> components = new LinkedList<>();
+	LinkedList<IClassDiagramComponent> components = new LinkedList<>();
 	LinkedList<Entity> entities = new LinkedList<>();
 	private String name;
-	LinkedList<IComponentsObserver> observers = new LinkedList<>();
+	LinkedList<IClassComponentsObserver> observers = new LinkedList<>();
 
 	/**
 	 * Creates a new class diagram with the specified name.
@@ -47,16 +50,13 @@ public class ClassDiagram implements IComponentsObserver
 	 */
 	public ClassDiagram(String name)
 	{
-		if (name.isEmpty())
-			throw new IllegalArgumentException("name is null");
-
-		this.name = name;
+		super(name);
 	}
 
 	@Override
 	public void addAggregation(Aggregation component)
 	{
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addAggregation(component);
 
 		addComponent(component);
@@ -65,7 +65,7 @@ public class ClassDiagram implements IComponentsObserver
 	@Override
 	public void addAssociationClass(AssociationClass component)
 	{
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addAssociationClass(component);
 
 		addComponent(component);
@@ -75,7 +75,7 @@ public class ClassDiagram implements IComponentsObserver
 	@Override
 	public void addBinary(Binary component)
 	{
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addBinary(component);
 
 		addComponent(component);
@@ -84,7 +84,7 @@ public class ClassDiagram implements IComponentsObserver
 	@Override
 	public void addClass(ClassEntity component)
 	{
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 
 			c.addClass(component);
 
@@ -99,7 +99,7 @@ public class ClassDiagram implements IComponentsObserver
 	 *            the new component.
 	 * @return true if the component has been added; false otherwise
 	 */
-	private boolean addComponent(IDiagramComponent component)
+	protected boolean addComponent(IClassDiagramComponent component)
 	{
 		if (component.getId() > currentID)
 			setCurrentId(component.getId() + 1);
@@ -120,7 +120,7 @@ public class ClassDiagram implements IComponentsObserver
 	 *            the new obserer.
 	 * @return true if the observer has been added; false otherwise.
 	 */
-	public boolean addComponentsObserver(IComponentsObserver c)
+	public boolean addComponentsObserver(IClassComponentsObserver c)
 	{
 		return observers.add(c);
 	}
@@ -128,7 +128,7 @@ public class ClassDiagram implements IComponentsObserver
 	@Override
 	public void addComposition(Composition component)
 	{
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addComposition(component);
 
 		addComponent(component);
@@ -137,7 +137,7 @@ public class ClassDiagram implements IComponentsObserver
 	@Override
 	public void addDependency(Dependency component)
 	{
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addDependency(component);
 
 		addComponent(component);
@@ -146,7 +146,7 @@ public class ClassDiagram implements IComponentsObserver
 	@Override
 	public void addInheritance(Inheritance component)
 	{
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addInheritance(component);
 
 		addComponent(component);
@@ -156,7 +156,7 @@ public class ClassDiagram implements IComponentsObserver
 	public void addInnerClass(InnerClass component)
 	{
 
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addInnerClass(component);
 
 		addComponent(component);
@@ -165,7 +165,7 @@ public class ClassDiagram implements IComponentsObserver
 	@Override
 	public void addInterface(InterfaceEntity component)
 	{
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addInterface(component);
 
 		addComponent(component);
@@ -178,7 +178,7 @@ public class ClassDiagram implements IComponentsObserver
 		if (components.contains(component))
 			return;
 		
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.addMulti(component);
 
 		addComponent(component);
@@ -197,7 +197,7 @@ public class ClassDiagram implements IComponentsObserver
 		
 		//Change.push(new BufferZOrder(entity, index));
 
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.changeZOrder(entity, index);
 	}
 
@@ -207,9 +207,9 @@ public class ClassDiagram implements IComponentsObserver
 	 * @return a copy of the array containing all class diagram elements
 	 */
 	@SuppressWarnings("unchecked")
-	public LinkedList<IDiagramComponent> getComponents()
+	public LinkedList<AbstractIDiagramComponent> getComponents()
 	{
-		return (LinkedList<IDiagramComponent>) components.clone();
+		return (LinkedList<AbstractIDiagramComponent>) components.clone();
 	}
 
 	/**
@@ -233,7 +233,7 @@ public class ClassDiagram implements IComponentsObserver
 	}
 
 	@Override
-	public void removeComponent(IDiagramComponent component)
+	public void removeComponent(IClassDiagramComponent component)
 	{
 		components.remove(component);
 
@@ -242,7 +242,7 @@ public class ClassDiagram implements IComponentsObserver
 		if (component instanceof Entity)
 			entities.remove(component);
 
-		for (final IComponentsObserver c : observers)
+		for (final IClassComponentsObserver c : observers)
 			c.removeComponent(component);
 	}
 
@@ -253,7 +253,7 @@ public class ClassDiagram implements IComponentsObserver
 	 *            the IComponentsObserver to remove
 	 * @return true if IComponentsObserver has been removed; else otherwise.
 	 */
-	public boolean removeComponentsObserver(IComponentsObserver c)
+	public boolean removeComponentsObserver(IClassComponentsObserver c)
 	{
 		return observers.remove(c);
 	}
@@ -267,9 +267,9 @@ public class ClassDiagram implements IComponentsObserver
 	 * @return the component corresponding to the given id, or null if no
 	 *         component are found.
 	 */
-	public IDiagramComponent searchComponentById(int id)
+	public AbstractIDiagramComponent searchComponentById(int id)
 	{
-		for (final IDiagramComponent c : components)
+		for (final AbstractIDiagramComponent c : components)
 
 			if (c.getId() == id)
 
@@ -315,7 +315,7 @@ public class ClassDiagram implements IComponentsObserver
 		String xml = tab + "<diagramElements>\n";
 
 		// write for each component its XML structure.
-		for (final IDiagramComponent component : components)
+		for (final AbstractIDiagramComponent component : components)
 			xml += component.toXML(depth + 1) + "\n";
 
 		return xml + tab + "</diagramElements>";

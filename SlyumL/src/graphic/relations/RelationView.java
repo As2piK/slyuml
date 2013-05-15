@@ -10,8 +10,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import utility.Utility;
-import classDiagram.IDiagramComponent;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 
 /**
  * The LineView class represent a collection of lines making a link between two
@@ -29,9 +29,9 @@ import classDiagram.IDiagramComponent.UpdateMessage;
  */
 public abstract class RelationView extends LineView implements Observer
 {
-	private final IDiagramComponent component;
+	private final IClassDiagramComponent component;
 
-	public RelationView(GraphicView graphicView, GraphicComponent source, GraphicComponent target, IDiagramComponent component, Point posSource, Point posTarget, boolean checkRecursivity)
+	public RelationView(GraphicView graphicView, GraphicComponent source, GraphicComponent target, IClassDiagramComponent component, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(graphicView, source, target, posSource, posTarget, checkRecursivity);
 

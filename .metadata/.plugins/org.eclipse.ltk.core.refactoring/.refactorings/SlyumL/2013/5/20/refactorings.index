@@ -1,0 +1,68 @@
+1368624492617	Copy compilation unit
+1368624507780	Rename type 'ClassDiagram'
+1368624561835	Copy compilation unit
+1368624575517	Rename type 'IDiagramComponent'
+1368624614010	Copy compilation unit
+1368624628527	Rename type 'IComponentsObserver'
+1368624657429	Rename type 'AbstractDiagramComponent'
+1368625139419	Delete element
+1368625184596	Copy compilation unit
+1368625192176	Rename type 'IDiagramComponent'
+1368625553843	Rename package 'diagram'
+1368625572602	Copy compilation units
+1368625580039	Rename type 'ClassDiagram'
+1368625606617	Rename type 'IComponentsObserver'
+1368625611988	Rename type 'IDiagramComponent'
+1368625630144	Rename type 'IComponentsObserver'
+1368625635568	Rename type 'IDiagramComponent'
+1368625761354	Rename package 'components'
+1368625767166	Copy compilation unit
+1368625773401	Rename type 'ClassEntity'
+1368625792870	Copy compilation unit
+1368625800001	Rename type 'Entity'
+1368625947194	Copy compilation unit
+1368625952939	Rename type 'Type'
+1368626287557	Delete element
+1368626291724	Delete element
+1368626292972	Delete element
+1368626485136	Copy compilation unit
+1368626496957	Copy compilation unit
+1368626505258	Copy compilation unit
+1368626514899	Copy compilation unit
+1368626746195	Copy compilation unit
+1368626756459	Rename type 'Method'
+1368626882008	Delete element
+1368626887187	Copy compilation unit
+1368626895133	Rename type 'Attribute'
+1368627019742	Rename local variable 'attribute'
+1368627110815	Rename method 'addAttribute'
+1368627115495	Rename local variable 'attribute'
+1368627129330	Rename field 'attributes'
+1368627332955	Rename method 'removeAttribute'
+1368627540346	Copy package
+1368627547011	Delete element
+1368627548930	Delete element
+1368627550065	Delete element
+1368627551218	Delete element
+1368627564817	Delete element
+1368627568577	Delete element
+1368627569857	Delete element
+1368627576145	Copy compilation unit
+1368627718084	Delete element
+1368627828754	Copy compilation unit
+1368627983564	Copy compilation unit
+1368628204477	Copy compilation unit
+1368628207901	Delete element
+1368628305181	Copy compilation unit
+1368628310651	Rename type 'EntityView'
+1368628405832	Copy compilation unit
+1368628432433	Rename local variable 'attribute'
+1368628467912	Rename field 'attribute'
+1368628484106	Rename local variable 'attribute'
+1368628718278	Rename local variable 'attribute'
+1368628807039	Copy compilation unit
+1368628824531	Rename field 'classWidth'
+1368628913066	Rename method 'prepareNewAttribute'
+1368629022998	Rename local variable 'tbAttribute'
+1368629039328	Rename local variable 'a'
+1368629100926	Rename field 'attributesView'

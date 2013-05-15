@@ -8,7 +8,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 
-import classDiagram.IDiagramComponent;
+import classDiagram.IClassDiagramComponent;
 import classDiagram.components.Visibility;
 import classDiagram.relationships.Role;
 
@@ -146,7 +146,7 @@ public class TextBoxRole extends TextBoxLabel
 	}
 
 	@Override
-	public IDiagramComponent getAssociedComponent()
+	public IClassDiagramComponent getAssociedComponent()
 	{
 		return role;
 	}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="diagram.AbstractDiagram"/>
+<fullyQualifiedTypeName name="diagram.AbstractIComponentsObserver"/>
+<fullyQualifiedTypeName name="diagram.AbstractIDiagramComponent"/>
+<fullyQualifiedTypeName name="classDiagram.IDiagramComponent"/>
+<fullyQualifiedTypeName name="classDiagram.components.Variable"/>
+<fullyQualifiedTypeName name="dbDiagram.components.Entity"/>
+<fullyQualifiedTypeName name="dbDiagram.DBDiagram"/>
+<fullyQualifiedTypeName name="dbDiagram.components.TableEntity"/>
+<fullyQualifiedTypeName name="graphic.textbox.TextBoxField"/>
+<fullyQualifiedTypeName name="graphic.textbox.TextBoxDBEntityName"/>
+<fullyQualifiedTypeName name="dbDiagram.components.Field"/>
+<fullyQualifiedTypeName name="dbDiagram.IDBDiagramComponent"/>
+<fullyQualifiedTypeName name="classDiagram.IClassDiagramComponent"/>
+<fullyQualifiedTypeName name="abstractDiagram.AbstractIDiagramComponent"/>
+</qualifiedTypeNameHistroy>

@@ -23,8 +23,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import utility.SDialogProjectLoading;
 import utility.SMessageDialog;
 
-import classDiagram.IDiagramComponent;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.Attribute;
 import classDiagram.components.ClassEntity;
@@ -767,7 +767,7 @@ public class XMLParser extends DefaultHandler
 		// Generals bounds
 		for (final GraphicComponent g : graphicView.getAllComponents())
 		{
-			final IDiagramComponent component = g.getAssociedComponent();
+			final IClassDiagramComponent component = g.getAssociedComponent();
 
 			if (component != null)
 			{
@@ -784,7 +784,7 @@ public class XMLParser extends DefaultHandler
 		// Associations
 		for (final LineView l : graphicView.getLinesView())
 		{
-			final IDiagramComponent component = l.getAssociedComponent();
+			final IClassDiagramComponent component = l.getAssociedComponent();
 
 			if (component != null)
 			{
@@ -831,7 +831,7 @@ public class XMLParser extends DefaultHandler
 		// Multi-association
 		for (final graphic.relations.MultiView mv : graphicView.getMultiView())
 		{
-			final IDiagramComponent component = mv.getAssociedComponent();
+			final IClassDiagramComponent component = mv.getAssociedComponent();
 
 			if (component != null)
 			{

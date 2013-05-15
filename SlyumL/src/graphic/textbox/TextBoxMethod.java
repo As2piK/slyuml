@@ -12,8 +12,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import utility.Utility;
-import classDiagram.IDiagramComponent;
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Method;
 import classDiagram.components.Variable;
 
@@ -110,7 +110,7 @@ public class TextBoxMethod extends TextBox implements Observer
 	}
 
 	@Override
-	public IDiagramComponent getAssociedComponent()
+	public IClassDiagramComponent getAssociedComponent()
 	{
 		return method;
 	}

@@ -1,6 +1,6 @@
 package swing.propretiesView;
 
-import classDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.IClassDiagramComponent.UpdateMessage;
 import graphic.GraphicComponent;
 import graphic.relations.LineCommentary;
 import graphic.relations.LineView;

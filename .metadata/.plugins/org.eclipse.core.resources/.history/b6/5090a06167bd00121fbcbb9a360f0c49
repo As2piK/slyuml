@@ -1,0 +1,265 @@
+package abstractDiagram.components;
+
+import change.BufferClass;
+import change.BufferCreationAttribute;
+import change.BufferCreationMethod;
+import change.BufferIndex;
+import change.Change;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import utility.SMessageDialog;
+import utility.Utility;
+import classDiagram.relationships.Inheritance;
+import classDiagram.relationships.Role;
+
+/**
+ * TODO
+ * 
+ * @author David Miserez
+ * @version 1.0 - 24.07.2011
+ */
+public abstract class AbstractEntity extends AbstractType
+{	
+	protected List<Inheritance> childs = new LinkedList<>();
+	protected List<Inheritance> parents = new LinkedList<>();
+	protected List<Role> roles = new LinkedList<>();
+
+	protected String stereotype = "";
+
+
+	/**
+	 * Add a new child.
+	 * 
+	 * @param child
+	 *            the new child
+	 */
+	public void addChild(Inheritance child)
+	{
+		if (child == null)
+			throw new IllegalArgumentException("child is null");
+
+		childs.add(child);
+
+		setChanged();
+	}
+
+	/**
+	 * Add a new parent.
+	 * 
+	 * @param parent
+	 *            the new parent
+	 */
+	public void addParent(Inheritance parent)
+	{
+		if (parent == null)
+			throw new IllegalArgumentException("parent is null");
+
+		parents.add(parent);
+
+		setChanged();
+	}
+
+	/**
+	 * Add a new role.
+	 * 
+	 * @param role
+	 *            the new role
+	 */
+	public void addRole(Role role)
+	{
+		if (role == null)
+			throw new IllegalArgumentException("role is null");
+
+		roles.add(role);
+
+		setChanged();
+	}
+
+	public LinkedList<AbstractEntity> getAllChilds()
+	{
+		final LinkedList<AbstractEntity> allChilds = new LinkedList<AbstractEntity>();
+		allChilds.add(this);
+
+		for (final Inheritance p : childs)
+			allChilds.addAll(p.getChild().getAllChilds());
+
+		return allChilds;
+	}
+
+	public LinkedList<AbstractEntity> getAllParents()
+	{
+		final LinkedList<AbstractEntity> allParents = new LinkedList<AbstractEntity>();
+		allParents.add(this);
+
+		for (final Inheritance p : parents)
+			allParents.addAll(p.getParent().getAllParents());
+
+		return allParents;
+	}
+
+	/**
+	 * Use in XML exportation. Get the type of the entity.
+	 * 
+	 * @return the type of the entity.
+	 */
+	protected abstract String getEntityType();
+
+	/**
+	 * Us in XML exportation. Get a string to add new tags if necessary.
+	 * 
+	 * @param depth
+	 *            the number of tabs to add before each tag
+	 * @return the tag to add before the closure tag.
+	 */
+	protected String getLastBalise(int depth)
+	{
+		return ""; // no last balise
+	}
+
+	/**
+	 * Get the stereotype of the entity.
+	 * 
+	 * @return the stereotype of the entity.
+	 */
+	public String getStereotype()
+	{
+		return stereotype;
+	}
+
+	public boolean isChildOf(AbstractEntity entity)
+	{
+		boolean isChild = false;
+
+		for (final Inheritance i : parents)
+			isChild |= i.getParent().isChildOf(entity);
+
+		return isChild || equals(entity);
+	}
+
+	public boolean isParentOf(AbstractEntity entity)
+	{
+		boolean isParent = false;
+
+		for (final Inheritance i : childs)
+			isParent |= i.getChild().isParentOf(entity);
+
+		return isParent || equals(entity);
+	}
+
+
+	/**
+	 * Move the object's position in the given array by the given offset. Offset
+	 * is added to the current index to compute the new index. The offset can be
+	 * positive or negative.
+	 * 
+	 * @param list
+	 *            the list containing the object to move
+	 * @param o
+	 *            the object to move
+	 * @param offset
+	 *            the offset for compute the new index
+	 */
+	private <T extends Object> void moveComponentPosition(LinkedList<T> list, T o, int offset)
+	{
+		final int index = list.indexOf(o);
+
+		if (index != -1)
+		{
+			Change.push(new BufferIndex<T>(this, list, o));
+
+			list.remove(o);
+			list.add(index + offset, o);
+
+			Change.push(new BufferIndex<T>(this, list, o));
+
+			setChanged();
+		}
+	}
+
+	/**
+	 * Remove the child.
+	 * 
+	 * @param child
+	 *            the child to remove
+	 */
+	public void removeChild(Inheritance child)
+	{
+		childs.remove(child);
+
+		setChanged();
+	}
+
+
+	/**
+	 * Remove the parent.
+	 * 
+	 * @param parent
+	 *            the parent to remove
+	 */
+	public void removeParent(Inheritance parent)
+	{
+		parents.remove(parent);
+
+		setChanged();
+	}
+
+	@Override
+	public boolean setName(String name)
+	{
+		BufferClass bc = new BufferClass(this);
+		boolean b;
+
+		b = super.setName(name);
+
+		if (b)
+		{
+			Change.push(bc);
+			Change.push(new BufferClass(this));
+		}
+
+		return b;
+	}
+
+	/**
+	 * Set the stereotype of the entity.
+	 * 
+	 * @param stereotype
+	 *            the new stereotype
+	 */
+	public void setStereotype(String stereotype)
+	{
+		if (stereotype == null)
+			throw new IllegalArgumentException("stereotype is null");
+
+		this.stereotype = stereotype;
+	}
+
+
+	@Override
+	public String toXML(int depth)
+	{
+		final String tab = Utility.generateTab(depth);
+
+		String xml = tab + "<entity " + "id=\"" + getId() + "\" " + "name=\"" + super.toXML(0) + "\" " + "visibility=\"" + visibility + "\" " + "entityType=\"" + getEntityType() + "\" " + "isAbstract=\"" + isAbstract() + "\" ";
+
+		if (attributes.size() == 0 && methods.size() == 0 && getLastBalise(depth).isEmpty())
+			return xml + "/>";
+
+		xml += ">\n";
+
+		for (final Attribute attribute : attributes)
+			xml += attribute.toXML(depth + 1) + "\n";
+
+		for (final Method operation : methods)
+			xml += operation.toXML(depth + 1) + "\n";
+
+		xml += getLastBalise(depth + 1);
+
+		return xml + tab + "</entity>";*/
+		
+		return ""; //TODO
+	}
+}
