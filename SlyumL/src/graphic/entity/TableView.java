@@ -1,34 +1,38 @@
 package graphic.entity;
 
-import graphic.ClassGraphicView;
-import classDiagram.components.Attribute;
-import classDiagram.components.ClassEntity;
+import graphic.GraphicView;
+
+import javax.swing.JOptionPane;
+
 import classDiagram.components.Method;
+import dbDiagram.DBDiagram;
+import dbDiagram.components.Field;
+import dbDiagram.components.TableEntity;
 
 /**
- * Represent the view of a table in UML structure.
+ * Represent the view of a class in UML structure.
  * 
- * @author Jonathan Schumacher
- * @version 1.0 - 2013
+ * @author David Miserez
+ * @version 1.0 - 25.07.2011
  */
-public class TableView extends ClassEntityView
+public class TableView extends TableEntityView
 {
 
 	/**
-	 * Create a new view from the given table.
+	 * Create a new view from the given class.
 	 * 
 	 * @param parent
 	 *            the graphic view
 	 * @param component
 	 *            the class (UML)
 	 */
-	public TableView(ClassGraphicView parent, ClassEntity component)
+	public TableView(GraphicView parent, TableEntity component)
 	{
 		super(parent, component);
 	}
 
 	@Override
-	protected void prepareNewAttribute(Attribute attribute)
+	protected void prepareNewAttribute(Field field)
 	{
 	}
 
@@ -50,6 +54,10 @@ public class TableView extends ClassEntityView
 	
 	protected void restoreEntity()
 	{
-		parent.getClassDiagram().addClass((ClassEntity)getAssociedComponent());
+		if (! (parent.getDiagram() instanceof DBDiagram)) {
+			JOptionPane.showMessageDialog(null, "ERREUR 339");
+		} else {
+			((DBDiagram)parent.getDiagram()).addTable((TableEntity)getAssociedComponent());
+		}
 	}
 }

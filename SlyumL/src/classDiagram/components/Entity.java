@@ -1,10 +1,10 @@
 package classDiagram.components;
 
-import abstractDiagram.components.AbstractEntity;
+import abstractDiagram.AbstractEntity;
 import change.BufferClass;
 import change.BufferCreationAttribute;
 import change.BufferCreationMethod;
-import change.BufferIndex;
+import change.BufferClassIndex;
 import change.Change;
 
 import java.util.LinkedList;
@@ -31,6 +31,9 @@ public abstract class Entity extends AbstractEntity
 	protected List<Inheritance> childs = new LinkedList<>();
 	protected LinkedList<Method> methods = new LinkedList<>();
 	protected List<Inheritance> parents = new LinkedList<>();
+	protected List<Role> roles = new LinkedList<>();
+
+	protected String stereotype = "";
 
 	protected Visibility visibility = Visibility.PUBLIC;
 
@@ -340,12 +343,12 @@ public abstract class Entity extends AbstractEntity
 
 		if (index != -1)
 		{
-			Change.push(new BufferIndex<T>(this, list, o));
+			Change.push(new BufferClassIndex<T>(this, list, o));
 			
 			list.remove(o);
 			list.add(index + offset, o);
 			
-			Change.push(new BufferIndex<T>(this, list, o));
+			Change.push(new BufferClassIndex<T>(this, list, o));
 
 			setChanged();
 		}

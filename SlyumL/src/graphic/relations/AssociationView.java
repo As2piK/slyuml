@@ -1,7 +1,7 @@
 package graphic.relations;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.AssociationClassView;
 import graphic.entity.ClassEntityView;
 import graphic.textbox.TextBoxLabelTitle;
@@ -35,7 +35,7 @@ public abstract class AssociationView extends RelationView
 {
 	private final Association association;
 
-	public AssociationView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Association association, Point posSource, Point posTarget, boolean checkRecursivity)
+	public AssociationView(GraphicView parent, ClassEntityView source, ClassEntityView target, Association association, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, association, posSource, posTarget, checkRecursivity);
 

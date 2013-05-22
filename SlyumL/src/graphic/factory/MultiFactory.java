@@ -1,7 +1,8 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
+import graphic.entity.AbstractEntityView;
 import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
 import graphic.relations.MultiView;
@@ -39,7 +40,7 @@ import classDiagram.relationships.Multi;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class MultiFactory extends CreateComponent
+public class MultiFactory extends CreateClassComponent
 {
 	private final JButton[] buttons = new JButton[2];
 	private ClassView classMouseHover = null;
@@ -54,10 +55,10 @@ public class MultiFactory extends CreateComponent
 	 * 
 	 * @param parent
 	 *            the graphic view
-	 * @param classDiagram
+	 * @param dbDiagram
 	 *            the class diagram
 	 */
-	public MultiFactory(final ClassGraphicView parent)
+	public MultiFactory(final GraphicView parent)
 	{
 		super(parent);
 
@@ -161,7 +162,7 @@ public class MultiFactory extends CreateComponent
 		return mv;
 	}
 	
-	public static MultiView createMulti(ClassGraphicView gv, Multi m)
+	public static MultiView createMulti(GraphicView gv, Multi m)
 	{
 		MultiView mv;
 		
@@ -229,7 +230,7 @@ public class MultiFactory extends CreateComponent
 	@Override
 	public void gMouseMoved(MouseEvent e)
 	{
-		final ClassEntityView ev = parent.getEntityAtPosition(e.getPoint());
+		final AbstractEntityView ev = parent.getEntityAtPosition(e.getPoint());
 
 		if (ev != null && ev.getClass() == ClassView.class)
 		{
@@ -253,7 +254,7 @@ public class MultiFactory extends CreateComponent
 	@Override
 	public void gMousePressed(MouseEvent e)
 	{
-		final ClassEntityView ev = parent.getEntityAtPosition(e.getPoint());
+		final AbstractEntityView ev = parent.getEntityAtPosition(e.getPoint());
 
 		if (ev != null && ev.getClass() == ClassView.class)
 		{

@@ -1,7 +1,7 @@
 package graphic.relations;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
 
 import java.awt.BasicStroke;
@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import classDiagram.ClassDiagram;
 import classDiagram.IClassDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Entity;
@@ -102,7 +103,7 @@ public class InheritanceView extends RelationView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public InheritanceView(ClassGraphicView parent,
+	public InheritanceView(GraphicView parent,
 			ClassEntityView source,
 			ClassEntityView target,
 			Inheritance inheritance,
@@ -241,7 +242,11 @@ public class InheritanceView extends RelationView
 	public void restore()
 	{
 		super.restore();
-		parent.getClassDiagram().addInheritance((Inheritance)getAssociedComponent());
+		if (parent.getDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getDiagram()).addInheritance((Inheritance)getAssociedComponent());
+		else {
+			//TODO ERREUR
+		}
 		
 		repaint();
 	}

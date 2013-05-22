@@ -1,7 +1,7 @@
 package graphic.textbox;
 
-import graphic.ClassGraphicView;
 import graphic.GraphicComponent;
+import graphic.GraphicView;
 import graphic.MovableComponent;
 import graphic.entity.ClassEntityView;
 import graphic.relations.LineCommentary;
@@ -21,14 +21,15 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JMenuItem;
 
+import abstractDiagram.AbstractIDiagramComponent;
 import swing.EditCommentaryDialog;
 import swing.Slyum;
 import swing.propretiesView.NoteProperties;
 import utility.PersonalizedIcon;
 import utility.Utility;
-import abstractDiagram.AbstractIDiagramComponent;
 import change.BufferNote;
 import change.Change;
+import classDiagram.IClassDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
 
 /**
@@ -95,7 +96,7 @@ public class TextBoxCommentary extends MovableComponent
 	 * @param text
 	 *            the default text include in the note
 	 */
-	public TextBoxCommentary(final ClassGraphicView parent, String text)
+	public TextBoxCommentary(final GraphicView parent, String text)
 	{
 		super(parent);
 
@@ -115,7 +116,7 @@ public class TextBoxCommentary extends MovableComponent
 	 * @param component
 	 *            the component associated with the not
 	 */
-	public TextBoxCommentary(final ClassGraphicView parent, String text, GraphicComponent component)
+	public TextBoxCommentary(final GraphicView parent, String text, GraphicComponent component)
 	{
 		super(parent);
 

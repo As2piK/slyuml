@@ -1,8 +1,7 @@
 package graphic.relations;
 
-import graphic.ClassGraphicView;
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.textbox.TextBox;
 
 import java.awt.BasicStroke;
@@ -24,6 +23,7 @@ import javax.swing.JOptionPane;
 import change.BufferBounds;
 import change.BufferCreation;
 import change.Change;
+
 import utility.SMessageDialog;
 import utility.Utility;
 
@@ -87,7 +87,7 @@ public abstract class LineView extends GraphicComponent
 	protected LinkedList<TextBox> tbRoles = new LinkedList<>();
 
 	public LineView (
-				final ClassGraphicView parent,
+				final GraphicView parent,
 				GraphicComponent source,
 				GraphicComponent target,
 				Point posSource,
@@ -463,7 +463,7 @@ public abstract class LineView extends GraphicComponent
 			createNewGrip(mousePressed);
 			acceptGripCreation = false;
 		}
-		else if (e.isControlDown() && !ClassGraphicView.isCtrlForGrip() || !e.isControlDown() && ClassGraphicView.isCtrlForGrip())
+		else if (e.isControlDown() && !GraphicView.isCtrlForGrip() || !e.isControlDown() && GraphicView.isCtrlForGrip())
 		{
 			final Point movement = new Point(mouse.x - mousePressed.x, mouse.y - mousePressed.y);
 
@@ -513,7 +513,7 @@ public abstract class LineView extends GraphicComponent
 		saveMouseLocation(e);
 		saveGrip = getGripBeforeLocation(e.getPoint());
 
-		if ((!e.isControlDown() && !ClassGraphicView.isCtrlForGrip() || e.isControlDown() && ClassGraphicView.isCtrlForGrip()) && e.getButton() == 1)
+		if ((!e.isControlDown() && !GraphicView.isCtrlForGrip() || e.isControlDown() && GraphicView.isCtrlForGrip()) && e.getButton() == 1)
 
 			acceptGripCreation = true;
 

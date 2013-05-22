@@ -1,7 +1,7 @@
 package swing;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.relations.LineCommentary;
 import graphic.relations.LineView;
 import graphic.relations.MultiLineView;
@@ -20,9 +20,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import abstractDiagram.AbstractIDiagramComponent;
 import utility.SDialogProjectLoading;
 import utility.SMessageDialog;
-
 import classDiagram.IClassDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.AssociationClass;
@@ -235,7 +235,7 @@ public class XMLParser extends DefaultHandler
 
 	LinkedList<Dependency> dependency = new LinkedList<>();
 
-	private final ClassGraphicView graphicView;
+	private final GraphicView graphicView;
 
 	LinkedList<Inheritance> inheritance = new LinkedList<>();
 
@@ -252,7 +252,7 @@ public class XMLParser extends DefaultHandler
 	private ClassDiagram uMLClassDiagram;
 	private SDialogProjectLoading dpl;
 
-	public XMLParser(classDiagram.ClassDiagram classDiagram, ClassGraphicView graphicView, SDialogProjectLoading dpl)
+	public XMLParser(classDiagram.ClassDiagram classDiagram, GraphicView graphicView, SDialogProjectLoading dpl)
 	{
 		super();
 
@@ -767,7 +767,7 @@ public class XMLParser extends DefaultHandler
 		// Generals bounds
 		for (final GraphicComponent g : graphicView.getAllComponents())
 		{
-			final IClassDiagramComponent component = g.getAssociedComponent();
+			final AbstractIDiagramComponent component = g.getAssociedComponent();
 
 			if (component != null)
 			{
@@ -784,7 +784,7 @@ public class XMLParser extends DefaultHandler
 		// Associations
 		for (final LineView l : graphicView.getLinesView())
 		{
-			final IClassDiagramComponent component = l.getAssociedComponent();
+			final AbstractIDiagramComponent component = l.getAssociedComponent();
 
 			if (component != null)
 			{

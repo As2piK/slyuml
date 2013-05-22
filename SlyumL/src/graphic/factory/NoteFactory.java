@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.textbox.TextBoxCommentary;
 
 import java.awt.Color;
@@ -29,7 +29,7 @@ public class NoteFactory extends RelationFactory
 	 * @param classDiagram
 	 *            the class diagram
 	 */
-	public NoteFactory(ClassGraphicView parent)
+	public NoteFactory(GraphicView parent)
 	{
 		super(parent);
 	}

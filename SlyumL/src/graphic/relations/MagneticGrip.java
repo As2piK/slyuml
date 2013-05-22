@@ -1,8 +1,7 @@
 package graphic.relations;
 
-import graphic.ClassGraphicView;
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -48,7 +47,7 @@ public class MagneticGrip extends RelationGrip implements Observer
 	 *            need to compute the first location of the anchor. Give the
 	 *            point were is the next grip on the relation.
 	 */
-	public MagneticGrip(ClassGraphicView parent, LineView relation, GraphicComponent component, Point first, Point next)
+	public MagneticGrip(GraphicView parent, LineView relation, GraphicComponent component, Point first, Point next)
 	{
 		super(parent, relation);
 

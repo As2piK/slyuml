@@ -1,20 +1,22 @@
 package dbDiagram.components;
 
+import abstractDiagram.components.AbstractType;
+import change.Change;
+
 import java.util.LinkedList;
 import java.util.Observable;
 
-import change.Change;
-import classDiagram.verifyName.TypeName;
 import dbDiagram.DBDiagram;
 import dbDiagram.IDBDiagramComponent;
+import dbDiagram.verifyName.TypeName;
 
 /**
- * Represent a type in Relationnal structure.
+ * Represent a type in UML structure.
  * 
- * @author Jonathan Schumacher
- * @version 1.0 - 2013
+ * @author David Miserez
+ * @version 1.0 - 24.07.2011
  */
-public class Type extends Observable implements IDBDiagramComponent
+public class Type extends AbstractType
 {
     public static final String accents = "ÀàÁáÂâÃãÄäÅåÒòÓóÔôÕõÖöØøÈèÉéÊêËëÇçÌìÍíÎîÏïÙùÚúÛûÜüÑñ";
     public static final String CARACTERES_VALID = "a-zA-Z_" + accents;
@@ -28,7 +30,7 @@ public class Type extends Observable implements IDBDiagramComponent
 	
 	protected final int id;
 
-	protected String name = ""; //TODO default : void
+	protected String name = "void";
 	
 	LinkedList<Integer> arraysSize = new LinkedList<>();
 

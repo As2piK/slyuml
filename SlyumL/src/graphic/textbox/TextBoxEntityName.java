@@ -1,11 +1,12 @@
 package graphic.textbox;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import abstractDiagram.AbstractEntity;
 import utility.Utility;
 import classDiagram.components.Entity;
 import classDiagram.verifyName.TypeName;
@@ -26,7 +27,7 @@ public class TextBoxEntityName extends TextBox
 {
 	private int classWidth;
 
-	private final Entity entity;
+	private final AbstractEntity entity;
 
 	/**
 	 * Create a new TextBoxEntityName with the given entity.
@@ -36,7 +37,7 @@ public class TextBoxEntityName extends TextBox
 	 * @param entity
 	 *            the entity
 	 */
-	public TextBoxEntityName(ClassGraphicView parent, Entity entity)
+	public TextBoxEntityName(GraphicView parent, AbstractEntity entity)
 	{
 		super(parent, entity.getName());
 
@@ -48,7 +49,7 @@ public class TextBoxEntityName extends TextBox
 	{
 		int style = Font.BOLD;
 
-		if (entity.isAbstract())
+		if (entity instanceof Entity && ((Entity)entity).isAbstract())
 			style |= Font.ITALIC;
 
 		effectivFont = getFont().deriveFont(style);

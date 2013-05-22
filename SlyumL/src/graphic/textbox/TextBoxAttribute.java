@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -9,6 +9,8 @@ import java.text.AttributedString;
 import java.util.Observable;
 import java.util.Observer;
 
+import abstractDiagram.AbstractIDiagramComponent;
+import abstractDiagram.components.AbstractVariable;
 import utility.Utility;
 import classDiagram.IClassDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
@@ -35,31 +37,35 @@ public class TextBoxAttribute extends TextBox implements Observer
 	 *            the attribute to convert to String
 	 * @return a String representing the Attribute.
 	 */
-	public static String getStringFromAttribute(Attribute attribute)
+	public static String getStringFromAttribute(AbstractVariable variable)
 	{
-		final String isConst = attribute.isConstant() ? " {const}" : "";
-		return attribute.getVisibility().toCar() + " " + attribute.getName() + " : " + attribute.getType() + isConst;
+		if (variable instanceof Attribute) {
+			final String isConst = ((Attribute)variable).isConstant() ? " {const}" : "";
+			return ((Attribute)variable).getVisibility().toCar() + " " + ((Attribute)variable).getName() + " : " + ((Attribute)variable).getType() + isConst;
+		} else {
+			return "875"; //TODO
+		}
 	}
 
-	private final Attribute attribute;
+	private final AbstractVariable variable;
 
 	/**
 	 * Create a new TextBoxAttribute with the given Attribute.
 	 * 
 	 * @param parent
 	 *            the graphic view
-	 * @param attribute
+	 * @param variable
 	 *            the attribute
 	 */
-	public TextBoxAttribute(ClassGraphicView parent, Attribute attribute)
+	public TextBoxAttribute(GraphicView parent, AbstractVariable variable)
 	{
-		super(parent, getStringFromAttribute(attribute));
+		super(parent, getStringFromAttribute(variable));
 
-		if (attribute == null)
+		if (variable == null)
 			throw new IllegalArgumentException("attribute is null");
 
-		this.attribute = attribute;
-		attribute.addObserver(this);
+		this.variable = variable;
+		variable.addObserver(this);
 	}
 
 	@Override
@@ -69,9 +75,9 @@ public class TextBoxAttribute extends TextBox implements Observer
 	}
 
 	@Override
-	public IClassDiagramComponent getAssociedComponent()
+	public AbstractIDiagramComponent getAssociedComponent()
 	{
-		return attribute;
+		return variable;
 	}
 
 	@Override
@@ -83,18 +89,19 @@ public class TextBoxAttribute extends TextBox implements Observer
 	@Override
 	public String getText()
 	{
-		return getStringFromAttribute(attribute);
+		return getStringFromAttribute(variable);
 	}
 
 	@Override
 	public void initAttributeString(AttributedString ats)
 	{
-		if (attribute.isConstant())
-			ats.addAttribute(TextAttribute.POSTURE, TextAttribute.POSTURE_OBLIQUE);
-
-		if (attribute.isStatic())
-			ats.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON, 2, ats.getIterator().getEndIndex());
-
+		if (variable instanceof Attribute) {
+			if (((Attribute)variable).isConstant())
+				ats.addAttribute(TextAttribute.POSTURE, TextAttribute.POSTURE_OBLIQUE);
+	
+			if (((Attribute)variable).isStatic())
+				ats.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON, 2, ats.getIterator().getEndIndex());
+		}
 	}
 
 	@Override
@@ -113,21 +120,21 @@ public class TextBoxAttribute extends TextBox implements Observer
 		{
 			super.setSelected(select);
 
-			attribute.select();
+			variable.select();
 
 			if (select)
-				attribute.notifyObservers(UpdateMessage.SELECT);
+				variable.notifyObservers(UpdateMessage.SELECT);
 			else
-				attribute.notifyObservers(UpdateMessage.UNSELECT);
+				variable.notifyObservers(UpdateMessage.UNSELECT);
 		}
 	}
 
 	@Override
 	public void setText(String text)
 	{
-		attribute.setText(text);
+		variable.setText(text);
 
-		super.setText(getStringFromAttribute(attribute));
+		super.setText(getStringFromAttribute(variable));
 	}
 
 	@Override
@@ -151,7 +158,7 @@ public class TextBoxAttribute extends TextBox implements Observer
 			}
 		else
 		{
-			final String text = getStringFromAttribute(attribute);
+			final String text = getStringFromAttribute(variable);
 
 			super.setText(text);
 		}

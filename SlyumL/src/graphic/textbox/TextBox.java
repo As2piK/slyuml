@@ -1,7 +1,7 @@
 package graphic.textbox;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -100,7 +100,7 @@ public abstract class TextBox extends GraphicComponent
 
 	private JTextField textField;
 
-	public TextBox(ClassGraphicView parent, String text)
+	public TextBox(GraphicView parent, String text)
 	{
 		super(parent);
 

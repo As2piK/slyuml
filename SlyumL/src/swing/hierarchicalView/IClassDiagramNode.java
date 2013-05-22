@@ -1,6 +1,6 @@
 package swing.hierarchicalView;
 
-import classDiagram.IClassDiagramComponent;
+import abstractDiagram.AbstractIDiagramComponent;
 
 /**
  * This interface is implemented by node (in JTree) that are associated with
@@ -16,7 +16,7 @@ public interface IClassDiagramNode
 	 * 
 	 * @return the associated UML object with this node
 	 */
-	public IClassDiagramComponent getAssociedComponent();
+	public AbstractIDiagramComponent getAssociedComponent();
 	
 	public void remove();
 }

@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.factory.AggregationFactory;
 import graphic.factory.AssociationClassFactory;
 import graphic.factory.BinaryFactory;
@@ -13,6 +13,7 @@ import graphic.factory.InterfaceFactory;
 import graphic.factory.LineCommentaryFactory;
 import graphic.factory.MultiFactory;
 import graphic.factory.NoteFactory;
+import graphic.factory.TableFactory;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,14 +27,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import swing.Slyum.DIAGRAM_TYPE;
 import utility.PersonalizedIcon;
 import utility.Utility;
 
 public class SPanelDiagramComponent extends JPanelRounded implements ActionListener
 {
 	private static final String TITLE = "Class diagram";
-	
+
 	private static final String TT_CLASS = "Class " + Utility.keystrokeToString(Slyum.KEY_CLASS);
+	private static final String TT_TABLE = "Table " + Utility.keystrokeToString(Slyum.KEY_CLASS);
 	private static final String TT_INTERFACE = "Interface " + Utility.keystrokeToString(Slyum.KEY_INTERFACE);
 	private static final String TT_CLASS_ASSOC = "Association class " + Utility.keystrokeToString(Slyum.KEY_ASSOCIATION_CLASS);
 	
@@ -111,10 +114,13 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		ClassGraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
+		GraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
 		
 		if (Slyum.ACTION_NEW_CLASS.equals(e.getActionCommand()))
 			gv.initNewComponent(new ClassFactory(gv));
+
+		else if (Slyum.ACTION_NEW_TABLE.equals(e.getActionCommand()))
+			gv.initNewComponent(new TableFactory(gv));
 
 		else if (Slyum.ACTION_NEW_INTERFACE.equals(e.getActionCommand()))
 			gv.initNewComponent(new InterfaceFactory(gv));
@@ -148,6 +154,24 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 
 		else if (Slyum.ACTION_NEW_LINK_NOTE.equals(e.getActionCommand()))
 			gv.initNewComponent(new LineCommentaryFactory(gv));
+	}
+	
+	public void switchButtonStatus() {
+		
+		if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
+			btnClass = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class.png"), Slyum.ACTION_NEW_CLASS, Color.RED, TT_CLASS);
+		} else {
+			btnClass = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class.png"), Slyum.ACTION_NEW_TABLE, Color.RED, TT_TABLE); //TODO ICON
+		}
+		
+		btnInterface.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);
+		btnClassAssociation.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);
+		btnGeneralize.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);
+		btnDependeny.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);
+		btnInnerClass.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);
+		btnAggregation.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);
+		btnComposition.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);
+		btnMulti.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);
 	}
 	
 	public SButton getBtnClass()

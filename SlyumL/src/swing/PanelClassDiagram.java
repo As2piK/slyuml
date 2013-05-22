@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -34,7 +34,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import swing.hierarchicalView.HierarchicalView;
+import swing.hierarchicalView.HierarchicalClassView;
 import swing.propretiesView.PropretiesChanger;
 import utility.SDialogProjectLoading;
 import utility.SMessageDialog;
@@ -64,7 +64,7 @@ public class PanelClassDiagram extends JPanel
 
 	private File currentFile = null;
 
-	private final ClassGraphicView graphicView;
+	private final GraphicView graphicView;
 	
 	private SSlider sSlider;
 
@@ -73,7 +73,7 @@ public class PanelClassDiagram extends JPanel
 		super(new BorderLayout());
 
 		// Create new graphiView, contain class diagram.
-		graphicView = new ClassGraphicView(getClassDiagram());
+		graphicView = new GraphicView(getClassDiagram());
         
         setTransferHandler(new FileHandler());
 		
@@ -106,7 +106,7 @@ public class PanelClassDiagram extends JPanel
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
 		
 		leftPanel.add(SPanelDiagramComponent.getInstance());
-		leftPanel.add(new HierarchicalView(getClassDiagram()));
+		leftPanel.add(new HierarchicalClassView(getClassDiagram()));
 		
 		final SSplitPane leftSplitPanel = new SSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, mainSplitPane);
 		leftSplitPanel.setDividerLocation(200);
@@ -208,7 +208,7 @@ public class PanelClassDiagram extends JPanel
 	 * 
 	 * @return the current GraphicView
 	 */
-	public ClassGraphicView getCurrentGraphicView()
+	public GraphicView getCurrentGraphicView()
 	{
 		return graphicView;
 	}
@@ -583,10 +583,10 @@ public class PanelClassDiagram extends JPanel
 	 * Return a LinkedList with all opened graphic views.
 	 * @return a LinkedList with all opened graphic views
 	 */
-	public LinkedList<ClassGraphicView> getAllGraphicView()
+	public LinkedList<GraphicView> getAllGraphicView()
 	{
 		// TODO
-		LinkedList<ClassGraphicView> l = new LinkedList<ClassGraphicView>();
+		LinkedList<GraphicView> l = new LinkedList<GraphicView>();
 		l.add(graphicView);
 		
 		return l;

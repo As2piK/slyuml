@@ -1,12 +1,13 @@
 package graphic.relations;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+import classDiagram.ClassDiagram;
 import classDiagram.relationships.Composition;
 
 /**
@@ -47,7 +48,7 @@ public class CompositionView extends BinaryView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public CompositionView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Composition composition, Point posSource, Point posTarget, boolean checkRecursivity)
+	public CompositionView(GraphicView parent, ClassEntityView source, ClassEntityView target, Composition composition, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, composition, posSource, posTarget, checkRecursivity);
 	}
@@ -62,7 +63,9 @@ public class CompositionView extends BinaryView
 	public void restore()
 	{
 		super.restore();
-		parent.getClassDiagram().addComposition((Composition)getAssociedComponent());
+		if (parent.getDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getDiagram()).addComposition((Composition)getAssociedComponent());
+		//TODO ERREUR
 		
 		repaint();
 	}

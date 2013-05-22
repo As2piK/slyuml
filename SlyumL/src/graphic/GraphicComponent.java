@@ -1,6 +1,6 @@
 package graphic;
 
-import graphic.entity.EntityView;
+import graphic.entity.ClassEntityView;
 import graphic.relations.LineView;
 
 import java.awt.Color;
@@ -18,6 +18,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
 
+import abstractDiagram.AbstractIDiagramComponent;
 import swing.PanelClassDiagram;
 import swing.SPanelDiagramComponent;
 import swing.Slyum;
@@ -26,7 +27,6 @@ import utility.PersonalizedIcon;
 import change.BufferCreation;
 import change.Change;
 import classDiagram.IClassDiagramComponent;
-import classDiagram.IDiagramComponent;
 
 /**
  * Represent a graphic component in Slyum. Graphics components can't be draw
@@ -45,7 +45,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	// resize.
 	protected Point mousePressed = new Point();
 
-	protected ClassGraphicView parent;
+	protected GraphicView parent;
 
 	protected JPopupMenu popupMenu;
 	protected JMenuItem miNewNote;
@@ -61,12 +61,12 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	 */
 	protected GraphicComponent()
 	{
-		parent = (ClassGraphicView) this;
+		parent = (GraphicView) this;
 
 		init();
 	}
 
-	public GraphicComponent(ClassGraphicView parent)
+	public GraphicComponent(GraphicView parent)
 	{
 		if (parent == null)
 			throw new IllegalArgumentException("parent is null");
@@ -92,7 +92,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	
 	public static void askNewColorForSelectedItems()
 	{
-		final SColorChooser scc = new SColorChooser(EntityView.getBasicColor());
+		final SColorChooser scc = new SColorChooser(ClassEntityView.getBasicColor());
 		
 		scc.setVisible(true);
 
@@ -150,10 +150,10 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 		parent.removeComponent(this);
 
 		// Search and remove the UML associated component.
-		final IClassDiagramComponent associed = getAssociedComponent();
+		final AbstractIDiagramComponent associed = getAssociedComponent();
 		
 		if (associed != null)
-			parent.getClassDiagram().removeComponent(associed);
+			parent.getDiagram().removeComponent(associed);
 		
 		// Search and delete all lines (relations, associations, etc...)
 		// associated with this component.
@@ -183,7 +183,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	 * 
 	 * @return
 	 */
-	public IClassDiagramComponent getAssociedComponent()
+	public AbstractIDiagramComponent getAssociedComponent()
 	{
 		return null;
 	}
@@ -197,7 +197,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	 */
 	public abstract Rectangle getBounds();
 	
-	public ClassGraphicView getGraphicView()
+	public GraphicView getGraphicView()
 	{
 		return parent;
 	}
@@ -426,7 +426,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	 */
 	public void maybeShowPopup(MouseEvent e, JPopupMenu popupMenu)
 	{
-		ClassGraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
+		GraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
 		
 		if (e.isPopupTrigger())
 		{

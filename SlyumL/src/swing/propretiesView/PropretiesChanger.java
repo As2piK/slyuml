@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import abstractDiagram.AbstractIDiagramComponent;
 import swing.Slyum;
 import utility.PersonalizedIcon;
 import classDiagram.IClassComponentsObserver;
@@ -164,5 +165,11 @@ public class PropretiesChanger extends JScrollPane implements IClassComponentsOb
 			view = noComponentLabel;
 
 		super.setViewportView(view);
+	}
+
+	@Override
+	public void removeComponent(AbstractIDiagramComponent component) {
+		// TODO Auto-generated method stub
+		
 	}
 }

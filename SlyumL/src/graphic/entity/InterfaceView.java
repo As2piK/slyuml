@@ -1,6 +1,7 @@
 package graphic.entity;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
+import classDiagram.ClassDiagram;
 import classDiagram.components.Attribute;
 import classDiagram.components.InterfaceEntity;
 import classDiagram.components.Method;
@@ -22,7 +23,7 @@ public class InterfaceView extends ClassEntityView
 	 * @param component
 	 *            the interface (UML)
 	 */
-	public InterfaceView(ClassGraphicView parent, InterfaceEntity component)
+	public InterfaceView(GraphicView parent, InterfaceEntity component)
 	{
 		super(parent, component);
 		
@@ -48,8 +49,9 @@ public class InterfaceView extends ClassEntityView
 		super.restore();
 		
 		parent.addEntity(this);
-		parent.getClassDiagram().addInterface((InterfaceEntity)getAssociedComponent());
-		
+		if (parent.getDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getDiagram()).addInterface((InterfaceEntity)getAssociedComponent());
+		//TODO ERREUR
 		parent.addOthersComponents(leftMovableSquare);
 		parent.addOthersComponents(rightMovableSquare);
 		

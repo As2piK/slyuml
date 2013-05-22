@@ -1,7 +1,5 @@
 package dbDiagram;
 
-import java.util.Observer;
-
 import abstractDiagram.AbstractIDiagramComponent;
 
 /**
@@ -17,4 +15,5 @@ public interface IDBDiagramComponent extends AbstractIDiagramComponent
 	{
 		ADD_FIELD, ADD_FIELD_NO_EDIT, MODIF, SELECT, UNSELECT
 	};
+	
 }

@@ -1,7 +1,7 @@
 package graphic.relations;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.textbox.TextBoxLabelTitle;
 
@@ -9,6 +9,7 @@ import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+import classDiagram.ClassDiagram;
 import classDiagram.IClassDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Entity;
@@ -92,7 +93,7 @@ public class DependencyView extends RelationView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public DependencyView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Dependency dependency, Point posSource, Point posTarget, boolean checkRecursivity)
+	public DependencyView(GraphicView parent, ClassEntityView source, ClassEntityView target, Dependency dependency, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, dependency, posSource, posTarget, checkRecursivity);
 
@@ -174,7 +175,9 @@ public class DependencyView extends RelationView
 	public void restore()
 	{
 		super.restore();
-		parent.getClassDiagram().addDependency((Dependency)getAssociedComponent());
+		if (parent.getDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getDiagram()).addDependency((Dependency)getAssociedComponent());
+		//TODO ERREUR
 		
 		repaint();
 	}

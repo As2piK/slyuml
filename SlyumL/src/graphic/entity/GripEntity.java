@@ -1,8 +1,7 @@
 package graphic.entity;
 
-import graphic.ClassGraphicView;
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.SquareGrip;
 
 import java.awt.Rectangle;
@@ -21,7 +20,7 @@ import change.Change;
  */
 public abstract class GripEntity extends SquareGrip
 {
-	public GripEntity(ClassGraphicView parent, int size, int cursor)
+	public GripEntity(GraphicView parent, int size, int cursor)
 	{
 		super(parent, size, cursor);
 	}

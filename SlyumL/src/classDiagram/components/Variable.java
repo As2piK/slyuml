@@ -1,12 +1,12 @@
 package classDiagram.components;
 
-import change.BufferVariable;
-import change.Change;
-import java.util.Observable;
+import javax.swing.JOptionPane;
 
 import utility.Utility;
+import abstractDiagram.components.AbstractVariable;
+import change.BufferClassVariable;
+import change.Change;
 import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.verifyName.VariableName;
 
 /**
@@ -15,7 +15,7 @@ import classDiagram.verifyName.VariableName;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Variable extends Observable implements IClassDiagramComponent
+public class Variable extends AbstractVariable
 {
 	public static final String REGEX_SEMANTIC_ATTRIBUTE = "[a-zA-Z_"+Type.accents+"][\\w_"+Type.accents+"]*";
 	
@@ -121,9 +121,9 @@ public class Variable extends Observable implements IClassDiagramComponent
 		if (!VariableName.getInstance().verifyName(name) || name.equals(getName()))
 			return false;
 
-		Change.push(new BufferVariable(this));
+		Change.push(new BufferClassVariable(this));
 		this.name = name;
-		Change.push(new BufferVariable(this));
+		Change.push(new BufferClassVariable(this));
 
 		setChanged();
 
@@ -141,9 +141,9 @@ public class Variable extends Observable implements IClassDiagramComponent
 		if (getType() != null && type.getName().equals(getType().getName()))
 			return;
 		
-		Change.push(new BufferVariable(this));
+		Change.push(new BufferClassVariable(this));
 		this.type = type;
-		Change.push(new BufferVariable(this));
+		Change.push(new BufferClassVariable(this));
 
 		setChanged();
 	}
@@ -160,5 +160,10 @@ public class Variable extends Observable implements IClassDiagramComponent
 		final String tab = Utility.generateTab(depth);
 
 		return tab + "<variable " + "name=\"" + name + "\" " + "type=\"" + type.toXML(depth+1) + "\" " + "const=\"" + constant + "\"/>";
+	}
+	
+	@Override
+	public void setText(String text) {
+		JOptionPane.showMessageDialog(null, "ERREUR #321");
 	}
 }

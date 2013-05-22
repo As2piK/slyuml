@@ -11,7 +11,7 @@ import classDiagram.components.Attribute;
  *
  * @author David
  */
-public class BufferAttribute extends BufferVariable
+public class BufferAttribute extends BufferClassVariable
 {
 	private Attribute attribute, copy;
 	

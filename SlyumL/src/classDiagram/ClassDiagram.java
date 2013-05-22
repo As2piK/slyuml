@@ -2,9 +2,11 @@ package classDiagram;
 
 import java.util.LinkedList;
 
-import utility.Utility;
+import javax.swing.JOptionPane;
+
 import abstractDiagram.AbstractDiagram;
 import abstractDiagram.AbstractIDiagramComponent;
+import utility.Utility;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
@@ -49,7 +51,10 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	 */
 	public ClassDiagram(String name)
 	{
-		super(name);
+		if (name.isEmpty())
+			throw new IllegalArgumentException("name is null");
+
+		this.name = name;
 	}
 
 	@Override
@@ -98,7 +103,7 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	 *            the new component.
 	 * @return true if the component has been added; false otherwise
 	 */
-	protected boolean addComponent(IClassDiagramComponent component)
+	private boolean addComponent(IClassDiagramComponent component)
 	{
 		if (component.getId() > currentID)
 			setCurrentId(component.getId() + 1);
@@ -119,6 +124,7 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	 *            the new obserer.
 	 * @return true if the observer has been added; false otherwise.
 	 */
+	@Override
 	public boolean addComponentsObserver(IClassComponentsObserver c)
 	{
 		return observers.add(c);
@@ -206,9 +212,9 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	 * @return a copy of the array containing all class diagram elements
 	 */
 	@SuppressWarnings("unchecked")
-	public LinkedList<AbstractIDiagramComponent> getComponents()
+	public LinkedList<IClassDiagramComponent> getComponents()
 	{
-		return (LinkedList<AbstractIDiagramComponent>) components.clone();
+		return (LinkedList<IClassDiagramComponent>) components.clone();
 	}
 
 	/**
@@ -231,6 +237,7 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 			removeComponent(components.get(0));
 	}
 
+	@Override
 	public void removeComponent(IClassDiagramComponent component)
 	{
 		components.remove(component);
@@ -241,7 +248,11 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 			entities.remove(component);
 
 		for (final IClassComponentsObserver c : observers)
-			c.removeComponent(component);
+			if (component instanceof IClassDiagramComponent) {
+				c.removeComponent((IClassDiagramComponent)component);
+			} else {
+				JOptionPane.showMessageDialog(null, "ERREUR #724");
+			}
 	}
 
 	/**
@@ -265,9 +276,9 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	 * @return the component corresponding to the given id, or null if no
 	 *         component are found.
 	 */
-	public AbstractIDiagramComponent searchComponentById(int id)
+	public IClassDiagramComponent searchComponentById(int id)
 	{
-		for (final AbstractIDiagramComponent c : components)
+		for (final IClassDiagramComponent c : components)
 
 			if (c.getId() == id)
 
@@ -313,9 +324,15 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 		String xml = tab + "<diagramElements>\n";
 
 		// write for each component its XML structure.
-		for (final AbstractIDiagramComponent component : components)
+		for (final IClassDiagramComponent component : components)
 			xml += component.toXML(depth + 1) + "\n";
 
 		return xml + tab + "</diagramElements>";
+	}
+
+	@Override
+	public void removeComponent(AbstractIDiagramComponent component) {
+		removeComponent((IClassDiagramComponent)component);
+		
 	}
 }

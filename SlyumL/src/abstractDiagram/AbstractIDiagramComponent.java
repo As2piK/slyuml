@@ -2,8 +2,6 @@ package abstractDiagram;
 
 import java.util.Observer;
 
-import abstractDiagram.AbstractIDiagramComponent;
-
 /**
  * Interface implemented by all class diagram component.
  * 

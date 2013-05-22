@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
+import swing.Slyum.DIAGRAM_TYPE;
 import utility.PersonalizedIcon;
 import utility.Utility;
 
@@ -16,7 +18,7 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 {
 	private static final long serialVersionUID = -3219782414246923686L;
 	
-	private static final String TT_NEW_PROJECT = "New project " + Utility.keystrokeToString(Slyum.KEY_NEW_PROJECT);
+	private static final String TT_NEW_PROJECT = "New project " + Utility.keystrokeToString(Slyum.KEY_NEW_CLASS_DIAGRAM);
 	private static final String TT_OPEN = "Open " + Utility.keystrokeToString(Slyum.KEY_OPEN_PROJECT);
 	private static final String TT_SAVE = "Save " + Utility.keystrokeToString(Slyum.KEY_SAVE);
 	private static final String TT_EXPORT = "Export image " + Utility.keystrokeToString(Slyum.KEY_EXPORT);
@@ -34,29 +36,57 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 		
 		return instance;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		PanelClassDiagram p = PanelClassDiagram.getInstance();
-		
-		if (Slyum.ACTION_NEW_PROJECT.equals(e.getActionCommand()))
-			p.newProject();
+		if (Slyum.ACTION_NEW_CLASS_DIAGRAM.equals(e.getActionCommand())) {
+			Slyum.currentDiagramType = DIAGRAM_TYPE.CLASS;
+			SPanelDiagramComponent.getInstance().switchButtonStatus();
+			PanelClassDiagram.getInstance().newProject();
+		} else if (Slyum.ACTION_NEW_DATABASE_DIAGRAM.equals(e.getActionCommand())) {
+			Slyum.currentDiagramType = DIAGRAM_TYPE.DB;
+			SPanelDiagramComponent.getInstance().switchButtonStatus();
+			PanelDBDiagram.getInstance().newProject();
+		} else if (Slyum.ACTION_OPEN.equals(e.getActionCommand())) {
+			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
+				PanelClassDiagram.getInstance().openFromXML();
+			} else {
+				PanelDBDiagram.getInstance().openFromXML();
+			}
+		}	
 
-		else if (Slyum.ACTION_OPEN.equals(e.getActionCommand()))
-			p.openFromXML();
+		else if (Slyum.ACTION_SAVE.equals(e.getActionCommand())) {
+			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
+				PanelClassDiagram.getInstance().saveToXML(false);
+			} else {
+				PanelDBDiagram.getInstance().saveToXML(false);
+			}
+		}
 
-		else if (Slyum.ACTION_SAVE.equals(e.getActionCommand()))
-			p.saveToXML(false);
-		
-		if (Slyum.ACTION_EXPORT.equals(e.getActionCommand()))
-			p.exportAsImage();
-		
-		else if (Slyum.ACTION_KLIPPER.equals(e.getActionCommand()))
-			p.getCurrentGraphicView().copyDiagramToClipboard();
-		
-		if (Slyum.ACTION_PRINT.equals(e.getActionCommand()))
-			p.initPrinting();
+		if (Slyum.ACTION_EXPORT.equals(e.getActionCommand())) {
+			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
+				PanelClassDiagram.getInstance().exportAsImage();
+			} else {
+				PanelDBDiagram.getInstance().exportAsImage();
+			}
+		}
+
+		else if (Slyum.ACTION_KLIPPER.equals(e.getActionCommand())) {
+			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
+				PanelClassDiagram.getInstance().getCurrentGraphicView().copyDiagramToClipboard();
+			} else {
+				PanelDBDiagram.getInstance().getCurrentGraphicView().copyDiagramToClipboard();
+			}
+		}
+
+		if (Slyum.ACTION_PRINT.equals(e.getActionCommand())) {
+			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
+				PanelClassDiagram.getInstance().initPrinting();
+			} else {
+				PanelDBDiagram.getInstance().initPrinting();
+			}
+		}
 	}
 
 	private SPanelFileComponent()
@@ -67,7 +97,7 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 		setForeground(Color.GRAY);
 		setMaximumSize(new Dimension(300, 50));
 
-		add(newProject = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "new.png"), Slyum.ACTION_NEW_PROJECT, Color.BLUE, TT_NEW_PROJECT));
+		add(newProject = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "new.png"), Slyum.ACTION_NEW_CLASS_DIAGRAM, Color.BLUE, TT_NEW_PROJECT));
 		add(open = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "open.png"), Slyum.ACTION_OPEN, Color.BLUE, TT_OPEN));
 		add(save = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "save.png"), Slyum.ACTION_SAVE, Color.BLUE, TT_SAVE));
 		add(export = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "export.png"), Slyum.ACTION_EXPORT, Color.BLUE, TT_EXPORT));

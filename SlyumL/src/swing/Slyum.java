@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 
 import java.awt.Color;
 import java.awt.Desktop;
@@ -47,6 +47,9 @@ import utility.SMessageDialog;
  */
 public class Slyum extends JFrame implements ActionListener
 {
+	public enum DIAGRAM_TYPE { CLASS, DB };
+	public static DIAGRAM_TYPE currentDiagramType = DIAGRAM_TYPE.CLASS;
+	
 	private static final long serialVersionUID = 1L;
 	private static final String APP_NAME = "Slyum";
 	public static final float version = 2.3f;
@@ -79,7 +82,8 @@ public class Slyum extends JFrame implements ActionListener
 	public static final String ACTION_UPDATE = "Update";
 	public static final String ACTION_SELECT_ALL = "SelectAll";
 	public static final String ACTION_UNSELECT_ALL = "UnselectAll";
-	public static final String ACTION_NEW_PROJECT = "NewProject";
+	public static final String ACTION_NEW_CLASS_DIAGRAM = "NewClassDiagram";
+	public static final String ACTION_NEW_DATABASE_DIAGRAM = "NewDBDiagram";
 	public static final String ACTION_OPEN = "Open";
 	public static final String ACTION_SAVE = "Save";
 	public static final String ACTION_SAVE_AS = "SaveAs";
@@ -88,6 +92,7 @@ public class Slyum extends JFrame implements ActionListener
 	public static final String ACTION_PRINT = "Print";
 	public static final String ACTION_NEW_LINK_NOTE = "LinkNote";
 	public static final String ACTION_NEW_CLASS = "NewClass";
+	public static final String ACTION_NEW_TABLE = "NewTable";
 	public static final String ACTION_NEW_INTERFACE = "NewInterface";
 	public static final String ACTION_NEW_GENERALIZE = "NewGeneralize";
 	public static final String ACTION_NEW_INNER_CLASS = "NewInnerClass";
@@ -126,7 +131,8 @@ public class Slyum extends JFrame implements ActionListener
 	public static final String ACTION_TEXTBOX_DOWN = "MoveTextBoxDown";
 	
 	// Accelerator
-	public final static String KEY_NEW_PROJECT = "ctrl alt N";
+	public final static String KEY_NEW_CLASS_DIAGRAM = "ctrl alt N";
+	public final static String KEY_NEW_DATABASE_DIAGRAM = "ctrl shift N";
 	public final static String KEY_OPEN_PROJECT = "ctrl O";
 	public final static String KEY_SAVE = "ctrl S";
 	public final static String KEY_SAVE_AS = "ctrl shift S";
@@ -407,7 +413,7 @@ public class Slyum extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		PanelClassDiagram p = PanelClassDiagram.getInstance();
-		ClassGraphicView gv = p.getCurrentGraphicView();
+		GraphicView gv = p.getCurrentGraphicView();
 		
             switch (e.getActionCommand())
             {
@@ -568,10 +574,21 @@ public class Slyum extends JFrame implements ActionListener
 		{
 			SPanelFileComponent p = SPanelFileComponent.getInstance();
 			
-			// Menu item New project
-			menuItem = createMenuItem("New Project", "newProject", KeyEvent.VK_J, KEY_NEW_PROJECT, ACTION_NEW_PROJECT, p.getBtnNewProject());
-			menu.add(menuItem);
 	
+			// Sub Menu Zoom
+			JMenu subMenu = new JMenu("New Project");
+			subMenu.setMnemonic(KeyEvent.VK_N);
+			menu.add(subMenu);
+
+			// Menu item New project
+			menuItem = createMenuItem("New Class Diagram", "NewClassDiagram", KeyEvent.VK_C, KEY_NEW_CLASS_DIAGRAM, ACTION_NEW_CLASS_DIAGRAM, p.getBtnNewProject());
+			subMenu.add(menuItem);
+			
+			// Menu item New project
+			menuItem = createMenuItem("New Database Diagram", "NewDBDiagram", KeyEvent.VK_D, KEY_NEW_DATABASE_DIAGRAM, ACTION_NEW_DATABASE_DIAGRAM, p.getBtnNewProject());
+			subMenu.add(menuItem);
+			
+			
 			/*
 			// Menu item New view
 			menuItem = createMenuItem("New View", "newView", KeyEvent.VK_N, "ctrl N", "newView", null);

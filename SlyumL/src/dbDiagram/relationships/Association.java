@@ -7,15 +7,15 @@ import java.util.Observable;
 
 import utility.Utility;
 import dbDiagram.DBDiagram;
-import dbDiagram.components.Entity;
 import dbDiagram.IDBDiagramComponent;
+import dbDiagram.components.Entity;
 
 /**
  * This abstract class is the upper-class for all associations in UML structure.
- * (Associations can be binary).
+ * (Associations can be binary, multi, agregation or composition).
  * 
- * @author Jonathan Schumacher
- * @version 1.0 - 2013
+ * @author David Miserez
+ * @version 1.0 - 24.07.2011
  */
 public abstract class Association extends Observable implements IDBDiagramComponent, ILabelTitle
 {

@@ -2,7 +2,7 @@ package graphic.factory;
 
 import change.Change;
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.AssociationClassView;
 import graphic.entity.ClassView;
 import graphic.relations.BinaryView;
@@ -35,10 +35,10 @@ public class AssociationClassFactory extends RelationFactory
 	 * 
 	 * @param parent
 	 *            the graphic view
-	 * @param classDiagram
+	 * @param dbDiagram
 	 *            the class diagram
 	 */
-	public AssociationClassFactory(ClassGraphicView parent)
+	public AssociationClassFactory(GraphicView parent)
 	{
 		super(parent);
 	}
@@ -53,7 +53,7 @@ public class AssociationClassFactory extends RelationFactory
 		if (componentMousePressed.getClass() == ClassView.class && componentMouseReleased.getClass() == ClassView.class)
 		{
 
-			final Rectangle bounds = new Rectangle(mousePressed.x + (mouseReleased.x - mousePressed.x) / 2, mousePressed.y + (mouseReleased.y - mousePressed.y) / 2 - 100, EntityFactory.DEFAULT_SIZE.width, EntityFactory.DEFAULT_SIZE.height - 5);
+			final Rectangle bounds = new Rectangle(mousePressed.x + (mouseReleased.x - mousePressed.x) / 2, mousePressed.y + (mouseReleased.y - mousePressed.y) / 2 - 100, ClassEntityFactory.DEFAULT_SIZE.width, ClassEntityFactory.DEFAULT_SIZE.height - 5);
 
 			final ClassView source = (ClassView) componentMousePressed;
 			final ClassView target = (ClassView) componentMouseReleased;
@@ -83,7 +83,7 @@ public class AssociationClassFactory extends RelationFactory
 		else if (componentMousePressed instanceof BinaryView)
 		{
 
-			final Rectangle bounds = new Rectangle(mouseReleased.x, mouseReleased.y, EntityFactory.DEFAULT_SIZE.width, EntityFactory.DEFAULT_SIZE.height - 5);
+			final Rectangle bounds = new Rectangle(mouseReleased.x, mouseReleased.y, ClassEntityFactory.DEFAULT_SIZE.width, ClassEntityFactory.DEFAULT_SIZE.height - 5);
 			
 			try
 			{

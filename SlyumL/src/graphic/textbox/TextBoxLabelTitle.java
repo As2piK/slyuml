@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.relations.LineView;
 import graphic.relations.RelationGrip;
 
@@ -48,7 +48,7 @@ public class TextBoxLabelTitle extends TextBoxLabel
 	 * @param relationView
 	 *            the line associated with the TextBox
 	 */
-	public TextBoxLabelTitle(ClassGraphicView parent, ILabelTitle label, LineView relationView)
+	public TextBoxLabelTitle(GraphicView parent, ILabelTitle label, LineView relationView)
 	{
 		super(parent, label.getLabel());
 

@@ -3,8 +3,8 @@ package dbDiagram.relationships;
 import java.util.Observable;
 
 import utility.Utility;
-import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
+import dbDiagram.DBDiagram;
+import dbDiagram.IDBDiagramComponent;
 
 /**
  * Represent a multiplicity in UML structure. A multiplicity is used by role to
@@ -13,7 +13,7 @@ import classDiagram.IClassDiagramComponent;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Multiplicity extends Observable implements IClassDiagramComponent
+public class Multiplicity extends Observable implements IDBDiagramComponent
 {
 	public static final Multiplicity ONE_ONLY = new Multiplicity(1);
 
@@ -21,7 +21,7 @@ public class Multiplicity extends Observable implements IClassDiagramComponent
 	public static final Multiplicity ZERO = new Multiplicity(0);
 	public static final Multiplicity ZERO_OR_MORE = new Multiplicity(0, Integer.MAX_VALUE);
 	public static final Multiplicity ZERO_OR_ONE = new Multiplicity(0, 1);
-	protected final int id = ClassDiagram.getNextId();
+	protected final int id = DBDiagram.getNextId();
 
 	private int lowerBound, upperBound;
 

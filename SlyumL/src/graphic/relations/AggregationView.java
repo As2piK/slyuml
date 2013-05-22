@@ -1,6 +1,6 @@
 package graphic.relations;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
 
 import java.awt.BasicStroke;
@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+import classDiagram.ClassDiagram;
 import classDiagram.relationships.Aggregation;
 
 /**
@@ -96,7 +97,7 @@ public class AggregationView extends BinaryView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public AggregationView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Aggregation aggregation, Point posSource, Point posTarget, boolean checkRecursivity)
+	public AggregationView(GraphicView parent, ClassEntityView source, ClassEntityView target, Aggregation aggregation, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, aggregation, posSource, posTarget, checkRecursivity);
 	}
@@ -111,8 +112,9 @@ public class AggregationView extends BinaryView
 	public void restore()
 	{
 		super.restore();
-		parent.getClassDiagram().addAggregation((Aggregation)getAssociedComponent());
-		
+		if (parent.getDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getDiagram()).addAggregation((Aggregation)getAssociedComponent());
+		//TODO ERREUR
 		repaint();
 	}
 }

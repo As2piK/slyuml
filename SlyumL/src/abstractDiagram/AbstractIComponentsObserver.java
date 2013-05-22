@@ -1,6 +1,6 @@
 package abstractDiagram;
 
-import classDiagram.components.Entity;
+
 
 /**
  * Interface implemented by all listeners of class diagram. When the class
@@ -12,13 +12,5 @@ import classDiagram.components.Entity;
  */
 public interface AbstractIComponentsObserver
 {
-	/**
-	 * Changes the index of entity in the array and notifiy observers.
-	 * 
-	 * @param entity
-	 *            the entity to move.
-	 * @param index
-	 *            the index to move the entity.
-	 */
-	public void changeZOrder(Entity entity, int index);
+	public void removeComponent(AbstractIDiagramComponent component);
 }

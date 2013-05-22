@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -55,7 +55,7 @@ public class SPanelStyleComponent extends JPanelRounded implements IListenerComp
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		ClassGraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
+		GraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
 		
 		if (Slyum.ACTION_ALIGN_TOP.equals(e.getActionCommand()))
 			gv.alignHorizontal(true);

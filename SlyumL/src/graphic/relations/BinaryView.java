@@ -1,12 +1,13 @@
 package graphic.relations;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.textbox.TextBoxRole;
 
 import java.awt.Point;
 import java.util.LinkedList;
 
+import classDiagram.ClassDiagram;
 import classDiagram.relationships.Binary;
 import classDiagram.relationships.Role;
 
@@ -48,7 +49,7 @@ public class BinaryView extends AssociationView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public BinaryView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Binary binary, Point posSource, Point posTarget, boolean checkRecursivity)
+	public BinaryView(GraphicView parent, ClassEntityView source, ClassEntityView target, Binary binary, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, binary, posSource, posTarget, checkRecursivity);
 
@@ -69,8 +70,10 @@ public class BinaryView extends AssociationView
 		super.restore();
 		
 		if (this.getClass().equals(BinaryView.class))
-			
-			parent.getClassDiagram().addBinary((Binary)getAssociedComponent());
+
+			if (parent.getDiagram() instanceof ClassDiagram)
+				((ClassDiagram)parent.getDiagram()).addBinary((Binary)getAssociedComponent());
+			//TODO ERREUR
 		
 		repaint();
 	}

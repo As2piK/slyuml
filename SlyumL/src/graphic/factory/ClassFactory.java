@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
 
@@ -20,7 +20,7 @@ import classDiagram.components.Visibility;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class ClassFactory extends EntityFactory
+public class ClassFactory extends ClassEntityFactory
 {
 
 	/**
@@ -28,10 +28,10 @@ public class ClassFactory extends EntityFactory
 	 * 
 	 * @param parent
 	 *            the graphic view
-	 * @param classDiagram
+	 * @param dbDiagram
 	 *            the class diagram
 	 */
-	public ClassFactory(ClassGraphicView parent)
+	public ClassFactory(GraphicView parent)
 	{
 		super(parent);
 	}

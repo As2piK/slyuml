@@ -1,8 +1,7 @@
 package graphic.relations;
 
-import graphic.ClassGraphicView;
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.SquareGrip;
 
 import java.awt.Cursor;
@@ -19,6 +18,7 @@ import javax.swing.JPopupMenu;
 import change.BufferBounds;
 import change.BufferCreation;
 import change.Change;
+
 import swing.Slyum;
 import utility.PersonalizedIcon;
 import utility.Utility;
@@ -51,7 +51,7 @@ public class RelationGrip extends SquareGrip implements ActionListener
 	 * @param relationView
 	 *            the LineView associated.
 	 */
-	public RelationGrip(ClassGraphicView parent, LineView relationView)
+	public RelationGrip(GraphicView parent, LineView relationView)
 	{
 		super(parent, DEFAULT_SIZE, Cursor.HAND_CURSOR);
 
@@ -206,7 +206,7 @@ public class RelationGrip extends SquareGrip implements ActionListener
 		if (anchor == null)
 			return;
 
-		final Rectangle repaintBounds = Utility.growRectangle(relation.getBounds(), ClassGraphicView.getGridSize() + 20);
+		final Rectangle repaintBounds = Utility.growRectangle(relation.getBounds(), GraphicView.getGridSize() + 20);
 
 		this.anchor = new Point(anchor);
 		relation.gripMoved(repaintBounds);

@@ -15,4 +15,5 @@ public interface IClassDiagramComponent extends AbstractIDiagramComponent
 	{
 		ADD_ATTRIBUTE, ADD_METHOD, ADD_ATTRIBUTE_NO_EDIT, ADD_METHOD_NO_EDIT, MODIF, SELECT, UNSELECT
 	};
+	
 }

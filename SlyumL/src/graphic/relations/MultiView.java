@@ -1,6 +1,6 @@
 package graphic.relations;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.MovableComponent;
 import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
@@ -21,6 +21,7 @@ import java.util.Observer;
 import javax.swing.JMenuItem;
 
 import utility.Utility;
+import classDiagram.ClassDiagram;
 import classDiagram.IClassDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.relationships.Binary;
@@ -50,7 +51,7 @@ public class MultiView extends MovableComponent implements Observer
 	 * @param multi
 	 *            the multi UML
 	 */
-	public MultiView(ClassGraphicView parent, Multi multi)
+	public MultiView(GraphicView parent, Multi multi)
 	{
 		super(parent);
 
@@ -324,7 +325,9 @@ public class MultiView extends MovableComponent implements Observer
 		super.restore();
 
 		parent.addMultiView(this);
-		parent.getClassDiagram().addMulti(multi);
+		if (parent.getDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getDiagram()).addMulti(multi);
+		//TODO ERREUR
 	}
 
 	@Override
@@ -395,7 +398,9 @@ public class MultiView extends MovableComponent implements Observer
 
 		final Binary binary = new Binary(roles.getFirst().getEntity(), roles.getLast().getEntity(), false, multi.getId());
 
-		parent.getClassDiagram().addBinary(binary);
+		if (parent.getDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getDiagram()).addBinary(binary);
+		//TODO ERREUR
 	}
 
 	@Override

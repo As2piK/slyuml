@@ -1,7 +1,5 @@
 package dbDiagram.components;
 
-import java.util.LinkedList;
-
 import swing.XMLParser.EntityType;
 
 /**
@@ -12,18 +10,17 @@ import swing.XMLParser.EntityType;
  */
 public class TableEntity extends Entity
 {
-
 	/**
-	 * Construct a new table.
+	 * Construct a new class.
 	 * 
 	 * @param name
 	 *            the name of the class
 	 * @param visibility
 	 *            the visibility of the class
 	 */
-	public TableEntity(String name)
+	public TableEntity(String name, Visibility visibility)
 	{
-		super(name);
+		super(name, visibility);
 	}
 
 	/**
@@ -37,9 +34,9 @@ public class TableEntity extends Entity
 	 * @param id
 	 *            the class id
 	 */
-	public TableEntity(String name, int id)
+	public TableEntity(String name, Visibility visibility, int id)
 	{
-		super(name, id);
+		super(name, visibility, id);
 	}
 
 	@Override

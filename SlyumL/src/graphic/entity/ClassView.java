@@ -1,6 +1,7 @@
 package graphic.entity;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
+import classDiagram.ClassDiagram;
 import classDiagram.components.Attribute;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Method;
@@ -22,7 +23,7 @@ public class ClassView extends ClassEntityView
 	 * @param component
 	 *            the class (UML)
 	 */
-	public ClassView(ClassGraphicView parent, ClassEntity component)
+	public ClassView(GraphicView parent, ClassEntity component)
 	{
 		super(parent, component);
 	}
@@ -50,6 +51,7 @@ public class ClassView extends ClassEntityView
 	
 	protected void restoreEntity()
 	{
-		parent.getClassDiagram().addClass((ClassEntity)getAssociedComponent());
+		if (parent.getDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getDiagram()).addClass((ClassEntity)getAssociedComponent());
 	}
 }

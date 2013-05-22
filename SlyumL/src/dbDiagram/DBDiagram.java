@@ -2,26 +2,32 @@ package dbDiagram;
 
 import java.util.LinkedList;
 
-import utility.Utility;
 import abstractDiagram.AbstractDiagram;
-import abstractDiagram.AbstractIComponentsObserver;
 import abstractDiagram.AbstractIDiagramComponent;
-import classDiagram.components.Entity;
-import classDiagram.relationships.Binary;
-import classDiagram.relationships.Inheritance;
-import classDiagram.relationships.Multi;
+import utility.Utility;
+import dbDiagram.components.AssociationClass;
 import dbDiagram.components.TableEntity;
+import dbDiagram.components.Entity;
+import dbDiagram.components.InterfaceEntity;
+import dbDiagram.relationships.Aggregation;
+import dbDiagram.relationships.Binary;
+import dbDiagram.relationships.Composition;
+import dbDiagram.relationships.Dependency;
+import dbDiagram.relationships.Inheritance;
+import dbDiagram.relationships.InnerClass;
+import dbDiagram.relationships.Multi;
 
 /**
- * This class contains all structurals Relationnal components. Add tables from here. It implements
- * AbstractIComponentsObserver and notify all listeners when a new Relationnal components is
+ * This class contains all structurals UML components. Add classes, interfaces,
+ * associations, inheritances, dependecies from here. It implements
+ * IComponentObserver and notify all listeners when a new UML components is
  * added, removed or modified.
  * 
- * @author Jonathan Schumacher
- * @version 1.0 - 2013
+ * @author David Miserez
+ * @version 1.0 - 24.07.201
  * 
  */
-public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObserver, IDBComponentsObserver
+public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 {
 	private static int currentID = 0;
 
@@ -43,29 +49,44 @@ public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObs
 	 */
 	public DBDiagram(String name)
 	{
-		super(name);
+		if (name.isEmpty())
+			throw new IllegalArgumentException("name is null");
+
+		this.name = name;
+	}
+
+	@Override
+	public void addAggregation(Aggregation component)
+	{
+		for (final IDBComponentsObserver c : observers)
+			c.addAggregation(component);
+
+		addComponent(component);
+	}
+
+	@Override
+	public void addAssociationClass(AssociationClass component) //TODO DELETE
+	{
 	}
 
 	@Override
 	public void addBinary(Binary component)
 	{
-		/* TODO
 		for (final IDBComponentsObserver c : observers)
 			c.addBinary(component);
 
-		addComponent(component);*/
+		addComponent(component);
 	}
 
 	@Override
 	public void addTable(TableEntity component)
 	{
-		/* TODO
 		for (final IDBComponentsObserver c : observers)
 
-			c.addClass(component);
+			c.addTable(component);
 
 		addComponent(component);
-		entities.addFirst(component);*/
+		entities.addFirst(component);
 	}
 
 	/**
@@ -75,7 +96,7 @@ public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObs
 	 *            the new component.
 	 * @return true if the component has been added; false otherwise
 	 */
-	protected boolean addComponent(IDBDiagramComponent component)
+	private boolean addComponent(IDBDiagramComponent component)
 	{
 		if (component.getId() > currentID)
 			setCurrentId(component.getId() + 1);
@@ -102,26 +123,62 @@ public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObs
 	}
 
 	@Override
+	public void addComposition(Composition component)
+	{
+		for (final IDBComponentsObserver c : observers)
+			c.addComposition(component);
+
+		addComponent(component);
+	}
+
+	@Override
+	public void addDependency(Dependency component)
+	{
+		for (final IDBComponentsObserver c : observers)
+			c.addDependency(component);
+
+		//addComponent(component);
+	}
+
+	@Override
 	public void addInheritance(Inheritance component)
 	{
-		/* TODO
 		for (final IDBComponentsObserver c : observers)
 			c.addInheritance(component);
 
-		addComponent(component);*/
+		addComponent(component);
+	}
+
+	@Override
+	public void addInnerClass(InnerClass component)
+	{
+
+		for (final IDBComponentsObserver c : observers)
+			c.addInnerClass(component);
+
+		addComponent(component);
+	}
+
+	@Override
+	public void addInterface(InterfaceEntity component)
+	{
+		for (final IDBComponentsObserver c : observers)
+			c.addInterface(component);
+
+		addComponent(component);
+		entities.addFirst(component);
 	}
 
 	@Override
 	public void addMulti(Multi component)
 	{
-		/* TODO
 		if (components.contains(component))
 			return;
 		
 		for (final IDBComponentsObserver c : observers)
 			c.addMulti(component);
 
-		addComponent(component); */
+		addComponent(component);
 	}
 
 	@Override
@@ -147,9 +204,9 @@ public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObs
 	 * @return a copy of the array containing all class diagram elements
 	 */
 	@SuppressWarnings("unchecked")
-	public LinkedList<AbstractIDiagramComponent> getComponents()
+	public LinkedList<IDBDiagramComponent> getComponents()
 	{
-		return (LinkedList<AbstractIDiagramComponent>) components.clone();
+		return (LinkedList<IDBDiagramComponent>) components.clone();
 	}
 
 	/**
@@ -173,13 +230,13 @@ public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObs
 	}
 
 	@Override
-	public void removeComponent(AbstractIDiagramComponent component)
+	public void removeComponent(IDBDiagramComponent component)
 	{
 		components.remove(component);
 
 		// Optimizes this (create more array for specific elements, not just an
 		// array for all components.
-		if (component instanceof dbDiagram.components.Entity)
+		if (component instanceof Entity)
 			entities.remove(component);
 
 		for (final IDBComponentsObserver c : observers)
@@ -207,9 +264,9 @@ public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObs
 	 * @return the component corresponding to the given id, or null if no
 	 *         component are found.
 	 */
-	public AbstractIDiagramComponent searchComponentById(int id)
+	public IDBDiagramComponent searchComponentById(int id)
 	{
-		for (final AbstractIDiagramComponent c : components)
+		for (final IDBDiagramComponent c : components)
 
 			if (c.getId() == id)
 
@@ -255,9 +312,14 @@ public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObs
 		String xml = tab + "<diagramElements>\n";
 
 		// write for each component its XML structure.
-		for (final AbstractIDiagramComponent component : components)
+		for (final IDBDiagramComponent component : components)
 			xml += component.toXML(depth + 1) + "\n";
 
 		return xml + tab + "</diagramElements>";
+	}
+
+	@Override
+	public void removeComponent(AbstractIDiagramComponent component) {
+		removeComponent((IDBDiagramComponent) component);
 	}
 }

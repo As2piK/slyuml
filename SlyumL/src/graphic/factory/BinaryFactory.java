@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
 import graphic.relations.BinaryView;
@@ -37,10 +37,10 @@ public class BinaryFactory extends RelationFactory
 	 * 
 	 * @param parent
 	 *            the graphic view
-	 * @param classDiagram
+	 * @param dbDiagram
 	 *            the class diagram
 	 */
-	public BinaryFactory(ClassGraphicView parent)
+	public BinaryFactory(GraphicView parent)
 	{
 		super(parent);
 	}

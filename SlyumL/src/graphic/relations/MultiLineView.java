@@ -1,7 +1,7 @@
 package graphic.relations;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.textbox.TextBoxRole;
 
@@ -45,7 +45,7 @@ public class MultiLineView extends LineView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public MultiLineView(ClassGraphicView graphicView, MultiView source, ClassEntityView target, Role role, Point posSource, Point posTarget, boolean checkRecursivity)
+	public MultiLineView(GraphicView graphicView, MultiView source, ClassEntityView target, Role role, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(graphicView, source, target, posSource, posTarget, checkRecursivity);
 

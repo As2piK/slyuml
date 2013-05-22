@@ -1,6 +1,6 @@
 package graphic.relations;
 
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
 
 import java.awt.BasicStroke;
@@ -61,7 +61,7 @@ public class InnerClassView extends InheritanceView
 		g2.drawLine(ref.x + vectorXN1, ref.y + vectorYN1, ref.x + vectorXN2, ref.y + vectorYN2);
 	}
 
-	public InnerClassView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Inheritance inheritance, Point posSource, Point posTarget, boolean checkRecursivity)
+	public InnerClassView(GraphicView parent, ClassEntityView source, ClassEntityView target, Inheritance inheritance, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, inheritance, posSource, posTarget, checkRecursivity);
 	}

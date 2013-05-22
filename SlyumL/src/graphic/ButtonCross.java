@@ -20,7 +20,7 @@ public abstract class ButtonCross extends GraphicComponent
 	private boolean isMouseHover = false;
 	private boolean isMousePressed = false;
 	
-	public ButtonCross(ClassGraphicView parent, ImageIcon image)
+	public ButtonCross(GraphicView parent, ImageIcon image)
 	{
 		super(parent);
 		

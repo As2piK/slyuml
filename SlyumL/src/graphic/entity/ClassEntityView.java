@@ -1,8 +1,7 @@
 package graphic.entity;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
-import graphic.MovableComponent;
+import graphic.GraphicView;
 import graphic.textbox.TextBox;
 import graphic.textbox.TextBoxAttribute;
 import graphic.textbox.TextBoxEntityName;
@@ -25,7 +24,6 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
@@ -40,6 +38,7 @@ import swing.Slyum;
 import utility.PersonalizedIcon;
 import utility.SMessageDialog;
 import utility.Utility;
+import abstractDiagram.AbstractIDiagramComponent;
 import change.BufferBounds;
 import change.Change;
 import classDiagram.IClassDiagramComponent;
@@ -56,7 +55,7 @@ import classDiagram.components.Visibility;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public abstract class ClassEntityView extends MovableComponent implements Observer
+public abstract class ClassEntityView extends AbstractEntityView
 {
 	public static final Color baseColor = new Color(255, 247, 225);
 	private static Color basicColor = new Color(baseColor.getRGB());
@@ -206,7 +205,7 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 	private static final Font stereotypeFontBasic = new Font(Slyum.getInstance().defaultFont.getFamily(), 0, 11); // TODO
 	private Font stereotypeFont = stereotypeFontBasic;
 
-	public ClassEntityView(final ClassGraphicView parent, Entity component)
+	public ClassEntityView(final GraphicView parent, Entity component)
 	{
 		super(parent);
 
@@ -468,7 +467,7 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 		final Rectangle bounds = getBounds();
 		
 		Change.push(new BufferBounds(this));
-		setBounds(new Rectangle(bounds.x, bounds.y, width + ClassGraphicView.getGridSize() + 15, bounds.height));
+		setBounds(new Rectangle(bounds.x, bounds.y, width + GraphicView.getGridSize() + 15, bounds.height));
 		Change.push(new BufferBounds(this));
 	}
 
@@ -605,11 +604,11 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 	{
 		super.gMouseClicked(e);
 
-		final TextBox textBox = ClassGraphicView.searchComponentWithPosition(getAllTextBox(), e.getPoint());
+		final TextBox textBox = GraphicView.searchComponentWithPosition(getAllTextBox(), e.getPoint());
 
 		if (textBox != null)
 		{
-			final IClassDiagramComponent idc = textBox.getAssociedComponent();
+			final AbstractIDiagramComponent idc = textBox.getAssociedComponent();
 
 			if (idc != null)
 			{
@@ -653,8 +652,8 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 	@Override
 	public void gMouseMoved(MouseEvent e)
 	{
-		final GraphicComponent textBoxMouseHover = ClassGraphicView.searchComponentWithPosition(getAllTextBox(), e.getPoint());
-		ClassGraphicView.computeComponentEventEnter(textBoxMouseHover, saveTextBoxMouseHover, e);
+		final GraphicComponent textBoxMouseHover = GraphicView.searchComponentWithPosition(getAllTextBox(), e.getPoint());
+		GraphicView.computeComponentEventEnter(textBoxMouseHover, saveTextBoxMouseHover, e);
 
 		saveTextBoxMouseHover = textBoxMouseHover;
 	}
@@ -675,7 +674,7 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 	{
 		final LinkedList<TextBox> tb = getAllTextBox();
 		tb.remove(entityName);
-		return ClassGraphicView.searchComponentWithPosition(tb, location);
+		return GraphicView.searchComponentWithPosition(tb, location);
 	}
 
 	@Override
@@ -758,9 +757,12 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 
 		else
 
-			for (final ClassEntityView ev : parent.getSelectedEntities())
-
-				ev.methodViewChange(newStyle);
+			for (final AbstractEntityView ev : parent.getSelectedEntities())
+				if (ev instanceof ClassEntityView) {
+				((ClassEntityView)ev).methodViewChange(newStyle);
+				} else {
+					JOptionPane.showMessageDialog(null, "ERREUR #875");
+				}
 	}
 
 	@Override

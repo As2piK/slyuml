@@ -1,7 +1,7 @@
 package graphic.relations;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
 
 import java.awt.BasicStroke;
@@ -40,7 +40,7 @@ public class AssociationClasseLine extends LineView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public AssociationClasseLine(ClassGraphicView graphicView, ClassEntityView source, AssociationView target, Point posSource, Point posTarget, boolean checkRecursivity)
+	public AssociationClasseLine(GraphicView graphicView, ClassEntityView source, AssociationView target, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(graphicView, source, target, posSource, posTarget, checkRecursivity);
 

@@ -1,9 +1,12 @@
 package dbDiagram.relationships;
 
+import java.util.Observable;
+
 import utility.Utility;
-import abstractDiagram.relationships.AbstractRole;
 import dbDiagram.DBDiagram;
+import dbDiagram.IDBDiagramComponent;
 import dbDiagram.components.Entity;
+import dbDiagram.components.Visibility;
 
 /**
  * Represent a Role in UML structure. A role make a link between an association
@@ -14,7 +17,7 @@ import dbDiagram.components.Entity;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Role extends AbstractRole
+public class Role extends Observable implements IDBDiagramComponent
 {
 	private Association associations;
 
@@ -23,6 +26,7 @@ public class Role extends AbstractRole
 	private final Multiplicity multiplicity;
 
 	private String name;
+	private Visibility visibility = Visibility.PRIVATE;
 
 	/**
 	 * Create a new role making a link between the given association and the
@@ -94,6 +98,16 @@ public class Role extends AbstractRole
 		return name;
 	}
 
+	/**
+	 * Get the visibility for this role.
+	 * 
+	 * @return the visibility for this role
+	 */
+	public Visibility getVisibility()
+	{
+		return visibility;
+	}
+
 	@Override
 	public void select()
 	{
@@ -158,6 +172,34 @@ public class Role extends AbstractRole
 		setChanged();
 	}
 
+	/**
+	 * Set the visibility for this role
+	 * 
+	 * @param visibility
+	 *            the new visibility for this role
+	 */
+	public void setVisibility(Visibility visibility)
+	{
+	    //saveState();
+
+		this.visibility = visibility;
+
+		//saveState();
+
+		setChanged();
+	}
+
+  /*
+	private void saveState()
+	{
+	  Multiplicity m = getMultiplicity();
+	
+	  Change.push(new BufferRole(this, name, visibility.name(), m.getLowerBound(), m.getUpperBound()));
+	
+	  Change.push(new BufferRole(this, getName(), getVisibility().name(), m.getLowerBound(), m.getUpperBound()));
+	}
+	*/
+
 
 	@Override
 	public String toString()
@@ -165,14 +207,14 @@ public class Role extends AbstractRole
 		if (name == null || name.isEmpty())
 			return "";
 
-		return name;
+		return visibility.toCar() + name;
 	}
 
 	@Override
 	public String toXML(int depth)
 	{
 		final String tab = Utility.generateTab(depth);
-		String role = tab + "<role " + "componentId=\"" + entity.getId() + "\" " + (name == null ? "" : "name=\"" + name.replaceAll("<", "&lt;") + "\" ");
+		String role = tab + "<role " + "componentId=\"" + entity.getId() + "\" " + (name == null ? "" : "name=\"" + name.replaceAll("<", "&lt;") + "\" ") + "visibility=\"" + visibility;
 
 		if (multiplicity == null)
 			role += "\"/>";

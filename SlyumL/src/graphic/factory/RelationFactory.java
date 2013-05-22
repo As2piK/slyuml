@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.ClassGraphicView;
+import graphic.GraphicView;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -23,13 +23,13 @@ import utility.Utility;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public abstract class RelationFactory extends ComponentFactory
+public abstract class RelationFactory extends ClassComponentFactory
 {
 	private GraphicComponent componentMouseHover;
 	protected Point mouseLocation = new Point();
 	protected BasicStroke stroke = new BasicStroke(1.2f);
 
-	public RelationFactory(ClassGraphicView parent)
+	public RelationFactory(GraphicView parent)
 	{
 		super(parent);
 

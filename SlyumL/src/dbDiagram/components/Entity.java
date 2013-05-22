@@ -1,8 +1,18 @@
 package dbDiagram.components;
 
 import java.util.LinkedList;
+import java.util.List;
 
-import abstractDiagram.components.AbstractEntity;
+import javax.swing.JOptionPane;
+
+import utility.SMessageDialog;
+import utility.Utility;
+import abstractDiagram.AbstractEntity;
+import change.BufferCreationField;
+import change.BufferDB;
+import change.BufferDBIndex;
+import change.Change;
+import dbDiagram.relationships.Inheritance;
 import dbDiagram.relationships.Role;
 
 /**
@@ -14,24 +24,44 @@ import dbDiagram.relationships.Role;
  */
 public abstract class Entity extends AbstractEntity
 {	
+	private boolean _isAbstract = false;
 	protected LinkedList<Field> fields = new LinkedList<>();
+	protected List<Inheritance> childs = new LinkedList<>();
+	protected LinkedList<Method> methods = new LinkedList<>();
+	protected List<Inheritance> parents = new LinkedList<>();
+	protected List<Role> roles = new LinkedList<>();
 
-	public Entity(String name)
+	protected String stereotype = "";
+
+	protected Visibility visibility = Visibility.PUBLIC;
+
+	public Entity(String name, Visibility visibility)
 	{
 		super(name);
 
+		initComponent(visibility);
 	}
 
-	public Entity(String name, int id)
+	public Entity(String name, Visibility visibility, int id)
 	{
 		super(name, id);
-
+		
+		initComponent(visibility);
 	}
-
+	
 	public Entity(Entity e)
 	{
 		super(e.name, e.id);
+		
+		initComponent(e.visibility);
+	}
+	
+	private void initComponent(Visibility visibility)
+	{
+		if (visibility == null)
+			throw new IllegalArgumentException("visibility is null");
 
+		this.visibility = visibility;
 	}
 
 	/**
@@ -41,14 +71,74 @@ public abstract class Entity extends AbstractEntity
 	 *            the new attribute.
 	 */
 	public void addField(Field field)
-	{
-		if (field == null)
-			throw new IllegalArgumentException("field is null");
+  {
+    if (field == null)
+      throw new IllegalArgumentException("field is null");
 
-		fields.add(field);
-		int i = fields.indexOf(field);
-		//Change.push(new BufferCreationAttribute(this, field, true, i)); TODO change
-		//Change.push(new BufferCreationAttribute(this, field, false, i)); TODO change
+    fields.add(field);
+    int i = fields.indexOf(field);
+    Change.push(new BufferCreationField(this, field, true, i));
+    Change.push(new BufferCreationField(this, field, false, i));
+
+    setChanged();
+  }
+
+	/**
+	 * Add a new child.
+	 * 
+	 * @param child
+	 *            the new child
+	 */
+	public void addChild(Inheritance child)
+	{
+		if (child == null)
+			throw new IllegalArgumentException("child is null");
+
+		childs.add(child);
+
+		setChanged();
+	}
+
+	/**
+	 * Add a new method.
+	 * 
+	 * @param method
+	 *            the new method.
+	 * @return
+	 */
+	public boolean addMethod(Method method)
+	{
+		if (method == null)
+			throw new IllegalArgumentException("method is null");
+
+		if (methods.contains(method))
+			return false;
+		
+		method.setAbstract(isAbstract());
+
+		methods.add(method);
+		
+		int i = methods.indexOf(method);
+		//Change.push(new BufferCreationMethod(this, method, true, i));
+		//Change.push(new BufferCreationMethod(this, method, false, i));
+
+		setChanged();
+
+		return true;
+	}
+
+	/**
+	 * Add a new parent.
+	 * 
+	 * @param parent
+	 *            the new parent
+	 */
+	public void addParent(Inheritance parent)
+	{
+		if (parent == null)
+			throw new IllegalArgumentException("parent is null");
+
+		parents.add(parent);
 
 		setChanged();
 	}
@@ -68,29 +158,41 @@ public abstract class Entity extends AbstractEntity
 
 		setChanged();
 	}
+	
+	public int countStaticMethods()
+	{
+		int i = 0;
+		for (Method m : getMethods())
+			if (m.isStatic()) i++;
+		
+		return i;
+	}
+	
+	public boolean isEveryMethodsStatic()
+	{
+		return getMethods().size() - countStaticMethods() == 0;
+	}
 
 	public LinkedList<Entity> getAllChilds()
 	{
-		/*final LinkedList<Entity> allChilds = new LinkedList<Entity>();
+		final LinkedList<Entity> allChilds = new LinkedList<Entity>();
 		allChilds.add(this);
 
 		for (final Inheritance p : childs)
 			allChilds.addAll(p.getChild().getAllChilds());
 
-		return allChilds; TODO */
-		return null;
+		return allChilds;
 	}
 
 	public LinkedList<Entity> getAllParents()
 	{
-		/*final LinkedList<Entity> allParents = new LinkedList<Entity>();
+		final LinkedList<Entity> allParents = new LinkedList<Entity>();
 		allParents.add(this);
 
 		for (final Inheritance p : parents)
 			allParents.addAll(p.getParent().getAllParents());
 
-		return allParents; TODO */
-		return null;
+		return allParents;
 	}
 
 	/**
@@ -98,12 +200,12 @@ public abstract class Entity extends AbstractEntity
 	 * 
 	 * @return an array containing all attributes of the entity.
 	 */
-	public LinkedList<Field> getAttributes()
+	public LinkedList<Field> getFields()
 	{
 		final LinkedList<Field> copy = new LinkedList<Field>();
 
-		for (final Field a : fields)
-			copy.add(a);
+		for (final Field f : fields)
+			copy.add(f);
 
 		return copy;
 	}
@@ -128,6 +230,21 @@ public abstract class Entity extends AbstractEntity
 	}
 
 	/**
+	 * Get a copy of the method's list.
+	 * 
+	 * @return an array containing all methods of the entity.
+	 */
+	public LinkedList<Method> getMethods()
+	{
+		final LinkedList<Method> copy = new LinkedList<Method>();
+
+		for (final Method m : methods)
+			copy.add(m);
+
+		return copy;
+	}
+
+	/**
 	 * Get the stereotype of the entity.
 	 * 
 	 * @return the stereotype of the entity.
@@ -137,28 +254,58 @@ public abstract class Entity extends AbstractEntity
 		return stereotype;
 	}
 
+	/**
+	 * Get the visibility of the entity.
+	 * 
+	 * @return the visibility of the entity
+	 */
+	public Visibility getVisibility()
+	{
+		return visibility;
+	}
+
+	/**
+	 * Return true if the entity has abstract methods; false otherwise.
+	 * 
+	 * @return true if the entity has abstract methods; false otherwise.
+	 */
+	public boolean hasAbstractMethods()
+	{
+		for (final Method m : getMethods())
+			if (m.isAbstract())
+				return true;
+
+		return false;
+	}
+
+	/**
+	 * Get the abstract state of the entity.
+	 * 
+	 * @return true if the entity is abstract; false otherwise
+	 */
+	public boolean isAbstract()
+	{
+		return _isAbstract;
+	}
+
 	public boolean isChildOf(Entity entity)
 	{
-		/* boolean isChild = false;
+		boolean isChild = false;
 
 		for (final Inheritance i : parents)
 			isChild |= i.getParent().isChildOf(entity);
 
 		return isChild || equals(entity);
-		TODO */
-		return false;
 	}
 
 	public boolean isParentOf(Entity entity)
 	{
-		/* boolean isParent = false;
+		boolean isParent = false;
 
 		for (final Inheritance i : childs)
 			isParent |= i.getChild().isParentOf(entity);
 
 		return isParent || equals(entity);
-		TODO */
-		return false;
 	}
 
 	/**
@@ -194,15 +341,30 @@ public abstract class Entity extends AbstractEntity
 
 		if (index != -1)
 		{
-			//Change.push(new BufferIndex<T>(this, list, o)); TODO change
-
+			//Change.push(new BufferDBIndex<T>(this, list, o));
+			
 			list.remove(o);
 			list.add(index + offset, o);
-
-			//Change.push(new BufferIndex<T>(this, list, o)); TODO change
+			
+			//Change.push(new BufferDBIndex<T>(this, list, o)); //TODO
 
 			setChanged();
 		}
+	}
+
+	/**
+	 * Move the method's position in the array by the given offset. Offset is
+	 * added to the current index to compute the new index. The offset can be
+	 * positive or negative.
+	 * 
+	 * @param method
+	 *            the method to move
+	 * @param offset
+	 *            the offset for compute the new index
+	 */
+	public void moveMethodPosition(Method method, int offset)
+	{
+		moveComponentPosition(methods, method, offset);
 	}
 
 	/**
@@ -218,12 +380,12 @@ public abstract class Entity extends AbstractEntity
 			throw new IllegalArgumentException("attribute is null");
 
 		int i = fields.indexOf(attribute);
-
+		
 		if (fields.remove(attribute))
 		{
-			//Change.push(new BufferCreationAttribute(this, attribute, false, i)); TODO change
-			//Change.push(new BufferCreationAttribute(this, attribute, true, i)); TODO change
-
+	    Change.push(new BufferCreationField(this, attribute, false, i));
+	    Change.push(new BufferCreationField(this, attribute, true, i));
+	    
 			setChanged();
 			return true;
 		}
@@ -231,21 +393,98 @@ public abstract class Entity extends AbstractEntity
 			return false;
 	}
 
+	/**
+	 * Remove the child.
+	 * 
+	 * @param child
+	 *            the child to remove
+	 */
+	public void removeChild(Inheritance child)
+	{
+		childs.remove(child);
 
+		setChanged();
+	}
+
+	/**
+	 * Remove the method.
+	 * 
+	 * @param method
+	 *            the method to remove.
+	 * @return true if the method has been removed; false otherwise
+	 */
+	public boolean removeMethod(Method method) //TODO REMOVE
+	{
+		if (method == null)
+			throw new IllegalArgumentException("method is null");
+
+		int i = methods.indexOf(method);
+		
+		if (methods.remove(method))
+		{
+      //Change.push(new BufferCreationMethod(this, method, false, i));
+      //Change.push(new BufferCreationMethod(this, method, true, i));
+      
+			setChanged();
+			notifyObservers();
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Remove the parent.
+	 * 
+	 * @param parent
+	 *            the parent to remove
+	 */
+	public void removeParent(Inheritance parent)
+	{
+		parents.remove(parent);
+
+		setChanged();
+	}
+
+	/**
+	 * Set the abstract state of the entity.
+	 * 
+	 * @param isAbstract
+	 *            the new abstract state.
+	 */
+	public void setAbstract(boolean isAbstract)
+	{
+		if (hasAbstractMethods())
+			if (SMessageDialog.showQuestionMessageYesNo("Class has abstract methods.\nDe-abstract all methods?") == JOptionPane.NO_OPTION)
+
+				isAbstract = true;
+
+			else
+				for (final Method m : getMethods())
+					if (m.isAbstract())
+						m.setAbstract(false);
+
+		Change.push(new BufferDB(this));
+		_isAbstract = isAbstract;
+		Change.push(new BufferDB(this));
+
+		setChanged();
+	}
+	
 	@Override
 	public boolean setName(String name)
 	{
-		//BufferClass bc = new BufferClass(this); TODO change
+		BufferDB bc = new BufferDB(this);
 		boolean b;
-
+		
 		b = super.setName(name);
-
+		
 		if (b)
 		{
-			//Change.push(bc); TODO change
-			//Change.push(new BufferClass(this)); TODO change
+			Change.push(bc);
+			Change.push(new BufferDB(this));
 		}
-
+		
 		return b;
 	}
 
@@ -263,10 +502,30 @@ public abstract class Entity extends AbstractEntity
 		this.stereotype = stereotype;
 	}
 
+	/**
+	 * Set the visibility of the entity.
+	 * 
+	 * @param visibility
+	 *            the new visibility
+	 */
+	public void setVisibility(Visibility visibility)
+	{
+		if (visibility == null)
+			throw new IllegalArgumentException("visibility is null");
+
+		if (visibility.equals(getVisibility()))
+			return;
+		
+		Change.push(new BufferDB(this));		
+		this.visibility = visibility;
+		Change.push(new BufferDB(this));
+
+		setChanged();
+	}
+
 	@Override
 	public String toXML(int depth)
 	{
-		/*
 		final String tab = Utility.generateTab(depth);
 
 		String xml = tab + "<entity " + "id=\"" + getId() + "\" " + "name=\"" + super.toXML(0) + "\" " + "visibility=\"" + visibility + "\" " + "entityType=\"" + getEntityType() + "\" " + "isAbstract=\"" + isAbstract() + "\" ";
@@ -279,12 +538,11 @@ public abstract class Entity extends AbstractEntity
 		for (final Field attribute : fields)
 			xml += attribute.toXML(depth + 1) + "\n";
 
-		for (final Field operation : methods)
+		for (final Method operation : methods)
 			xml += operation.toXML(depth + 1) + "\n";
 
 		xml += getLastBalise(depth + 1);
 
-		return xml + tab + "</entity>"; TODO*/
-		return "";
+		return xml + tab + "</entity>";
 	}
 }

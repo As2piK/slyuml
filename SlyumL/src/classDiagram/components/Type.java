@@ -1,12 +1,15 @@
 package classDiagram.components;
 
+import abstractDiagram.components.AbstractType;
 import change.Change;
+
 import java.util.LinkedList;
 import java.util.Observable;
 
 import classDiagram.ClassDiagram;
 import classDiagram.IClassDiagramComponent;
 import classDiagram.verifyName.TypeName;
+import dbDiagram.IDBDiagramComponent;
 
 /**
  * Represent a type in UML structure.
@@ -14,7 +17,7 @@ import classDiagram.verifyName.TypeName;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Type extends Observable implements IClassDiagramComponent
+public class Type extends AbstractType
 {
     public static final String accents = "ÀàÁáÂâÃãÄäÅåÒòÓóÔôÕõÖöØøÈèÉéÊêËëÇçÌìÍíÎîÏïÙùÚúÛûÜüÑñ";
     public static final String CARACTERES_VALID = "a-zA-Z_" + accents;
@@ -27,8 +30,6 @@ public class Type extends Observable implements IClassDiagramComponent
 	}
 	
 	protected final int id;
-
-	protected String name = "void";
 	
 	LinkedList<Integer> arraysSize = new LinkedList<>();
 
