@@ -21,7 +21,7 @@ import classDiagram.relationships.Dependency;
  * @author David Miserez
  * @version 1.0 - 28.07.2011
  */
-public class NodeDepedency extends DefaultMutableTreeNode implements IClassDiagramNode, ICustomizedIconNode, Observer
+public class NodeDepedency extends DefaultMutableTreeNode implements IDiagramNode, ICustomizedIconNode, Observer
 {
 	private static final long serialVersionUID = 1674273797529847201L;
 

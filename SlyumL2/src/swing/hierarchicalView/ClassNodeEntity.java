@@ -21,7 +21,7 @@ import classDiagram.components.Method;
  * @author David Miserez
  * @version 1.0 - 28.07.2011
  */
-public class NodeEntity extends DefaultMutableTreeNode implements Observer, IClassDiagramNode, ICustomizedIconNode
+public class ClassNodeEntity extends DefaultMutableTreeNode implements Observer, IDiagramNode, ICustomizedIconNode
 {
 	private static final long serialVersionUID = 1L;
 	private final Entity entity;
@@ -42,7 +42,7 @@ public class NodeEntity extends DefaultMutableTreeNode implements Observer, ICla
 	 * @param icon
 	 *            the customized icon
 	 */
-	public NodeEntity(Entity entity, DefaultTreeModel treeModel, JTree tree, ImageIcon icon)
+	public ClassNodeEntity(Entity entity, DefaultTreeModel treeModel, JTree tree, ImageIcon icon)
 	{
 		super(entity.getName());
 
@@ -87,7 +87,7 @@ public class NodeEntity extends DefaultMutableTreeNode implements Observer, ICla
 
 		for (final Attribute a : entity.getAttributes())
 		{
-			node = new NodeAttribute(a, treeModel, tree);
+			node = new ClassNodeAttribute(a, treeModel, tree);
 			add(node);
 		}
 
@@ -105,7 +105,7 @@ public class NodeEntity extends DefaultMutableTreeNode implements Observer, ICla
 	{
 		for (int i = getChildCount()-1; i >= 0; i--)
 		{
-			IClassDiagramNode node = (IClassDiagramNode)getChildAt(i);
+			IDiagramNode node = (IDiagramNode)getChildAt(i);
 			
             node.getAssociedComponent().deleteObserver((Observer)node);
         }

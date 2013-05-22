@@ -41,13 +41,13 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		if (Slyum.ACTION_NEW_CLASS_DIAGRAM.equals(e.getActionCommand())) {
+			PanelClassDiagram.getInstance().newProject();
 			Slyum.currentDiagramType = DIAGRAM_TYPE.CLASS;
 			SPanelDiagramComponent.getInstance().switchButtonStatus();
-			PanelClassDiagram.getInstance().newProject();
 		} else if (Slyum.ACTION_NEW_DATABASE_DIAGRAM.equals(e.getActionCommand())) {
+			PanelDBDiagram.getInstance().newProject();
 			Slyum.currentDiagramType = DIAGRAM_TYPE.DB;
 			SPanelDiagramComponent.getInstance().switchButtonStatus();
-			PanelDBDiagram.getInstance().newProject();
 		} else if (Slyum.ACTION_OPEN.equals(e.getActionCommand())) {
 			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
 				PanelClassDiagram.getInstance().openFromXML();

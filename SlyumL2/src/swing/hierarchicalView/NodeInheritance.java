@@ -21,7 +21,7 @@ import classDiagram.relationships.Inheritance;
  * @author David Miserez
  * @version 1.0 - 28.07.2011
  */
-public class NodeInheritance extends DefaultMutableTreeNode implements ICustomizedIconNode, Observer, IClassDiagramNode
+public class NodeInheritance extends DefaultMutableTreeNode implements ICustomizedIconNode, Observer, IDiagramNode
 
 {
 	/**

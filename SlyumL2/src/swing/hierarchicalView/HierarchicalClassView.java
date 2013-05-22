@@ -94,7 +94,7 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 			@Override
 			public void removeNodeFromParent(MutableTreeNode node)
 			{
-				((IClassDiagramNode)node).remove();
+				((IDiagramNode)node).remove();
 				super.removeNodeFromParent(node);
 			}
 		};
@@ -131,13 +131,13 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	 */
 	public void addAssociation(Association component, String imgPath)
 	{
-		addNode(new NodeAssociation(component, treeModel, PersonalizedIcon.createImageIcon(imgPath), tree), associationsNode);
+		addNode(new ClassNodeAssociation(component, treeModel, PersonalizedIcon.createImageIcon(imgPath), tree), associationsNode);
 	}
 
 	@Override
 	public void addAssociationClass(AssociationClass component)
 	{
-		addNode(new NodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "classAssoc16.png")), entitiesNode);
+		addNode(new ClassNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "classAssoc16.png")), entitiesNode);
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	@Override
 	public void addClass(ClassEntity component)
 	{
-		addNode(new NodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class16.png")), entitiesNode);
+		addNode(new ClassNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class16.png")), entitiesNode);
 	}
 
 	@Override
@@ -180,7 +180,7 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	@Override
 	public void addInterface(InterfaceEntity component)
 	{
-		addNode(new NodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "interface16.png")), entitiesNode);
+		addNode(new ClassNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "interface16.png")), entitiesNode);
 	}
 
 	@Override
@@ -209,7 +209,7 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	{
 		LinkedList<AbstractEntityView> evs = PanelClassDiagram.getInstance().getCurrentGraphicView().getSelectedEntities();
 		
-		final NodeEntity ne = (NodeEntity) searchAssociedNodeIn(entity, entitiesNode);
+		final ClassNodeEntity ne = (ClassNodeEntity) searchAssociedNodeIn(entity, entitiesNode);
 
 		entitiesNode.remove(ne);
 
@@ -225,7 +225,7 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	@Override
 	public void removeComponent(IClassDiagramComponent component)
 	{
-		final IClassDiagramNode associedNode = searchAssociedNode(component);
+		final IDiagramNode associedNode = searchAssociedNode(component);
 
 		if (associedNode != null)
 		{
@@ -242,9 +242,9 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	 *            the object associated with a node
 	 * @return the node associated with the object; or null if no node are found
 	 */
-	public IClassDiagramNode searchAssociedNode(Object o)
+	public IDiagramNode searchAssociedNode(Object o)
 	{
-		IClassDiagramNode result = searchAssociedNodeIn(o, entitiesNode);
+		IDiagramNode result = searchAssociedNodeIn(o, entitiesNode);
 
 		if (result == null)
 			result = searchAssociedNodeIn(o, associationsNode);
@@ -268,13 +268,13 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	 *            the root node for the JTree
 	 * @return the node associated with the object; or null if no node are found
 	 */
-	public static IClassDiagramNode searchAssociedNodeIn(Object o, TreeNode root)
+	public static IDiagramNode searchAssociedNodeIn(Object o, TreeNode root)
 	{
-		IClassDiagramNode child = null;
+		IDiagramNode child = null;
 
 		for (int i = 0; i < root.getChildCount(); i++)
 		{
-			child = (IClassDiagramNode) root.getChildAt(i);
+			child = (IDiagramNode) root.getChildAt(i);
 
 			if (child.getAssociedComponent().equals(o))
 				return child;
@@ -305,11 +305,11 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 		{
 			final Object o = treePath.getLastPathComponent();
 
-			if (!(o instanceof IClassDiagramNode)) // is an associed component
+			if (!(o instanceof IDiagramNode)) // is an associed component
 				// node ?
 				continue;
 
-			final AbstractIDiagramComponent component = ((IClassDiagramNode) o).getAssociedComponent();
+			final AbstractIDiagramComponent component = ((IDiagramNode) o).getAssociedComponent();
 			component.select();
 
 			if (e.isAddedPath(treePath))

@@ -22,7 +22,7 @@ import classDiagram.components.Attribute;
  * @author David Miserez
  * @version 1.0 - 28.07.2011
  */
-public class NodeAttribute extends DefaultMutableTreeNode implements ICustomizedIconNode, Observer, IClassDiagramNode
+public class ClassNodeAttribute extends DefaultMutableTreeNode implements ICustomizedIconNode, Observer, IDiagramNode
 {
 	private static final long serialVersionUID = -2998185646864433535L;
 	private final Attribute attribute;
@@ -39,7 +39,7 @@ public class NodeAttribute extends DefaultMutableTreeNode implements ICustomized
 	 * @param tree
 	 *            the JTree
 	 */
-	public NodeAttribute(Attribute attribute, DefaultTreeModel treeModel, JTree tree)
+	public ClassNodeAttribute(Attribute attribute, DefaultTreeModel treeModel, JTree tree)
 	{
 		super(attribute.getName());
 

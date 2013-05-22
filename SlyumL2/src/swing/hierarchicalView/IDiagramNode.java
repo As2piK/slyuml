@@ -9,7 +9,7 @@ import abstractDiagram.AbstractIDiagramComponent;
  * @author David Miserez
  * @version 1.0 - 28.07.2011
  */
-public interface IClassDiagramNode
+public interface IDiagramNode
 {
 	/**
 	 * Get the associated UML object with this node.

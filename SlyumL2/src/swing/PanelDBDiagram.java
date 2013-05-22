@@ -34,6 +34,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import classDiagram.ClassDiagram;
 import swing.hierarchicalView.HierarchicalDBView;
 import swing.propretiesView.PropretiesChanger;
 import utility.SDialogProjectLoading;
@@ -41,7 +42,6 @@ import utility.SMessageDialog;
 import utility.SSlider;
 import utility.Utility;
 import change.Change;
-import classDiagram.ClassDiagram;
 import dbDiagram.DBDiagram;
 
 /**
@@ -61,7 +61,7 @@ public class PanelDBDiagram extends JPanel
 		return instance;
 	}
 
-	private ClassDiagram dbDiagram;
+	private DBDiagram dbDiagram;
 
 	private File currentFile = null;
 
@@ -183,11 +183,11 @@ public class PanelDBDiagram extends JPanel
 	 * 
 	 * @return the class diagram
 	 */
-	public ClassDiagram getDBDiagram()
+	public DBDiagram getDBDiagram()
 	{
 		if (dbDiagram == null)
 		{
-			dbDiagram = new ClassDiagram("DB diagram");
+			dbDiagram = new DBDiagram("DB diagram");
 			dbDiagram.addComponentsObserver(PropretiesChanger.getInstance());
 		}
 
@@ -196,7 +196,6 @@ public class PanelDBDiagram extends JPanel
 	
 	public JButton getRedoButton()
 	{
-		//TODO
 		return SPanelUndoRedo.getInstance().getRedoButton();
 	}
 	
@@ -305,6 +304,7 @@ public class PanelDBDiagram extends JPanel
 	public void cleanApplication()
 	{
 		dbDiagram.removeAll();
+		PanelClassDiagram.getInstance().getClassDiagram().removeAll();
 		graphicView.removeAll();
 		setCurrentFile(null);
 	}
@@ -380,10 +380,10 @@ public class PanelDBDiagram extends JPanel
 				try
 				{
 					SAXParser parser = factory.newSAXParser();
-					XMLParser handler = new XMLParser(dbDiagram, graphicView, dpl);
-					parser.parse(file, handler);
+					//XMLParser handler = new XMLParser(dbDiagram, graphicView, dpl); //TODO
+					//parser.parse(file, handler);
 
-					handler.createDiagram();
+					//handler.createDiagram();
 				}
 				catch (Exception e)
 				{

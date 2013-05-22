@@ -2,20 +2,11 @@ package dbDiagram;
 
 import java.util.LinkedList;
 
+import utility.Utility;
 import abstractDiagram.AbstractDiagram;
 import abstractDiagram.AbstractIDiagramComponent;
-import utility.Utility;
-import dbDiagram.components.AssociationClass;
-import dbDiagram.components.TableEntity;
 import dbDiagram.components.Entity;
-import dbDiagram.components.InterfaceEntity;
-import dbDiagram.relationships.Aggregation;
-import dbDiagram.relationships.Binary;
-import dbDiagram.relationships.Composition;
-import dbDiagram.relationships.Dependency;
-import dbDiagram.relationships.Inheritance;
-import dbDiagram.relationships.InnerClass;
-import dbDiagram.relationships.Multi;
+import dbDiagram.components.TableEntity;
 
 /**
  * This class contains all structurals UML components. Add classes, interfaces,
@@ -53,29 +44,6 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 			throw new IllegalArgumentException("name is null");
 
 		this.name = name;
-	}
-
-	@Override
-	public void addAggregation(Aggregation component)
-	{
-		for (final IDBComponentsObserver c : observers)
-			c.addAggregation(component);
-
-		addComponent(component);
-	}
-
-	@Override
-	public void addAssociationClass(AssociationClass component) //TODO DELETE
-	{
-	}
-
-	@Override
-	public void addBinary(Binary component)
-	{
-		for (final IDBComponentsObserver c : observers)
-			c.addBinary(component);
-
-		addComponent(component);
 	}
 
 	@Override
@@ -120,65 +88,6 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	public boolean addComponentsObserver(IDBComponentsObserver c)
 	{
 		return observers.add(c);
-	}
-
-	@Override
-	public void addComposition(Composition component)
-	{
-		for (final IDBComponentsObserver c : observers)
-			c.addComposition(component);
-
-		addComponent(component);
-	}
-
-	@Override
-	public void addDependency(Dependency component)
-	{
-		for (final IDBComponentsObserver c : observers)
-			c.addDependency(component);
-
-		//addComponent(component);
-	}
-
-	@Override
-	public void addInheritance(Inheritance component)
-	{
-		for (final IDBComponentsObserver c : observers)
-			c.addInheritance(component);
-
-		addComponent(component);
-	}
-
-	@Override
-	public void addInnerClass(InnerClass component)
-	{
-
-		for (final IDBComponentsObserver c : observers)
-			c.addInnerClass(component);
-
-		addComponent(component);
-	}
-
-	@Override
-	public void addInterface(InterfaceEntity component)
-	{
-		for (final IDBComponentsObserver c : observers)
-			c.addInterface(component);
-
-		addComponent(component);
-		entities.addFirst(component);
-	}
-
-	@Override
-	public void addMulti(Multi component)
-	{
-		if (components.contains(component))
-			return;
-		
-		for (final IDBComponentsObserver c : observers)
-			c.addMulti(component);
-
-		addComponent(component);
 	}
 
 	@Override

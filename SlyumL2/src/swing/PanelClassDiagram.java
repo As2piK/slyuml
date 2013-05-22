@@ -303,6 +303,7 @@ public class PanelClassDiagram extends JPanel
 	public void cleanApplication()
 	{
 		classDiagram.removeAll();
+		PanelDBDiagram.getInstance().getDBDiagram().removeAll();
 		graphicView.removeAll();
 		setCurrentFile(null);
 	}

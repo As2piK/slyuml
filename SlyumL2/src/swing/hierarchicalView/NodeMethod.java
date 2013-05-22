@@ -10,7 +10,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import swing.Slyum;
-import swing.hierarchicalView.IClassDiagramNode;
+import swing.hierarchicalView.IDiagramNode;
 import swing.hierarchicalView.ICustomizedIconNode;
 import utility.PersonalizedIcon;
 import classDiagram.IClassDiagramComponent;
@@ -24,7 +24,7 @@ import classDiagram.components.Method;
  * @version 1.0 - 28.07.2011
  */
 @SuppressWarnings("serial")
-public class NodeMethod extends DefaultMutableTreeNode implements Observer, IClassDiagramNode, ICustomizedIconNode
+public class NodeMethod extends DefaultMutableTreeNode implements Observer, IDiagramNode, ICustomizedIconNode
 {
 	private final Method method;
 	private final JTree tree;

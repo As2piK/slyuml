@@ -21,7 +21,7 @@ import classDiagram.relationships.Role;
  * @author David Miserez
  * @version 1.0 - 28.07.2011
  */
-public class NodeAssociation extends DefaultMutableTreeNode implements IClassDiagramNode, ICustomizedIconNode, Observer
+public class ClassNodeAssociation extends DefaultMutableTreeNode implements IDiagramNode, ICustomizedIconNode, Observer
 {
 	private static final long serialVersionUID = 3002125135918965920L;
 
@@ -70,7 +70,7 @@ public class NodeAssociation extends DefaultMutableTreeNode implements IClassDia
 	 * @param tree
 	 *            the JTree
 	 */
-	public NodeAssociation(Association association, DefaultTreeModel treeModel, ImageIcon icon, JTree tree)
+	public ClassNodeAssociation(Association association, DefaultTreeModel treeModel, ImageIcon icon, JTree tree)
 	{
 		super(generateName(association));
 
