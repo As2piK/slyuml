@@ -1,10 +1,8 @@
 package dbDiagram.relationships;
 
-import java.util.Observable;
-
 import utility.Utility;
+import abstractDiagram.relationships.AbstractRole;
 import dbDiagram.DBDiagram;
-import dbDiagram.IDBDiagramComponent;
 import dbDiagram.components.Entity;
 
 /**
@@ -16,7 +14,7 @@ import dbDiagram.components.Entity;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Role extends Observable implements IDBDiagramComponent
+public class Role extends AbstractRole
 {
 	private Association associations;
 

@@ -1,10 +1,8 @@
 package classDiagram.relationships;
 
-import java.util.Observable;
-
 import utility.Utility;
+import abstractDiagram.relationships.AbstractRole;
 import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.components.Entity;
 import classDiagram.components.Visibility;
 
@@ -17,7 +15,7 @@ import classDiagram.components.Visibility;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Role extends Observable implements IClassDiagramComponent
+public class Role extends AbstractRole
 {
 	private Association associations;
 

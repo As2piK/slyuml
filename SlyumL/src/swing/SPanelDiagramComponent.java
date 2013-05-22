@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.factory.AggregationFactory;
 import graphic.factory.AssociationClassFactory;
 import graphic.factory.BinaryFactory;
@@ -111,7 +111,7 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		GraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
+		ClassGraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
 		
 		if (Slyum.ACTION_NEW_CLASS.equals(e.getActionCommand()))
 			gv.initNewComponent(new ClassFactory(gv));

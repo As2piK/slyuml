@@ -1,16 +1,6 @@
 package abstractDiagram;
 
-import classDiagram.components.AssociationClass;
-import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
-import classDiagram.components.InterfaceEntity;
-import classDiagram.relationships.Aggregation;
-import classDiagram.relationships.Binary;
-import classDiagram.relationships.Composition;
-import classDiagram.relationships.Dependency;
-import classDiagram.relationships.Inheritance;
-import classDiagram.relationships.InnerClass;
-import classDiagram.relationships.Multi;
 
 /**
  * Interface implemented by all listeners of class diagram. When the class

@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.relations.InheritanceView;
 
@@ -34,7 +34,7 @@ public class InheritanceFactory extends RelationFactory
 	 * @param classDiagram
 	 *            the class diagram
 	 */
-	public InheritanceFactory(GraphicView parent)
+	public InheritanceFactory(ClassGraphicView parent)
 	{
 		super(parent);
 	}

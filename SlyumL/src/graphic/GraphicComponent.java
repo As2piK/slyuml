@@ -1,6 +1,6 @@
 package graphic;
 
-import graphic.entity.ClassEntityView;
+import graphic.entity.EntityView;
 import graphic.relations.LineView;
 
 import java.awt.Color;
@@ -26,6 +26,7 @@ import utility.PersonalizedIcon;
 import change.BufferCreation;
 import change.Change;
 import classDiagram.IClassDiagramComponent;
+import classDiagram.IDiagramComponent;
 
 /**
  * Represent a graphic component in Slyum. Graphics components can't be draw
@@ -44,7 +45,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	// resize.
 	protected Point mousePressed = new Point();
 
-	protected GraphicView parent;
+	protected ClassGraphicView parent;
 
 	protected JPopupMenu popupMenu;
 	protected JMenuItem miNewNote;
@@ -60,12 +61,12 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	 */
 	protected GraphicComponent()
 	{
-		parent = (GraphicView) this;
+		parent = (ClassGraphicView) this;
 
 		init();
 	}
 
-	public GraphicComponent(GraphicView parent)
+	public GraphicComponent(ClassGraphicView parent)
 	{
 		if (parent == null)
 			throw new IllegalArgumentException("parent is null");
@@ -91,7 +92,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	
 	public static void askNewColorForSelectedItems()
 	{
-		final SColorChooser scc = new SColorChooser(ClassEntityView.getBasicColor());
+		final SColorChooser scc = new SColorChooser(EntityView.getBasicColor());
 		
 		scc.setVisible(true);
 
@@ -196,7 +197,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	 */
 	public abstract Rectangle getBounds();
 	
-	public GraphicView getGraphicView()
+	public ClassGraphicView getGraphicView()
 	{
 		return parent;
 	}
@@ -425,7 +426,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	 */
 	public void maybeShowPopup(MouseEvent e, JPopupMenu popupMenu)
 	{
-		GraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
+		ClassGraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
 		
 		if (e.isPopupTrigger())
 		{

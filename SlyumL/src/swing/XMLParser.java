@@ -1,7 +1,7 @@
 package swing;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.relations.LineCommentary;
 import graphic.relations.LineView;
 import graphic.relations.MultiLineView;
@@ -235,7 +235,7 @@ public class XMLParser extends DefaultHandler
 
 	LinkedList<Dependency> dependency = new LinkedList<>();
 
-	private final GraphicView graphicView;
+	private final ClassGraphicView graphicView;
 
 	LinkedList<Inheritance> inheritance = new LinkedList<>();
 
@@ -252,7 +252,7 @@ public class XMLParser extends DefaultHandler
 	private ClassDiagram uMLClassDiagram;
 	private SDialogProjectLoading dpl;
 
-	public XMLParser(classDiagram.ClassDiagram classDiagram, GraphicView graphicView, SDialogProjectLoading dpl)
+	public XMLParser(classDiagram.ClassDiagram classDiagram, ClassGraphicView graphicView, SDialogProjectLoading dpl)
 	{
 		super();
 

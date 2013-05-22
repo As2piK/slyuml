@@ -1,7 +1,7 @@
 package graphic.relations;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.textbox.TextBoxLabelTitle;
 
@@ -92,7 +92,7 @@ public class DependencyView extends RelationView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public DependencyView(GraphicView parent, ClassEntityView source, ClassEntityView target, Dependency dependency, Point posSource, Point posTarget, boolean checkRecursivity)
+	public DependencyView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Dependency dependency, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, dependency, posSource, posTarget, checkRecursivity);
 

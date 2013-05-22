@@ -2,7 +2,7 @@ package graphic.factory;
 
 import change.Change;
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.AssociationClassView;
 import graphic.entity.ClassView;
 import graphic.relations.BinaryView;
@@ -38,7 +38,7 @@ public class AssociationClassFactory extends RelationFactory
 	 * @param classDiagram
 	 *            the class diagram
 	 */
-	public AssociationClassFactory(GraphicView parent)
+	public AssociationClassFactory(ClassGraphicView parent)
 	{
 		super(parent);
 	}

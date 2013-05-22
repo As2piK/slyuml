@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.Color;
 import java.awt.Desktop;
@@ -407,7 +407,7 @@ public class Slyum extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		PanelClassDiagram p = PanelClassDiagram.getInstance();
-		GraphicView gv = p.getCurrentGraphicView();
+		ClassGraphicView gv = p.getCurrentGraphicView();
 		
             switch (e.getActionCommand())
             {

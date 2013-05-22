@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.BasicStroke;
 import java.awt.Cursor;
@@ -43,7 +43,7 @@ public abstract class TextBoxLabel extends TextBox implements Observer
 
 	private Cursor previousCursor = new Cursor(Cursor.DEFAULT_CURSOR);
 
-	public TextBoxLabel(GraphicView parent, String text)
+	public TextBoxLabel(ClassGraphicView parent, String text)
 	{
 		super(parent, text);
 	}

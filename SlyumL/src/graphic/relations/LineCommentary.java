@@ -1,7 +1,8 @@
 package graphic.relations;
 
+import graphic.ClassGraphicView;
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.textbox.TextBoxCommentary;
 
 import java.awt.BasicStroke;
@@ -9,7 +10,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 
 import classDiagram.IClassDiagramComponent.UpdateMessage;
-
 import swing.propretiesView.NoteProperties;
 import utility.SMessageDialog;
 
@@ -38,7 +38,7 @@ public class LineCommentary extends LineView
 		
 		associed = !(source.getAssociedComponent() == null && target.getAssociedComponent() == null);
 
-		graphic = !(source instanceof GraphicView || target instanceof GraphicView);
+		graphic = !(source instanceof ClassGraphicView || target instanceof ClassGraphicView);
 		
 		ext = source instanceof TextBoxCommentary || target instanceof TextBoxCommentary;
 		
@@ -70,7 +70,7 @@ public class LineCommentary extends LineView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public LineCommentary(GraphicView graphicView, GraphicComponent source, GraphicComponent target, Point posSource, Point posTarget, boolean checkRecursivity)
+	public LineCommentary(ClassGraphicView graphicView, GraphicComponent source, GraphicComponent target, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(graphicView, source, target, posSource, posTarget, checkRecursivity);
 
@@ -89,7 +89,7 @@ public class LineCommentary extends LineView
 
 			return false;
 
-		if (newCompo instanceof GraphicView)
+		if (newCompo instanceof ClassGraphicView)
 
 			delete();
 

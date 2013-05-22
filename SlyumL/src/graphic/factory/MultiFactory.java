@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
 import graphic.relations.MultiView;
@@ -57,7 +57,7 @@ public class MultiFactory extends CreateComponent
 	 * @param classDiagram
 	 *            the class diagram
 	 */
-	public MultiFactory(final GraphicView parent)
+	public MultiFactory(final ClassGraphicView parent)
 	{
 		super(parent);
 
@@ -161,7 +161,7 @@ public class MultiFactory extends CreateComponent
 		return mv;
 	}
 	
-	public static MultiView createMulti(GraphicView gv, Multi m)
+	public static MultiView createMulti(ClassGraphicView gv, Multi m)
 	{
 		MultiView mv;
 		

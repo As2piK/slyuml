@@ -25,7 +25,7 @@ public class StyleCross extends GraphicComponent
 	
 	private int nbrComponentSelected;
 	
-	public StyleCross(GraphicView parent, Point location, int nbrComponentSelected)
+	public StyleCross(ClassGraphicView parent, Point location, int nbrComponentSelected)
 	{
 		super(parent);
 		

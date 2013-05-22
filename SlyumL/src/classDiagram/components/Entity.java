@@ -1,10 +1,12 @@
 package classDiagram.components;
 
+import abstractDiagram.components.AbstractEntity;
 import change.BufferClass;
 import change.BufferCreationAttribute;
 import change.BufferCreationMethod;
 import change.BufferIndex;
 import change.Change;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,16 +24,13 @@ import classDiagram.relationships.Role;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public abstract class Entity extends Type
+public abstract class Entity extends AbstractEntity
 {	
 	private boolean _isAbstract = false;
 	protected LinkedList<Attribute> attributes = new LinkedList<>();
 	protected List<Inheritance> childs = new LinkedList<>();
 	protected LinkedList<Method> methods = new LinkedList<>();
 	protected List<Inheritance> parents = new LinkedList<>();
-	protected List<Role> roles = new LinkedList<>();
-
-	protected String stereotype = "";
 
 	protected Visibility visibility = Visibility.PUBLIC;
 

@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -64,7 +64,7 @@ public class PanelClassDiagram extends JPanel
 
 	private File currentFile = null;
 
-	private final GraphicView graphicView;
+	private final ClassGraphicView graphicView;
 	
 	private SSlider sSlider;
 
@@ -73,7 +73,7 @@ public class PanelClassDiagram extends JPanel
 		super(new BorderLayout());
 
 		// Create new graphiView, contain class diagram.
-		graphicView = new GraphicView(getClassDiagram());
+		graphicView = new ClassGraphicView(getClassDiagram());
         
         setTransferHandler(new FileHandler());
 		
@@ -208,7 +208,7 @@ public class PanelClassDiagram extends JPanel
 	 * 
 	 * @return the current GraphicView
 	 */
-	public GraphicView getCurrentGraphicView()
+	public ClassGraphicView getCurrentGraphicView()
 	{
 		return graphicView;
 	}
@@ -583,10 +583,10 @@ public class PanelClassDiagram extends JPanel
 	 * Return a LinkedList with all opened graphic views.
 	 * @return a LinkedList with all opened graphic views
 	 */
-	public LinkedList<GraphicView> getAllGraphicView()
+	public LinkedList<ClassGraphicView> getAllGraphicView()
 	{
 		// TODO
-		LinkedList<GraphicView> l = new LinkedList<GraphicView>();
+		LinkedList<ClassGraphicView> l = new LinkedList<ClassGraphicView>();
 		l.add(graphicView);
 		
 		return l;

@@ -1,7 +1,7 @@
 package graphic.relations;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 
 import java.awt.BasicStroke;
@@ -102,7 +102,7 @@ public class InheritanceView extends RelationView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public InheritanceView(GraphicView parent,
+	public InheritanceView(ClassGraphicView parent,
 			ClassEntityView source,
 			ClassEntityView target,
 			Inheritance inheritance,

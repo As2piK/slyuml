@@ -1,7 +1,7 @@
 package graphic.textbox;
 
+import graphic.ClassGraphicView;
 import graphic.GraphicComponent;
-import graphic.GraphicView;
 import graphic.MovableComponent;
 import graphic.entity.ClassEntityView;
 import graphic.relations.LineCommentary;
@@ -26,9 +26,9 @@ import swing.Slyum;
 import swing.propretiesView.NoteProperties;
 import utility.PersonalizedIcon;
 import utility.Utility;
+import abstractDiagram.AbstractIDiagramComponent;
 import change.BufferNote;
 import change.Change;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
 
 /**
@@ -95,7 +95,7 @@ public class TextBoxCommentary extends MovableComponent
 	 * @param text
 	 *            the default text include in the note
 	 */
-	public TextBoxCommentary(final GraphicView parent, String text)
+	public TextBoxCommentary(final ClassGraphicView parent, String text)
 	{
 		super(parent);
 
@@ -115,7 +115,7 @@ public class TextBoxCommentary extends MovableComponent
 	 * @param component
 	 *            the component associated with the not
 	 */
-	public TextBoxCommentary(final GraphicView parent, String text, GraphicComponent component)
+	public TextBoxCommentary(final ClassGraphicView parent, String text, GraphicComponent component)
 	{
 		super(parent);
 
@@ -413,7 +413,7 @@ public class TextBoxCommentary extends MovableComponent
 
 		for (final LineView lv : parent.getLinesViewAssociedWith(this))
 		{
-			IClassDiagramComponent associedComponent = lv.getLastPoint().getAssociedComponentView().getAssociedComponent();
+			AbstractIDiagramComponent associedComponent = lv.getLastPoint().getAssociedComponentView().getAssociedComponent();
 			int id = -1;
 
 			if (associedComponent != null)

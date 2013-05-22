@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -37,7 +37,7 @@ public class TextBoxField extends TextBox implements Observer
 	 * @param field
 	 *            the attribute
 	 */
-	public TextBoxField(GraphicView parent, Field field)
+	public TextBoxField(ClassGraphicView parent, Field field)
 	{
 		super(parent, field.getName());
 

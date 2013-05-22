@@ -1,6 +1,7 @@
 package classDiagram;
 
 import abstractDiagram.AbstractIComponentsObserver;
+import abstractDiagram.AbstractIDiagramComponent;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
@@ -116,5 +117,5 @@ public interface IClassComponentsObserver extends AbstractIComponentsObserver
 	 * @param component
 	 *            the component to remove.
 	 */
-	public void removeComponent(IClassDiagramComponent component);
+	public void removeComponent(AbstractIDiagramComponent component);
 }

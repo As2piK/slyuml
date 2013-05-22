@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.relations.LineCommentary;
 
 import java.awt.BasicStroke;
@@ -30,7 +30,7 @@ public class LineCommentaryFactory extends RelationFactory
 	 * @param classDiagram
 	 *            the class diagram
 	 */
-	public LineCommentaryFactory(GraphicView parent)
+	public LineCommentaryFactory(ClassGraphicView parent)
 	{
 		super(parent);
 

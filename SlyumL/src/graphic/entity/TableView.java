@@ -1,6 +1,6 @@
 package graphic.entity;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import classDiagram.components.Attribute;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Method;
@@ -22,7 +22,7 @@ public class TableView extends ClassEntityView
 	 * @param component
 	 *            the class (UML)
 	 */
-	public TableView(GraphicView parent, ClassEntity component)
+	public TableView(ClassGraphicView parent, ClassEntity component)
 	{
 		super(parent, component);
 	}

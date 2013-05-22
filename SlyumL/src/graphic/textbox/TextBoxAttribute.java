@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -51,7 +51,7 @@ public class TextBoxAttribute extends TextBox implements Observer
 	 * @param attribute
 	 *            the attribute
 	 */
-	public TextBoxAttribute(GraphicView parent, Attribute attribute)
+	public TextBoxAttribute(ClassGraphicView parent, Attribute attribute)
 	{
 		super(parent, getStringFromAttribute(attribute));
 

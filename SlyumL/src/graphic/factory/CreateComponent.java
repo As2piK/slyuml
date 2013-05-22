@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.Cursor;
 import java.awt.Point;
@@ -22,7 +22,7 @@ public abstract class CreateComponent extends GraphicComponent
 {
 	protected ClassDiagram classDiagram;
 
-	public CreateComponent(GraphicView parent)
+	public CreateComponent(ClassGraphicView parent)
 	{
 		super(parent);
 

@@ -1,8 +1,8 @@
 package dbDiagram.components;
 
 import java.util.LinkedList;
-import java.util.List;
 
+import abstractDiagram.components.AbstractEntity;
 import dbDiagram.relationships.Role;
 
 /**
@@ -12,12 +12,9 @@ import dbDiagram.relationships.Role;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public abstract class Entity extends Type
+public abstract class Entity extends AbstractEntity
 {	
 	protected LinkedList<Field> fields = new LinkedList<>();
-	protected List<Role> roles = new LinkedList<>();
-
-	protected String stereotype = "";
 
 	public Entity(String name)
 	{

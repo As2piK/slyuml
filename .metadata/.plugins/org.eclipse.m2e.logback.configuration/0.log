@@ -1,7 +1,6 @@
-2013-05-15 15:33:59,900 [main] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
-2013-05-15 15:34:00,119 [pool-5-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
-2013-05-15 15:34:00,128 [main] ERROR o.e.r.i.r.repo.ModelRepositoryIndex - Failed to open search index.
-org.apache.lucene.index.IndexNotFoundException: no segments* file found in org.apache.lucene.store.MMapDirectory@G:\As2piK\Dropbox\Bachelor\SlyumL\.metadata\.plugins\org.eclipse.recommenders.rcp\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@71635d3a: files: []
+2013-05-21 11:26:47,495 [main] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-21 11:26:47,617 [main] ERROR o.e.r.i.r.repo.ModelRepositoryIndex - Failed to open search index.
+org.apache.lucene.index.IndexNotFoundException: no segments* file found in org.apache.lucene.store.MMapDirectory@G:\As2piK\Dropbox\Bachelor\SlyumL\.metadata\.plugins\org.eclipse.recommenders.rcp\index lockFactory=org.apache.lucene.store.NativeFSLockFactory@37c14c27: files: []
 	at org.apache.lucene.index.SegmentInfos$FindSegmentsFile.run(SegmentInfos.java:712) ~[org.apache.lucene.core_3.5.0.v20120725-1805.jar:3.5.0 1204988 - simon - 2011-11-22 14:46:51]
 	at org.apache.lucene.index.DirectoryReader.open(DirectoryReader.java:75) ~[org.apache.lucene.core_3.5.0.v20120725-1805.jar:3.5.0 1204988 - simon - 2011-11-22 14:46:51]
 	at org.apache.lucene.index.IndexReader.open(IndexReader.java:462) ~[org.apache.lucene.core_3.5.0.v20120725-1805.jar:3.5.0 1204988 - simon - 2011-11-22 14:46:51]
@@ -56,7 +55,7 @@ org.apache.lucene.index.IndexNotFoundException: no segments* file found in org.a
 	at org.eclipse.jface.action.Action.runWithEvent(Action.java:499) [org.eclipse.jface_3.8.200.v20121212-113328.jar:na]
 	at org.eclipse.jface.commands.ActionHandler.execute(ActionHandler.java:119) [org.eclipse.jface_3.8.200.v20121212-113328.jar:na]
 	at org.eclipse.ui.internal.handlers.E4HandlerProxy.execute(E4HandlerProxy.java:76) [org.eclipse.ui.workbench_3.105.0.v20121210-193513.jar:na]
-	at sun.reflect.GeneratedMethodAccessor33.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.GeneratedMethodAccessor27.invoke(Unknown Source) ~[na:na]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:1.7.0_21]
 	at java.lang.reflect.Method.invoke(Unknown Source) ~[na:1.7.0_21]
 	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:56) [org.eclipse.e4.core.di_1.2.0.v20121024-173149.jar:na]
@@ -108,7 +107,11 @@ org.apache.lucene.index.IndexNotFoundException: no segments* file found in org.a
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:584) [org.eclipse.equinox.launcher_1.3.0.v20121114-150939.jar:na]
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1443) [org.eclipse.equinox.launcher_1.3.0.v20121114-150939.jar:na]
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1419) [org.eclipse.equinox.launcher_1.3.0.v20121114-150939.jar:na]
-2013-05-15 15:34:01,250 [pool-8-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
-2013-05-15 15:52:59,015 [pool-10-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
-2013-05-15 15:52:59,833 [pool-12-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
-2013-05-15 15:53:00,481 [pool-14-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-21 11:26:47,725 [pool-6-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-21 11:26:48,982 [pool-8-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-21 13:18:33,136 [pool-11-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-21 13:18:33,921 [pool-13-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-21 13:18:34,589 [pool-15-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-22 14:35:32,544 [main] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-22 14:37:52,085 [pool-6-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16
+2013-05-22 14:37:53,044 [pool-8-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 16

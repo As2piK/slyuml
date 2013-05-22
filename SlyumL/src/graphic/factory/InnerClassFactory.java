@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.relations.InnerClassView;
 
@@ -17,7 +17,7 @@ public class InnerClassFactory extends InheritanceFactory
 {
 	public final String ERROR_CREATION_MESSAGE = "Inner class creation failed.\nYou must make a bond between two classes or class -> interface.";
 
-	public InnerClassFactory(GraphicView parent)
+	public InnerClassFactory(ClassGraphicView parent)
 	{
 		super(parent);
 	}

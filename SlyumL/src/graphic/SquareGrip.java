@@ -24,7 +24,7 @@ public abstract class SquareGrip extends GraphicComponent
 	protected Cursor previousCursor = cursor;
 	protected boolean previousVisible = isVisible();
 
-	public SquareGrip(GraphicView parent, int size, int cursor)
+	public SquareGrip(ClassGraphicView parent, int size, int cursor)
 	{
 		super(parent);
 

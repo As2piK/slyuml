@@ -13,16 +13,19 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="getAssociedComponent" key="selection"/>
+		<item value="adjustWidth" key="selection"/>
 		<list key="findhistory">
-			<item value="getAssociedComponent"/>
-			<item value="addr"/>
-			<item value="addAg"/>
-			<item value="removeComponen"/>
-			<item value="addComp"/>
-			<item value="getcomp"/>
+			<item value="adjustWidth"/>
+			<item value="AbstractDiagram"/>
+			<item value="getAssoci"/>
+			<item value="moveCompon"/>
+			<item value="addCompon"/>
+			<item value="classDiagram"/>
+			<item value="AddComponentsOb"/>
+			<item value="AddComponentso"/>
 		</list>
 		<list key="replacehistory">
+			<item value="dbDiagram"/>
 		</list>
 	</section>
 </section>

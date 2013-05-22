@@ -1,4 +1,4 @@
-!SESSION 2013-05-15 15:10:18.552 -----------------------------------------------
+!SESSION 2013-05-21 11:22:43.426 -----------------------------------------------
 eclipse.buildId=I20121214-0730
 java.version=1.7.0_21
 java.vendor=Oracle Corporation
@@ -6,7 +6,7 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_CH
 Framework arguments:  -product org.eclipse.epp.package.java.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
 
-!ENTRY org.eclipse.egit.ui 2 0 2013-05-15 15:10:49.072
+!ENTRY org.eclipse.egit.ui 2 0 2013-05-21 11:23:08.654
 !MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
 Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
 The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
@@ -14,12 +14,58 @@ this system level configuration. The Git installation location can be configured
 Team > Git > Configuration preference page's 'System Settings' tab.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
-!ENTRY org.eclipse.egit.ui 2 0 2013-05-15 15:10:49.073
+!ENTRY org.eclipse.egit.ui 2 0 2013-05-21 11:23:08.654
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\Jonathan'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
-!ENTRY org.eclipse.m2e.logback.appender 4 0 2013-05-15 15:34:00.129
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2013-05-21 11:26:47.618
 !MESSAGE Failed to open search index.
+!SESSION 2013-05-22 14:32:55.745 -----------------------------------------------
+eclipse.buildId=I20121214-0730
+java.version=1.7.0_21
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_CH
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-05-22 14:33:20.505
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2013-05-22 14:33:20.510
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Jonathan'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.recommenders.rcp.utils 4 0 2013-05-22 15:29:46.780
+!MESSAGE Failed to resolve selection in '=SlyumL2/src<graphic.factory{CreateGenericComponent.java' at offset 727
+!STACK 1
+Java Model Exception: Java Model Status [Index out of bounds]
+	at org.eclipse.jdt.internal.core.Openable.codeSelect(Openable.java:157)
+	at org.eclipse.jdt.internal.core.CompilationUnit.codeSelect(CompilationUnit.java:377)
+	at org.eclipse.jdt.internal.core.CompilationUnit.codeSelect(CompilationUnit.java:371)
+	at org.eclipse.recommenders.internal.rcp.providers.JavaSelectionUtils.resolveJavaElementFromTypeRootInEditor(JavaSelectionUtils.java:147)
+	at org.eclipse.recommenders.internal.rcp.providers.JavaSelectionUtils.resolveJavaElementFromEditor(JavaSelectionUtils.java:129)
+	at org.eclipse.recommenders.internal.rcp.providers.JavaSelectionUtils.resolveJavaElementFromEditor(JavaSelectionUtils.java:112)
+	at org.eclipse.recommenders.internal.rcp.providers.JavaSelectionProvider.handleSelectionInEditor(JavaSelectionProvider.java:108)
+	at org.eclipse.recommenders.internal.rcp.providers.JavaSelectionProvider.access$1(JavaSelectionProvider.java:105)
+	at org.eclipse.recommenders.internal.rcp.providers.JavaSelectionProvider$1.run(JavaSelectionProvider.java:82)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+!SUBENTRY 1 org.eclipse.jdt.core 4 980 2013-05-22 15:29:46.780
+!MESSAGE Index out of bounds

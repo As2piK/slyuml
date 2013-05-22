@@ -1,7 +1,7 @@
 package swing;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -65,7 +65,7 @@ public class SPanelElement extends JPanelRounded implements ActionListener, ILis
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		GraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
+		ClassGraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
 		
 		if (e.getActionCommand().equals(Slyum.ACTION_DELETE))
 			

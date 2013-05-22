@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -73,7 +73,7 @@ public class SPanelZOrder extends JPanelRounded implements ActionListener, IList
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		GraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
+		ClassGraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
 		
 		if (Slyum.ACTION_MOVE_TOP.equals(e.getActionCommand()))
 			
@@ -100,7 +100,7 @@ public class SPanelZOrder extends JPanelRounded implements ActionListener, IList
 	
 	public void updateBtnState()
 	{
-		GraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
+		ClassGraphicView gv = PanelClassDiagram.getInstance().getCurrentGraphicView();
 		boolean enable = gv.countEntities() > 1 && gv.countSelectedEntities() > 0;
 		
 		top.setEnabled(enable);

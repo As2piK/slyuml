@@ -1,6 +1,6 @@
 package graphic.relations;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.textbox.TextBoxRole;
 
@@ -48,7 +48,7 @@ public class BinaryView extends AssociationView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public BinaryView(GraphicView parent, ClassEntityView source, ClassEntityView target, Binary binary, Point posSource, Point posTarget, boolean checkRecursivity)
+	public BinaryView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Binary binary, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, binary, posSource, posTarget, checkRecursivity);
 

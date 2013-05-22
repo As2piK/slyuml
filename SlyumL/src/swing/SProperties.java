@@ -1,6 +1,6 @@
 package swing;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.textbox.TextBox;
 
@@ -380,7 +380,7 @@ public class SProperties extends JDialog
 										btnColor.addActionListener(new ActionListener() {
 											public void actionPerformed(ActionEvent arg0)
 											{
-												final SColorChooser scc = new SColorChooser(new Color(GraphicView.getGridColor()));
+												final SColorChooser scc = new SColorChooser(new Color(ClassGraphicView.getGridColor()));
 												scc.setVisible(true);
 
 												if (scc.isAccepted())
@@ -697,7 +697,7 @@ public class SProperties extends JDialog
 
 							PropertyLoader.getInstance().push();
 							
-							GraphicView.setGridSize(sliderGridSize.getValue());
+							ClassGraphicView.setGridSize(sliderGridSize.getValue());
 						}
 						catch (Exception e1)
 						{
@@ -761,18 +761,18 @@ public class SProperties extends JDialog
 	
 	private void init()
 	{
-		btnBackgroundColor.setBackground(GraphicView.getBasicColor());
+		btnBackgroundColor.setBackground(ClassGraphicView.getBasicColor());
 		btnDefaultClassColor.setBackground(ClassEntityView.getBasicColor());
-		ckbBackgroundGradient.setSelected(GraphicView.getBackgroundGradient());
-		chckbxOpacityGrid.setSelected(GraphicView.isGridOpacityEnable());
-		sliderGridPoint.setValue(GraphicView.getGridOpacity());
+		ckbBackgroundGradient.setSelected(ClassGraphicView.getBackgroundGradient());
+		chckbxOpacityGrid.setSelected(ClassGraphicView.isGridOpacityEnable());
+		sliderGridPoint.setValue(ClassGraphicView.getGridOpacity());
 		sliderGridPoint.setEnabled(chckbxOpacityGrid.isSelected());
-		sliderGridSize.setValue(GraphicView.getGridSize());
-		btnColor.setBackground(new Color(GraphicView.getGridColor()));
+		sliderGridSize.setValue(ClassGraphicView.getGridSize());
+		btnColor.setBackground(new Color(ClassGraphicView.getGridColor()));
 		listName.setSelectedValue(TextBox.getFontName(), true);
 		listSize.setSelectedValue(TextBox.getFontSize(), true);
-		chckbxUseCtrlFor.setSelected(GraphicView.isCtrlForGrip());
-		chckbxShowGrid.setSelected(GraphicView.isGridVisible());
+		chckbxUseCtrlFor.setSelected(ClassGraphicView.isCtrlForGrip());
+		chckbxShowGrid.setSelected(ClassGraphicView.isGridVisible());
 		
 		switch (Utility.getGraphicQualityType())
 		{
@@ -791,9 +791,9 @@ public class SProperties extends JDialog
 		chckbxDisableErrorMessage.setSelected(Slyum.isShowErrorMessage());
 		chckbxDisableCrossPopup.setSelected(Slyum.isShowCrossMenu());
 		chckbxUseSmallIcons.setSelected(Slyum.getSmallIcons());
-		chckbxEnableGrid.setSelected(GraphicView.isGridEnable());
+		chckbxEnableGrid.setSelected(ClassGraphicView.isGridEnable());
 
-		if (GraphicView.isAutomatiqueGridColor())
+		if (ClassGraphicView.isAutomatiqueGridColor())
 			rdbtnAutomaticcolor.setSelected(true);
 		else
 			rdbtnSelectedColor.setSelected(true);

@@ -1,6 +1,6 @@
 package graphic.entity;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.relations.AssociationClasseLine;
 import graphic.relations.BinaryView;
 
@@ -35,7 +35,7 @@ public class AssociationClassView extends ClassView
 	 * @param bounds
 	 *            the default bounds
 	 */
-	public AssociationClassView(GraphicView parent, AssociationClass component, BinaryView binaryView, Rectangle bounds)
+	public AssociationClassView(ClassGraphicView parent, AssociationClass component, BinaryView binaryView, Rectangle bounds)
 	{
 		super(parent, component);
 
@@ -71,7 +71,7 @@ public class AssociationClassView extends ClassView
 	 * @param bounds
 	 *            the default bounds
 	 */
-	public AssociationClassView(GraphicView parent, AssociationClass component, ClassView source, ClassView target, Point posSource, Point posTarget, Rectangle bounds)
+	public AssociationClassView(ClassGraphicView parent, AssociationClass component, ClassView source, ClassView target, Point posSource, Point posTarget, Rectangle bounds)
 	{
 		super(parent, component);
 

@@ -1,7 +1,12 @@
 {
-  "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\src": {
-    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\src",
+  "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL2\\src": {
+    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL2\\src",
     "status": "UNRESOLVED",
-    "error": "No class path info available for \u0027G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\src\u0027. Skipped."
+    "error": "No class path info available for \u0027G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL2\\src\u0027. Skipped."
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
+    "status": "RESOLVED"
   }
 }

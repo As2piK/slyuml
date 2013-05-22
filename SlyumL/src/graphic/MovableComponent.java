@@ -32,7 +32,7 @@ public abstract class MovableComponent extends GraphicComponent
 
 	protected GripEntity rightMovableSquare;
 
-	public MovableComponent(GraphicView parent)
+	public MovableComponent(ClassGraphicView parent)
 	{
 		super(parent);
 
@@ -100,7 +100,7 @@ public abstract class MovableComponent extends GraphicComponent
 	public int ajustOnGrid(int value)
 	{
 		// Use the integer cast for adjusting value.
-		return value / GraphicView.getGridSize() * GraphicView.getGridSize();
+		return value / ClassGraphicView.getGridSize() * ClassGraphicView.getGridSize();
 	}
 
 	@Override
@@ -283,7 +283,7 @@ public abstract class MovableComponent extends GraphicComponent
 		leftMovableSquare.saveMouseLocation(e);
 		leftMovableSquare.setBounds(boundsResizer);
 
-		final int anchor = (ghost.x + ghost.width) / GraphicView.getGridSize();
+		final int anchor = (ghost.x + ghost.width) / ClassGraphicView.getGridSize();
 		ghost.x = boundsResizer.x;
 		ghost.x = ajustOnGrid(ghost.x);
 
@@ -292,7 +292,7 @@ public abstract class MovableComponent extends GraphicComponent
 		if (ghost.y < 0)
 			ghost.y = 0;
 
-		ghost.width = anchor * GraphicView.getGridSize() - ghost.x;
+		ghost.width = anchor * ClassGraphicView.getGridSize() - ghost.x;
 
 		if (ghost.width < MINIMUM_SIZE.x)
 		{
@@ -320,7 +320,7 @@ public abstract class MovableComponent extends GraphicComponent
 		rightMovableSquare.saveMouseLocation(e);
 		rightMovableSquare.setBounds(boundsResizer);
 
-		ghost.width = ajustOnGrid(boundsResizer.x - ghost.x) + GraphicView.getGridSize();
+		ghost.width = ajustOnGrid(boundsResizer.x - ghost.x) + ClassGraphicView.getGridSize();
 
 		if (ghost.width < MINIMUM_SIZE.x)
 			ghost.width = saveGhost.width;

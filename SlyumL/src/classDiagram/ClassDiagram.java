@@ -2,10 +2,9 @@ package classDiagram;
 
 import java.util.LinkedList;
 
-import abstractDiagram.AbstractDiagram;
-import abstractDiagram.AbstractIComponentsObserver;
-import abstractDiagram.AbstractIDiagramComponent;
 import utility.Utility;
+import abstractDiagram.AbstractDiagram;
+import abstractDiagram.AbstractIDiagramComponent;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
@@ -28,7 +27,7 @@ import classDiagram.relationships.Multi;
  * @version 1.0 - 24.07.201
  * 
  */
-public class ClassDiagram extends AbstractDiagram implements AbstractIComponentsObserver, IClassComponentsObserver
+public class ClassDiagram extends AbstractDiagram implements IClassComponentsObserver
 {
 	private static int currentID = 0;
 
@@ -232,7 +231,6 @@ public class ClassDiagram extends AbstractDiagram implements AbstractIComponents
 			removeComponent(components.get(0));
 	}
 
-	@Override
 	public void removeComponent(IClassDiagramComponent component)
 	{
 		components.remove(component);

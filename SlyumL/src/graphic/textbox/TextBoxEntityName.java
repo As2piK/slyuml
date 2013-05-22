@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -36,7 +36,7 @@ public class TextBoxEntityName extends TextBox
 	 * @param entity
 	 *            the entity
 	 */
-	public TextBoxEntityName(GraphicView parent, Entity entity)
+	public TextBoxEntityName(ClassGraphicView parent, Entity entity)
 	{
 		super(parent, entity.getName());
 

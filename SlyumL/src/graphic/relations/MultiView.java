@@ -1,6 +1,6 @@
 package graphic.relations;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.MovableComponent;
 import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
@@ -50,7 +50,7 @@ public class MultiView extends MovableComponent implements Observer
 	 * @param multi
 	 *            the multi UML
 	 */
-	public MultiView(GraphicView parent, Multi multi)
+	public MultiView(ClassGraphicView parent, Multi multi)
 	{
 		super(parent);
 

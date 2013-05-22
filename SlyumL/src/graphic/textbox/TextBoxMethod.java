@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -92,7 +92,7 @@ public class TextBoxMethod extends TextBox implements Observer
 	 * @param attribute
 	 *            the method
 	 */
-	public TextBoxMethod(GraphicView parent, Method method)
+	public TextBoxMethod(ClassGraphicView parent, Method method)
 	{
 		super(parent, getStringFromMethod(method, ParametersViewStyle.TYPE_AND_NAME));
 

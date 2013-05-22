@@ -173,13 +173,13 @@ public class DBDiagram extends AbstractDiagram implements AbstractIComponentsObs
 	}
 
 	@Override
-	public void removeComponent(IDBDiagramComponent component)
+	public void removeComponent(AbstractIDiagramComponent component)
 	{
 		components.remove(component);
 
 		// Optimizes this (create more array for specific elements, not just an
 		// array for all components.
-		if (component instanceof Entity)
+		if (component instanceof dbDiagram.components.Entity)
 			entities.remove(component);
 
 		for (final IDBComponentsObserver c : observers)

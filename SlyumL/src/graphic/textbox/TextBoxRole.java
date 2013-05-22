@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.relations.MagneticGrip;
 
 import java.awt.Point;
@@ -103,7 +103,7 @@ public class TextBoxRole extends TextBoxLabel
 	 * @param grip
 	 *            the grip near the role
 	 */
-	public TextBoxRole(GraphicView parent, Role role, MagneticGrip grip)
+	public TextBoxRole(ClassGraphicView parent, Role role, MagneticGrip grip)
 	{
 		super(parent, roleToString(role));
 

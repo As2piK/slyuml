@@ -1,6 +1,6 @@
 package graphic.entity;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import classDiagram.components.Attribute;
 import classDiagram.components.InterfaceEntity;
 import classDiagram.components.Method;
@@ -22,7 +22,7 @@ public class InterfaceView extends ClassEntityView
 	 * @param component
 	 *            the interface (UML)
 	 */
-	public InterfaceView(GraphicView parent, InterfaceEntity component)
+	public InterfaceView(ClassGraphicView parent, InterfaceEntity component)
 	{
 		super(parent, component);
 		

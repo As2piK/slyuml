@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 import graphic.relations.DependencyView;
 
@@ -34,7 +34,7 @@ public class DependencyFactory extends RelationFactory
 	 * @param classDiagram
 	 *            the class diagram
 	 */
-	public DependencyFactory(GraphicView parent)
+	public DependencyFactory(ClassGraphicView parent)
 	{
 		super(parent);
 

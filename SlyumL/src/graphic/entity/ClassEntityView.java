@@ -1,7 +1,7 @@
 package graphic.entity;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.MovableComponent;
 import graphic.textbox.TextBox;
 import graphic.textbox.TextBoxAttribute;
@@ -206,7 +206,7 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 	private static final Font stereotypeFontBasic = new Font(Slyum.getInstance().defaultFont.getFamily(), 0, 11); // TODO
 	private Font stereotypeFont = stereotypeFontBasic;
 
-	public ClassEntityView(final GraphicView parent, Entity component)
+	public ClassEntityView(final ClassGraphicView parent, Entity component)
 	{
 		super(parent);
 
@@ -468,7 +468,7 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 		final Rectangle bounds = getBounds();
 		
 		Change.push(new BufferBounds(this));
-		setBounds(new Rectangle(bounds.x, bounds.y, width + GraphicView.getGridSize() + 15, bounds.height));
+		setBounds(new Rectangle(bounds.x, bounds.y, width + ClassGraphicView.getGridSize() + 15, bounds.height));
 		Change.push(new BufferBounds(this));
 	}
 
@@ -605,7 +605,7 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 	{
 		super.gMouseClicked(e);
 
-		final TextBox textBox = GraphicView.searchComponentWithPosition(getAllTextBox(), e.getPoint());
+		final TextBox textBox = ClassGraphicView.searchComponentWithPosition(getAllTextBox(), e.getPoint());
 
 		if (textBox != null)
 		{
@@ -653,8 +653,8 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 	@Override
 	public void gMouseMoved(MouseEvent e)
 	{
-		final GraphicComponent textBoxMouseHover = GraphicView.searchComponentWithPosition(getAllTextBox(), e.getPoint());
-		GraphicView.computeComponentEventEnter(textBoxMouseHover, saveTextBoxMouseHover, e);
+		final GraphicComponent textBoxMouseHover = ClassGraphicView.searchComponentWithPosition(getAllTextBox(), e.getPoint());
+		ClassGraphicView.computeComponentEventEnter(textBoxMouseHover, saveTextBoxMouseHover, e);
 
 		saveTextBoxMouseHover = textBoxMouseHover;
 	}
@@ -675,7 +675,7 @@ public abstract class ClassEntityView extends MovableComponent implements Observ
 	{
 		final LinkedList<TextBox> tb = getAllTextBox();
 		tb.remove(entityName);
-		return GraphicView.searchComponentWithPosition(tb, location);
+		return ClassGraphicView.searchComponentWithPosition(tb, location);
 	}
 
 	@Override

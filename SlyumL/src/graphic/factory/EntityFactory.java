@@ -1,7 +1,7 @@
 package graphic.factory;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 
 import java.awt.BasicStroke;
@@ -30,7 +30,7 @@ public abstract class EntityFactory extends ComponentFactory
 	public final static Dimension DEFAULT_SIZE = new Dimension(150, 61);
 	private final Rectangle bounds;
 
-	public EntityFactory(GraphicView parent)
+	public EntityFactory(ClassGraphicView parent)
 	{
 		super(parent);
 
@@ -60,7 +60,7 @@ public abstract class EntityFactory extends ComponentFactory
 
 		final Point middle = new Point(e.getX() - DEFAULT_SIZE.width / 2, e.getY() - DEFAULT_SIZE.height / 2);
 
-		int gs = GraphicView.getGridSize();
+		int gs = ClassGraphicView.getGridSize();
 		int x = (middle.x / gs) * gs;
 		int y = (middle.y / gs) * gs;
 		

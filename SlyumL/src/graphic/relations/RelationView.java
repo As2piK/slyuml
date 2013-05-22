@@ -1,7 +1,7 @@
 package graphic.relations;
 
 import graphic.GraphicComponent;
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.AssociationClassView;
 import graphic.textbox.TextBoxRole;
 
@@ -31,7 +31,7 @@ public abstract class RelationView extends LineView implements Observer
 {
 	private final IClassDiagramComponent component;
 
-	public RelationView(GraphicView graphicView, GraphicComponent source, GraphicComponent target, IClassDiagramComponent component, Point posSource, Point posTarget, boolean checkRecursivity)
+	public RelationView(ClassGraphicView graphicView, GraphicComponent source, GraphicComponent target, IClassDiagramComponent component, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(graphicView, source, target, posSource, posTarget, checkRecursivity);
 

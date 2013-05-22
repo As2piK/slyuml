@@ -1,16 +1,10 @@
 package dbDiagram;
 
 import abstractDiagram.AbstractIComponentsObserver;
-import classDiagram.components.AssociationClass;
-import classDiagram.components.ClassEntity;
+import abstractDiagram.AbstractIDiagramComponent;
 import classDiagram.components.Entity;
-import classDiagram.components.InterfaceEntity;
-import classDiagram.relationships.Aggregation;
 import classDiagram.relationships.Binary;
-import classDiagram.relationships.Composition;
-import classDiagram.relationships.Dependency;
 import classDiagram.relationships.Inheritance;
-import classDiagram.relationships.InnerClass;
 import classDiagram.relationships.Multi;
 import dbDiagram.components.TableEntity;
 
@@ -74,5 +68,5 @@ public interface IDBComponentsObserver extends AbstractIComponentsObserver
 	 * @param component
 	 *            the component to remove.
 	 */
-	public void removeComponent(IDBDiagramComponent component);
+	public void removeComponent(AbstractIDiagramComponent component);
 }

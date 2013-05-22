@@ -1,6 +1,6 @@
 package graphic.relations;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.entity.ClassEntityView;
 
 import java.awt.Color;
@@ -47,7 +47,7 @@ public class CompositionView extends BinaryView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public CompositionView(GraphicView parent, ClassEntityView source, ClassEntityView target, Composition composition, Point posSource, Point posTarget, boolean checkRecursivity)
+	public CompositionView(ClassGraphicView parent, ClassEntityView source, ClassEntityView target, Composition composition, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, composition, posSource, posTarget, checkRecursivity);
 	}

@@ -3,6 +3,7 @@ package abstractDiagram;
 import java.util.LinkedList;
 
 import utility.Utility;
+import classDiagram.IClassComponentsObserver;
 import classDiagram.IClassDiagramComponent;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;

@@ -1,6 +1,6 @@
 package graphic.textbox;
 
-import graphic.GraphicView;
+import graphic.ClassGraphicView;
 import graphic.relations.AssociationView;
 import graphic.relations.LineView;
 import graphic.relations.MagneticGrip;
@@ -122,7 +122,7 @@ public class TextBoxMultiplicity extends TextBoxLabel
 	 * @param grip
 	 *            the grip associated with
 	 */
-	public TextBoxMultiplicity(GraphicView parent, Multiplicity multiplicity, MagneticGrip grip)
+	public TextBoxMultiplicity(ClassGraphicView parent, Multiplicity multiplicity, MagneticGrip grip)
 	{
 		super(parent, multiplicity.toString());
 
