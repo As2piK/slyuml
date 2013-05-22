@@ -14,7 +14,7 @@ import swing.Slyum.DIAGRAM_TYPE;
 import utility.PersonalizedIcon;
 import utility.Utility;
 
-public class SPanelFileComponent extends JPanelRounded implements ActionListener
+public class DBSPanelFileComponent extends JPanelRounded implements ActionListener
 {
 	private static final long serialVersionUID = -3219782414246923686L;
 	
@@ -27,12 +27,12 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 	
 	private SButton newProject, open, save, export, klipper, print;
 	
-	private static SPanelFileComponent instance;
+	private static DBSPanelFileComponent instance;
 	
-	public static SPanelFileComponent getInstance()
+	public static DBSPanelFileComponent getInstance()
 	{
 		if (instance == null)
-			instance = new SPanelFileComponent();
+			instance = new DBSPanelFileComponent();
 		
 		return instance;
 	}
@@ -45,14 +45,14 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 			Slyum.currentDiagramType = DIAGRAM_TYPE.CLASS;
 			SPanelDiagramComponent.getInstance().switchButtonStatus();
 		} else if (Slyum.ACTION_NEW_DATABASE_DIAGRAM.equals(e.getActionCommand())) {
-			PanelDBDiagram.getInstance().newProject();
+			PanelClassDiagram.getInstance().newProject();
 			Slyum.currentDiagramType = DIAGRAM_TYPE.DB;
 			SPanelDiagramComponent.getInstance().switchButtonStatus();
 		} else if (Slyum.ACTION_OPEN.equals(e.getActionCommand())) {
 			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
 				PanelClassDiagram.getInstance().openFromXML();
 			} else {
-				PanelDBDiagram.getInstance().openFromXML();
+				PanelClassDiagram.getInstance().openFromXML();
 			}
 		}	
 
@@ -60,7 +60,7 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
 				PanelClassDiagram.getInstance().saveToXML(false);
 			} else {
-				PanelDBDiagram.getInstance().saveToXML(false);
+				PanelClassDiagram.getInstance().saveToXML(false);
 			}
 		}
 
@@ -68,7 +68,7 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
 				PanelClassDiagram.getInstance().exportAsImage();
 			} else {
-				PanelDBDiagram.getInstance().exportAsImage();
+				PanelClassDiagram.getInstance().exportAsImage();
 			}
 		}
 
@@ -76,7 +76,7 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
 				PanelClassDiagram.getInstance().getCurrentGraphicView().copyDiagramToClipboard();
 			} else {
-				PanelDBDiagram.getInstance().getCurrentGraphicView().copyDiagramToClipboard();
+				PanelClassDiagram.getInstance().getCurrentGraphicView().copyDiagramToClipboard();
 			}
 		}
 
@@ -84,12 +84,12 @@ public class SPanelFileComponent extends JPanelRounded implements ActionListener
 			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
 				PanelClassDiagram.getInstance().initPrinting();
 			} else {
-				PanelDBDiagram.getInstance().initPrinting();
+				PanelClassDiagram.getInstance().initPrinting();
 			}
 		}
 	}
 
-	private SPanelFileComponent()
+	private DBSPanelFileComponent()
 	{
 		setLayout(new GridLayout(1, 6, 5, 5));
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

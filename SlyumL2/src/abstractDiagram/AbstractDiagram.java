@@ -28,5 +28,9 @@ public abstract class AbstractDiagram implements AbstractIComponentsObserver
 	 * @param index
 	 *            the index to move the entity.
 	 */
+	
+	public abstract String getName();
+	public abstract void removeAll();
+	public abstract String toXML(int no);
 	public void changeZOrder(AbstractEntity entity, int index) {};
 }

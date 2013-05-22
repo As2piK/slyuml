@@ -58,6 +58,7 @@ import javax.swing.SwingUtilities;
 
 import swing.IListenerComponentSelectionChanged;
 import swing.PanelClassDiagram;
+import swing.PanelClassDiagram;
 import swing.PropertyLoader;
 import swing.SColorChooser;
 import swing.SPanelElement;

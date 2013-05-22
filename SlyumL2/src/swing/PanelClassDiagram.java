@@ -34,14 +34,16 @@ import javax.swing.filechooser.FileFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import swing.hierarchicalView.HierarchicalClassView;
+import abstractDiagram.AbstractDiagram;
+import classDiagram.ClassDiagram;
+import swing.hierarchicalView.DBHierarchicalView;
 import swing.propretiesView.PropretiesChanger;
 import utility.SDialogProjectLoading;
 import utility.SMessageDialog;
 import utility.SSlider;
 import utility.Utility;
 import change.Change;
-import classDiagram.ClassDiagram;
+import dbDiagram.DBDiagram;
 
 /**
  * Show the panel containing all views (hierarchical, properties and graphic)
@@ -60,7 +62,7 @@ public class PanelClassDiagram extends JPanel
 		return instance;
 	}
 
-	private ClassDiagram classDiagram;
+	private AbstractDiagram dbDiagram;
 
 	private File currentFile = null;
 
@@ -73,7 +75,7 @@ public class PanelClassDiagram extends JPanel
 		super(new BorderLayout());
 
 		// Create new graphiView, contain class diagram.
-		graphicView = new GraphicView(getClassDiagram());
+		graphicView = new GraphicView(getDBDiagram());
         
         setTransferHandler(new FileHandler());
 		
@@ -81,7 +83,7 @@ public class PanelClassDiagram extends JPanel
 		JPanel panelToolBar = new JPanel();
 		panelToolBar.setLayout(new BoxLayout(panelToolBar, BoxLayout.LINE_AXIS));
 
-		panelToolBar.add(SPanelFileComponent.getInstance());
+		panelToolBar.add(DBSPanelFileComponent.getInstance());
 		panelToolBar.add(SPanelUndoRedo.getInstance());
 		panelToolBar.add(SPanelElement.getInstance());
 		panelToolBar.add(SPanelStyleComponent.getInstance());
@@ -106,7 +108,7 @@ public class PanelClassDiagram extends JPanel
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
 		
 		leftPanel.add(SPanelDiagramComponent.getInstance());
-		leftPanel.add(new HierarchicalClassView(getClassDiagram()));
+		leftPanel.add(new DBHierarchicalView(getDBDiagram()));
 		
 		final SSplitPane leftSplitPanel = new SSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, mainSplitPane);
 		leftSplitPanel.setDividerLocation(200);
@@ -182,15 +184,15 @@ public class PanelClassDiagram extends JPanel
 	 * 
 	 * @return the class diagram
 	 */
-	public ClassDiagram getClassDiagram()
+	public AbstractDiagram getDBDiagram()
 	{
-		if (classDiagram == null)
+		if (dbDiagram == null)
 		{
-			classDiagram = new ClassDiagram("Class diagram");
-			classDiagram.addComponentsObserver(PropretiesChanger.getInstance());
+			dbDiagram = new DBDiagram("DB diagram");
+			dbDiagram.addComponentsObserver(PropretiesChanger.getInstance());
 		}
 
-		return classDiagram;
+		return dbDiagram;
 	}
 	
 	public JButton getRedoButton()
@@ -302,8 +304,8 @@ public class PanelClassDiagram extends JPanel
 	
 	public void cleanApplication()
 	{
-		classDiagram.removeAll();
-		PanelDBDiagram.getInstance().getDBDiagram().removeAll();
+		dbDiagram.removeAll();
+		//PanelClassDiagram.getInstance().getClassDiagram().removeAll();
 		graphicView.removeAll();
 		setCurrentFile(null);
 	}
@@ -379,10 +381,10 @@ public class PanelClassDiagram extends JPanel
 				try
 				{
 					SAXParser parser = factory.newSAXParser();
-					XMLParser handler = new XMLParser(classDiagram, graphicView, dpl);
-					parser.parse(file, handler);
+					//XMLParser handler = new XMLParser(dbDiagram, graphicView, dpl); //TODO
+					//parser.parse(file, handler);
 
-					handler.createDiagram();
+					//handler.createDiagram();
 				}
 				catch (Exception e)
 				{
@@ -544,9 +546,9 @@ public class PanelClassDiagram extends JPanel
 			if (!initCurrentSaveFile())
 				return;
 
-		String xml = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>\n\n<classDiagram name=\"" + classDiagram.getName() + "\">\n";
+		String xml = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>\n\n<classDiagram name=\"" + dbDiagram.getName() + "\">\n";
 
-		xml += classDiagram.toXML(1) + "\n";
+		xml += dbDiagram.toXML(1) + "\n";
 
 		xml += graphicView.toXML(1) + "\n";
 

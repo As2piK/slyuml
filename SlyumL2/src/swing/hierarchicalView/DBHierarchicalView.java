@@ -1,11 +1,11 @@
 package swing.hierarchicalView;
 
 import graphic.entity.AbstractEntityView;
-import graphic.entity.ClassEntityView;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.LinkedList;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -20,29 +20,18 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import abstractDiagram.AbstractIDiagramComponent;
 import swing.JPanelRounded;
 import swing.PanelClassDiagram;
 import swing.Slyum;
 import utility.PersonalizedIcon;
-import classDiagram.ClassDiagram;
-import classDiagram.IClassComponentsObserver;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
-import classDiagram.components.AssociationClass;
-import classDiagram.components.ClassEntity;
-import classDiagram.components.Entity;
-import classDiagram.components.InterfaceEntity;
-import classDiagram.relationships.Aggregation;
-import classDiagram.relationships.Association;
-import classDiagram.relationships.Binary;
-import classDiagram.relationships.Composition;
-import classDiagram.relationships.Dependency;
-import classDiagram.relationships.Inheritance;
-import classDiagram.relationships.InnerClass;
-import classDiagram.relationships.Multi;
-
-import java.util.Observer;
+import abstractDiagram.AbstractDiagram;
+import abstractDiagram.AbstractIDiagramComponent;
+import dbDiagram.IDBComponentsObserver;
+import dbDiagram.IDBDiagramComponent;
+import dbDiagram.IDBDiagramComponent.UpdateMessage;
+import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
+import dbDiagram.relationships.Association;
 
 /**
  * This class is a hierarchical view of the class diagram. It represents class
@@ -53,10 +42,9 @@ import java.util.Observer;
  * @version 1.0 - 28.07.2011
  */
 @SuppressWarnings("serial")
-public class HierarchicalClassView extends JPanelRounded implements IClassComponentsObserver, TreeSelectionListener
+public class DBHierarchicalView extends JPanelRounded implements IDBComponentsObserver, TreeSelectionListener
 {
-	private final DefaultMutableTreeNode entitiesNode, associationsNode,
-			inheritancesNode, dependenciesNode;
+	private final DefaultMutableTreeNode entitiesNode, associationsNode;
 	private final JTree tree;
 	private final DefaultTreeModel treeModel;
 
@@ -65,29 +53,23 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	 * view is empty, if class diagram had already components, you must add them
 	 * manually.
 	 * 
-	 * @param classDiagram
+	 * @param diagram
 	 *            the class diagram for constructing the hierarchical view.
 	 */
-	public HierarchicalClassView(ClassDiagram classDiagram)
+	public DBHierarchicalView(AbstractDiagram diagram)
 	{
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		setBackground(Color.WHITE);
 		setForeground(Color.GRAY);
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
-		final DefaultMutableTreeNode root = new DefaultMutableTreeNode(classDiagram.getName());
+		final DefaultMutableTreeNode root = new DefaultMutableTreeNode(diagram.getName());
 
 		entitiesNode = new DefaultMutableTreeNode("Entities");
 		root.add(entitiesNode);
 
 		associationsNode = new DefaultMutableTreeNode("Relations");
 		root.add(associationsNode);
-
-		inheritancesNode = new DefaultMutableTreeNode("Inheritances");
-		root.add(inheritancesNode);
-
-		dependenciesNode = new DefaultMutableTreeNode("Dependencies");
-		root.add(dependenciesNode);
 
 		treeModel = new DefaultTreeModel(root)
 		{
@@ -110,15 +92,9 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 		
 		add(scrollPane);
 
-		classDiagram.addComponentsObserver(this);
+		diagram.addComponentsObserver(this);
 
 		setMinimumSize(new Dimension(150, 200));
-	}
-
-	@Override
-	public void addAggregation(Aggregation component)
-	{
-		addAssociation(component, "resources/icon/aggregation16.png");
 	}
 
 	/**
@@ -131,62 +107,14 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	 */
 	public void addAssociation(Association component, String imgPath)
 	{
-		addNode(new ClassNodeAssociation(component, treeModel, PersonalizedIcon.createImageIcon(imgPath), tree), associationsNode);
+		addNode(new DBNodeAssociation(component, treeModel, PersonalizedIcon.createImageIcon(imgPath), tree), associationsNode);
 	}
 
-	@Override
-	public void addAssociationClass(AssociationClass component)
-	{
-		addNode(new ClassNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "classAssoc16.png")), entitiesNode);
-	}
 
 	@Override
-	public void addBinary(Binary component)
+	public void addTable(TableEntity component)
 	{
-		addAssociation(component, "resources/icon/association16.png");
-	}
-
-	@Override
-	public void addClass(ClassEntity component)
-	{
-		addNode(new ClassNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class16.png")), entitiesNode);
-	}
-
-	@Override
-	public void addComposition(Composition component)
-	{
-		addAssociation(component, "resources/icon/composition16.png");
-	}
-
-	@Override
-	public void addDependency(Dependency component)
-	{
-		addNode(new NodeDepedency(component, treeModel, tree), dependenciesNode);
-	}
-
-	@Override
-	public void addInheritance(Inheritance component)
-	{
-		addNode(new NodeInheritance(component, treeModel, tree), inheritancesNode);
-	}
-
-	@Override
-	public void addInnerClass(InnerClass component)
-	{
-		addNode(new NodeInnerClass(component, treeModel, tree), inheritancesNode);
-
-	}
-
-	@Override
-	public void addInterface(InterfaceEntity component)
-	{
-		addNode(new ClassNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "interface16.png")), entitiesNode);
-	}
-
-	@Override
-	public void addMulti(Multi component)
-	{
-		addAssociation(component, "resources/icon/multi16.png");
+		addNode(new DBNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class16.png")), entitiesNode);
 	}
 
 	/**
@@ -223,7 +151,7 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 	}
 
 	@Override
-	public void removeComponent(IClassDiagramComponent component)
+	public void removeComponent(IDBDiagramComponent component)
 	{
 		final IDiagramNode associedNode = searchAssociedNode(component);
 
@@ -248,12 +176,6 @@ public class HierarchicalClassView extends JPanelRounded implements IClassCompon
 
 		if (result == null)
 			result = searchAssociedNodeIn(o, associationsNode);
-
-		if (result == null)
-			result = searchAssociedNodeIn(o, inheritancesNode);
-
-		if (result == null)
-			result = searchAssociedNodeIn(o, dependenciesNode);
 
 		return result;
 	}

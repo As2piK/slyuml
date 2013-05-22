@@ -20,6 +20,7 @@ import javax.swing.JRadioButtonMenuItem;
 
 import abstractDiagram.AbstractIDiagramComponent;
 import swing.PanelClassDiagram;
+import swing.PanelClassDiagram;
 import swing.SPanelDiagramComponent;
 import swing.Slyum;
 import swing.SColorChooser;

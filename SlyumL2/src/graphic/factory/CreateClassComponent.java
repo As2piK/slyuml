@@ -31,7 +31,7 @@ public abstract class CreateClassComponent extends CreateGenericComponent
 		if (parent.getDiagram() instanceof ClassDiagram)
 			this.classDiagram = (ClassDiagram) parent.getDiagram();
 		else
-			JOptionPane.showMessageDialog(null, "ERREUR #928");
+			JOptionPane.showMessageDialog(null, "ERREUR #928 : Instance : " + parent.getDiagram().getClass());
 	}
 
 	/**

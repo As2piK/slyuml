@@ -572,7 +572,7 @@ public class Slyum extends JFrame implements ActionListener
 		menuBar.add(menu);
 
 		{
-			SPanelFileComponent p = SPanelFileComponent.getInstance();
+			ClassSPanelFileComponent p = ClassSPanelFileComponent.getInstance();
 			
 	
 			// Sub Menu Zoom
