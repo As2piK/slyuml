@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -21,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -34,15 +36,16 @@ import javax.swing.filechooser.FileFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import abstractDiagram.AbstractDiagram;
-import classDiagram.ClassDiagram;
-import swing.hierarchicalView.DBHierarchicalView;
+import swing.Slyum.DIAGRAM_TYPE;
+import swing.hierarchicalView.HierarchicalView;
 import swing.propretiesView.PropretiesChanger;
 import utility.SDialogProjectLoading;
 import utility.SMessageDialog;
 import utility.SSlider;
 import utility.Utility;
+import abstractDiagram.AbstractDiagram;
 import change.Change;
+import classDiagram.ClassDiagram;
 import dbDiagram.DBDiagram;
 
 /**
@@ -62,20 +65,23 @@ public class PanelClassDiagram extends JPanel
 		return instance;
 	}
 
-	private AbstractDiagram dbDiagram;
+	private ClassDiagram classDiagram;
+	private DBDiagram dbDiagram;
 
 	private File currentFile = null;
 
 	private final GraphicView graphicView;
 	
 	private SSlider sSlider;
+	
+	private HierarchicalView hierarchicView;
 
 	private PanelClassDiagram()
 	{
 		super(new BorderLayout());
 
 		// Create new graphiView, contain class diagram.
-		graphicView = new GraphicView(getDBDiagram());
+		graphicView = new GraphicView(getClassDiagram(), getDBDiagram());
         
         setTransferHandler(new FileHandler());
 		
@@ -97,6 +103,13 @@ public class PanelClassDiagram extends JPanel
 				getCurrentGraphicView().repaint();
 			}			
 		});
+		panelToolBar.add(new JButton(new AbstractAction("Switch diagram type") {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Not yet implemented");
+			}
+		}));
 		
 		add(panelToolBar, BorderLayout.PAGE_START);
 
@@ -107,8 +120,10 @@ public class PanelClassDiagram extends JPanel
 		JPanel leftPanel = new JPanel();
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
 		
+		hierarchicView = new HierarchicalView(getClassDiagram(), getDBDiagram());
+		
 		leftPanel.add(SPanelDiagramComponent.getInstance());
-		leftPanel.add(new DBHierarchicalView(getDBDiagram()));
+		leftPanel.add(hierarchicView);
 		
 		final SSplitPane leftSplitPanel = new SSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPanel, mainSplitPane);
 		leftSplitPanel.setDividerLocation(200);
@@ -184,11 +199,33 @@ public class PanelClassDiagram extends JPanel
 	 * 
 	 * @return the class diagram
 	 */
-	public AbstractDiagram getDBDiagram()
+	public ClassDiagram getClassDiagram()
 	{
-		if (dbDiagram == null)
+		if (classDiagram == null || dbDiagram == null)
 		{
-			dbDiagram = new DBDiagram("DB diagram");
+			
+			classDiagram = new ClassDiagram("Class diagram");
+			dbDiagram = new DBDiagram("DB Diagram");
+			classDiagram.addComponentsObserver(PropretiesChanger.getInstance());
+			dbDiagram.addComponentsObserver(PropretiesChanger.getInstance());
+		}
+
+		return classDiagram;
+	}
+
+	/**
+	 * Get the db diagram from project.
+	 * 
+	 * @return the class diagram
+	 */
+	public DBDiagram getDBDiagram()
+	{
+		if (classDiagram == null || dbDiagram == null)
+		{
+			
+			classDiagram = new ClassDiagram("Class diagram");
+			dbDiagram = new DBDiagram("DB Diagram");
+			classDiagram.addComponentsObserver(PropretiesChanger.getInstance());
 			dbDiagram.addComponentsObserver(PropretiesChanger.getInstance());
 		}
 
@@ -294,20 +331,22 @@ public class PanelClassDiagram extends JPanel
 	/**
 	 * Create a new project. Ask user to save current project.
 	 */
-	public void newProject()
+	public void newProject(Slyum.DIAGRAM_TYPE type)
 	{
 		if (!askForSave())
 			return;
 		
+		Slyum.currentDiagramType = type;
 		cleanApplication();
+		hierarchicView.switchVisibleNodes();
 	}
 	
 	public void cleanApplication()
 	{
-		dbDiagram.removeAll();
-		//PanelClassDiagram.getInstance().getClassDiagram().removeAll();
+		classDiagram.removeAll();
 		graphicView.removeAll();
 		setCurrentFile(null);
+
 	}
 	
 	public void setCurrentFile(File file)
@@ -546,9 +585,9 @@ public class PanelClassDiagram extends JPanel
 			if (!initCurrentSaveFile())
 				return;
 
-		String xml = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>\n\n<classDiagram name=\"" + dbDiagram.getName() + "\">\n";
+		String xml = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>\n\n<classDiagram name=\"" + classDiagram.getName() + "\">\n";
 
-		xml += dbDiagram.toXML(1) + "\n";
+		xml += classDiagram.toXML(1) + "\n";
 
 		xml += graphicView.toXML(1) + "\n";
 

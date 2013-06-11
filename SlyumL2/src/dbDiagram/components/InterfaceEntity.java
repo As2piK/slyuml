@@ -52,9 +52,6 @@ public class InterfaceEntity extends Entity
 		if (attribute == null)
 			throw new IllegalArgumentException("attribute is null");
 
-		// Only static attribute can be added to an interface.
-		attribute.setStatic(true);
-
 		super.addField(attribute);
 	}
 

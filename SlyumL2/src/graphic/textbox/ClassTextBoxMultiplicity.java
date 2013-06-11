@@ -1,7 +1,7 @@
 package graphic.textbox;
 
 import graphic.GraphicView;
-import graphic.relations.AssociationView;
+import graphic.relations.ClassAssociationView;
 import graphic.relations.LineView;
 import graphic.relations.MagneticGrip;
 
@@ -40,7 +40,7 @@ import classDiagram.relationships.Role;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class TextBoxMultiplicity extends TextBoxLabel
+public class ClassTextBoxMultiplicity extends TextBoxLabel
 {
 	/**
 	 * Return multiplicity corresponding to the string given in parameter or
@@ -122,7 +122,7 @@ public class TextBoxMultiplicity extends TextBoxLabel
 	 * @param grip
 	 *            the grip associated with
 	 */
-	public TextBoxMultiplicity(GraphicView parent, Multiplicity multiplicity, MagneticGrip grip)
+	public ClassTextBoxMultiplicity(GraphicView parent, Multiplicity multiplicity, MagneticGrip grip)
 	{
 		super(parent, multiplicity.toString());
 
@@ -176,15 +176,15 @@ public class TextBoxMultiplicity extends TextBoxLabel
 		// search a multiplicity corresponding to the textBox multiplicity...
 		for (final LineView av : parent.getLinesView())
 			// take all line view
-			if (av instanceof AssociationView) // test if it's an associationView (have some role)
+			if (av instanceof ClassAssociationView) // test if it's an associationView (have some role)
 
-				for (final Role r : ((Association) ((AssociationView) av).getAssociedComponent()).getRoles())
+				for (final Role r : ((Association) ((ClassAssociationView) av).getAssociedComponent()).getRoles())
 					// iterate through roles
 
 					if (r.getMultiplicity().equals(multiplicity)) // multiplicity's
 						// role is the same than textBoxMultiplicity multiplicity?
 
-						((AssociationView) av).setSelected(true);
+						((ClassAssociationView) av).setSelected(true);
 	}
 
 	@Override

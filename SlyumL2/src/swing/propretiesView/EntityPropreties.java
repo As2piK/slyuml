@@ -54,6 +54,7 @@ import classDiagram.components.Type;
 import classDiagram.components.Variable;
 import classDiagram.components.Visibility;
 import classDiagram.verifyName.TypeName;
+import dbDiagram.components.Field;
 
 /**
  * Show the propreties of an UML entity with Swing components. All inner classes
@@ -279,6 +280,209 @@ public class EntityPropreties extends GlobalPropreties
 
 	}
 
+	private class FieldTableModel extends AbstractTableModel implements Observer, TableModelListener, MouseListener
+	{
+		private static final long serialVersionUID = 5735895585153401565L;
+
+		private final String[] columnNames = { "Name", "Type" };
+
+		private final LinkedList<Object[]> data = new LinkedList<Object[]>();
+
+		private final HashMap<Field, Integer> mapIndex = new HashMap<Field, Integer>();
+
+		public void addField(Field field)
+		{
+			data.add(new Object[] { field.getName(), field.getType() });
+
+			field.addObserver(this);
+			mapIndex.put(field, data.size() - 1);
+
+			fireTableRowsInserted(0, data.size());
+		}
+
+		public void clearAll()
+		{
+			data.clear();
+			mapIndex.clear();
+			fireTableDataChanged();
+		}
+
+		@Override
+		public Class<? extends Object> getColumnClass(int c)
+		{
+			return getValueAt(0, c).getClass();
+		}
+
+		@Override
+		public int getColumnCount()
+		{
+			return columnNames.length;
+		}
+
+		@Override
+		public String getColumnName(int col)
+		{
+			return columnNames[col];
+		}
+
+		@SuppressWarnings("unchecked")
+		public HashMap<Field, Integer> getMapIndex()
+		{
+			return (HashMap<Field, Integer>) mapIndex.clone();
+		}
+
+		@Override
+		public int getRowCount()
+		{
+			return data.size();
+		}
+
+		@Override
+		public Object getValueAt(int row, int col)
+		{
+			return data.get(row)[col];
+		}
+
+		@Override
+		public boolean isCellEditable(int row, int col)
+		{
+			return !(currentObject.getClass() == InterfaceEntity.class && col == 4);
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e)
+		{
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e)
+		{
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e)
+		{
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e)
+		{
+			if (currentObject == null || !(currentObject instanceof Entity))
+				return;
+
+			// Get the selected attribute
+			final int index = fieldsTable.getSelectionModel().getLeadSelectionIndex();
+			final Field field = Utility.getKeysByValue(mapIndex, index).iterator().next();
+
+			// Unselect all attributes
+			for (final Field a : ((dbDiagram.components.Entity) currentObject).getFields())
+			{
+				if (a.equals(field))
+					continue;
+
+				a.select();
+				a.notifyObservers(UpdateMessage.UNSELECT);
+			}
+
+			// Select the selected attribute
+			field.select();
+			field.notifyObservers(dbDiagram.IDBDiagramComponent.UpdateMessage.SELECT);
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e)
+		{
+		}
+
+		public void setField(Field field, int index)
+		{
+			data.set(index, new Object[] { field.getName(), field.getType().getName() });
+
+			fireTableRowsUpdated(index, index);
+		}
+
+		@Override
+		public void setValueAt(Object value, int row, int col)
+		{
+			data.get(row)[col] = value;
+
+			fireTableCellUpdated(row, col);
+		}
+
+		@Override
+		public void tableChanged(TableModelEvent e)
+		{
+			final int row = e.getFirstRow();
+			final int column = e.getColumn();
+
+			if (column == -1)
+				return;
+
+			final TableModel model = (TableModel) e.getSource();
+			final Object data = model.getValueAt(row, column);
+			final Field field = Utility.getKeysByValue(mapIndex, row).iterator().next();
+
+			switch (column)
+			{
+				case 0: // nom
+				    
+					if (field.setName((String) data))
+						setValueAt(field.getName(), row, column);
+
+					break;
+
+				case 1: // type
+					String s = (String) data;
+					
+					if (!TypeName.getInstance().verifyName(s))
+						setValueAt(field.getType().getName(), row, column);
+					
+						//attribute.setType(new Type(s)); TODO
+
+					break;
+			}
+
+			field.notifyObservers(dbDiagram.IDBDiagramComponent.UpdateMessage.SELECT);
+			field.getType().notifyObservers();
+
+			fieldsTable.addRowSelectionInterval(row, row);
+		}
+
+		@Override
+		public void update(Observable arg0, Object arg1)
+		{
+			final Field field = (Field) arg0;
+			try
+			{
+				final int index = mapIndex.get(field);
+
+				if (index == -1)
+					return;
+
+				if (arg1 != null && arg1 instanceof dbDiagram.IDBDiagramComponent.UpdateMessage)
+					switch ((dbDiagram.IDBDiagramComponent.UpdateMessage) arg1)
+					{
+						case SELECT:
+							btnRemoveField.setEnabled(true);
+							btnUpField.setEnabled(index > 0);
+							btnDownField.setEnabled(index < mapIndex.size() - 1);
+							showInProperties();
+							fieldsTable.addRowSelectionInterval(index, index);
+							break;
+						case UNSELECT:
+							fieldsTable.removeRowSelectionInterval(index, index);
+							break;
+					}
+
+				setField(field, index);
+			} catch (final Exception e)
+			{
+
+			}
+		}
+
+	}
+	
 	private class MethodTableModel extends AbstractTableModel implements Observer, TableModelListener, MouseListener
 	{
 		private static final long serialVersionUID = -8935769363179120147L;
@@ -710,7 +914,8 @@ public class EntityPropreties extends GlobalPropreties
 
 		@Override
 		public void update(Observable arg0, Object arg1)
-		{			
+		{		
+			
 			if (arg1 != null && arg1 instanceof UpdateMessage)
 			{
 				switch ((UpdateMessage) arg1)
@@ -774,7 +979,7 @@ public class EntityPropreties extends GlobalPropreties
 		component.setMinimumSize(size);
 	}
 
-	JTable attributesTable, methodsTable, parametersTable;
+	JTable attributesTable, fieldsTable, methodsTable, parametersTable;
 	
 	private final JButton btnAddParameters,
 			btnRemoveMethod,
@@ -785,7 +990,11 @@ public class EntityPropreties extends GlobalPropreties
 			btnDownMethod,
 			btnRemoveParameters,
 			btnRightParameters,
-			btnLeftParameters;
+			btnLeftParameters,
+			btnAddField,
+			btnRemoveField,
+			btnUpField,
+			btnDownField;
 
 	JCheckBox checkBoxAbstract = new JCheckBox("Abstract");
 
@@ -818,6 +1027,10 @@ public class EntityPropreties extends GlobalPropreties
 		btnRemoveParameters = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_red_delete" + small), Color.RED, "Remove");
 		btnRightParameters = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_violet_right" + small), Color.MAGENTA, "Rigth");
 		btnLeftParameters = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_violet_left" + small), Color.MAGENTA, "Left");
+		btnAddField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_plus_blue" + small), Color.BLUE, "Add");
+		btnRemoveField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_red_delete" + small), Color.RED, "Remove");
+		btnUpField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_violet_up" + small), Color.MAGENTA, "Up");
+		btnDownField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_violet_down" + small), Color.MAGENTA, "Down");
 		
 		imgNoAttribute = new JLabel(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "empty_attribute.png"));
 		imgNoMethod = new JLabel(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "empty_method.png"));
@@ -839,6 +1052,13 @@ public class EntityPropreties extends GlobalPropreties
 
 		attributesTable.addMouseListener((AttributeTableModel) attributesTable.getModel());
 
+		fieldsTable = new JTable(new FieldTableModel());
+		fieldsTable.setPreferredSize(new Dimension(200, 0));
+		
+		fieldsTable.getModel().addTableModelListener((FieldTableModel) fieldsTable.getModel());
+		
+		fieldsTable.addMouseListener((FieldTableModel) fieldsTable.getModel());
+		
 		methodsTable = new JTable(new MethodTableModel());
 		methodsTable.setPreferredScrollableViewportSize(new Dimension(200, 0));
 		methodsTable.getModel().addTableModelListener((MethodTableModel) methodsTable.getModel());
@@ -1318,7 +1538,7 @@ public class EntityPropreties extends GlobalPropreties
 			{
 				final Visibility newVisibility = Visibility.valueOf(comboBox.getSelectedItem().toString().toUpperCase());
 
-				if (newVisibility != Visibility.valueOf(((Entity) currentObject).getVisibility().getName().toUpperCase()))
+				if (currentObject instanceof Entity && newVisibility != Visibility.valueOf(((Entity) currentObject).getVisibility().getName().toUpperCase()))
 				{
 					((Entity) currentObject).setVisibility(newVisibility);
 					((Entity) currentObject).notifyObservers();
@@ -1354,8 +1574,9 @@ public class EntityPropreties extends GlobalPropreties
 	}
 
 	@Override
-	public void updateComponentInformations(UpdateMessage msg)
+	public void updateClassComponentInformations(UpdateMessage msg)
 	{
+
 		if (currentObject == null)
 			return;
 

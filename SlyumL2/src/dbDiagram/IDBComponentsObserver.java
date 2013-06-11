@@ -3,6 +3,7 @@ package dbDiagram;
 import abstractDiagram.AbstractIComponentsObserver;
 import dbDiagram.components.Entity;
 import dbDiagram.components.TableEntity;
+import dbDiagram.relationships.Binary;
 
 /**
  * Interface implemented by all listeners of class diagram. When the class
@@ -23,6 +24,8 @@ public interface IDBComponentsObserver extends AbstractIComponentsObserver
 	 */
 	public void addTable(TableEntity component);
 
+	public void addBinary(Binary binary);
+	
 	/**
 	 * Changes the index of entity in the array and notifiy observers.
 	 * 

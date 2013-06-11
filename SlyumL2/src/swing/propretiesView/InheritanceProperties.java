@@ -86,7 +86,7 @@ public class InheritanceProperties extends GlobalPropreties implements ActionLis
 	}
 
 	@Override
-	public void updateComponentInformations(UpdateMessage msg)
+	public void updateClassComponentInformations(UpdateMessage msg)
 	{
 		if (currentObject != null)
 		{

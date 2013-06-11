@@ -325,8 +325,8 @@ public class MultiView extends MovableComponent implements Observer
 		super.restore();
 
 		parent.addMultiView(this);
-		if (parent.getDiagram() instanceof ClassDiagram)
-			((ClassDiagram)parent.getDiagram()).addMulti(multi);
+		if (parent.getClassDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getClassDiagram()).addMulti(multi);
 		//TODO ERREUR
 	}
 
@@ -398,8 +398,8 @@ public class MultiView extends MovableComponent implements Observer
 
 		final Binary binary = new Binary(roles.getFirst().getEntity(), roles.getLast().getEntity(), false, multi.getId());
 
-		if (parent.getDiagram() instanceof ClassDiagram)
-			((ClassDiagram)parent.getDiagram()).addBinary(binary);
+		if (parent.getClassDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getClassDiagram()).addBinary(binary);
 		//TODO ERREUR
 	}
 

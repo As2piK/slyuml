@@ -4,19 +4,18 @@ import graphic.GraphicComponent;
 import graphic.GraphicView;
 import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
+import graphic.entity.TableEntityView;
 import graphic.relations.ClassBinaryView;
+import graphic.relations.DBBinaryView;
 import graphic.relations.MultiLineView;
 import graphic.relations.MultiView;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import dbDiagram.relationships.Binary;
 import utility.SMessageDialog;
 
-import classDiagram.components.ClassEntity;
-import classDiagram.relationships.Binary;
-import classDiagram.relationships.Multi;
-import classDiagram.relationships.Role;
 
 /**
  * BinaryFactory allows to create a new binary view associated with a new
@@ -28,9 +27,9 @@ import classDiagram.relationships.Role;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class BinaryFactory extends ClassRelationFactory
+public class BinaryDBRelationFactory extends DBRelationFactory
 {
-	public final String ERROR_CREATION_MESSAGE = "Association creation failed.\nYou must make a bond between two entities (class or interface).";
+	public final String ERROR_CREATION_MESSAGE = "Association creation failed.\nYou must make a bond between two tables.";
 
 	/**
 	 * Create a new factory allowing the creation of a binary.
@@ -40,7 +39,7 @@ public class BinaryFactory extends ClassRelationFactory
 	 * @param dbDiagram
 	 *            the class diagram
 	 */
-	public BinaryFactory(GraphicView parent)
+	public BinaryDBRelationFactory(GraphicView parent)
 	{
 		super(parent);
 	}
@@ -48,24 +47,25 @@ public class BinaryFactory extends ClassRelationFactory
 	@Override
 	public GraphicComponent create()
 	{
-		if (componentMousePressed instanceof ClassEntityView && componentMouseReleased instanceof ClassEntityView)
+		if (componentMousePressed instanceof TableEntityView && componentMouseReleased instanceof TableEntityView)
 		{
-			final ClassEntityView source = (ClassEntityView) componentMousePressed;
-			final ClassEntityView target = (ClassEntityView) componentMouseReleased;
+			final TableEntityView source = (TableEntityView) componentMousePressed;
+			final TableEntityView target = (TableEntityView) componentMouseReleased;
 
 			final Binary binary = new Binary(source.getComponent(), target.getComponent(), false);
 
-			final ClassBinaryView b = new ClassBinaryView(parent, source, target, binary, mousePressed, mouseReleased, true);
+			final DBBinaryView b = new DBBinaryView(parent, source, target, binary, mousePressed, mouseReleased, true);
 
 			parent.addLineView(b);
-			classDiagram.addBinary(binary);
+			dbDiagram.addBinary(binary);
 
 			parent.unselectAll();
 			b.setSelected(true);
 
 			return b;
 		}
-		else
+		return null; //TODO
+		/*else
 		{
 			final MultiView multiView;
 			final ClassView classView;
@@ -99,7 +99,7 @@ public class BinaryFactory extends ClassRelationFactory
 
 	        repaint();
 			return mlv;
-		}
+		}*/
 	}
 	
 	@Override

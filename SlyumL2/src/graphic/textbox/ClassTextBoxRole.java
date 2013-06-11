@@ -38,7 +38,7 @@ import classDiagram.relationships.Role;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class TextBoxRole extends TextBoxLabel
+public class ClassTextBoxRole extends TextBoxLabel
 {
 	/**
 	 * Convert ginven string into the given role. If String can't be parsing,
@@ -90,7 +90,7 @@ public class TextBoxRole extends TextBoxLabel
 
 	private final Role role;
 
-	private TextBoxMultiplicity tbm;
+	private ClassTextBoxMultiplicity tbm;
 
 	/**
 	 * Create a new TextBoxRole associated with a role and draw a line through
@@ -103,7 +103,7 @@ public class TextBoxRole extends TextBoxLabel
 	 * @param grip
 	 *            the grip near the role
 	 */
-	public TextBoxRole(GraphicView parent, Role role, MagneticGrip grip)
+	public ClassTextBoxRole(GraphicView parent, Role role, MagneticGrip grip)
 	{
 		super(parent, roleToString(role));
 
@@ -127,7 +127,7 @@ public class TextBoxRole extends TextBoxLabel
 
 		computeLabelPosition();
 
-		parent.addOthersComponents(tbm = new TextBoxMultiplicity(parent, role.getMultiplicity(), grip));
+		parent.addOthersComponents(tbm = new ClassTextBoxMultiplicity(parent, role.getMultiplicity(), grip));
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class TextBoxRole extends TextBoxLabel
 		return role.toString();
 	}
 
-	public TextBoxMultiplicity getTextBoxMultiplicity()
+	public ClassTextBoxMultiplicity getTextBoxMultiplicity()
 	{
 		return tbm;
 	}

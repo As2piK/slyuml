@@ -18,7 +18,7 @@ import utility.SMessageDialog;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class LineCommentaryFactory extends RelationFactory
+public class LineCommentaryFactory extends ClassRelationFactory
 {
 	public final String ERROR_CREATION_MESSAGE = "Note link creation failed.\nYou must make a bond between a note and another graphic component.";
 

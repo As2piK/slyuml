@@ -1040,7 +1040,7 @@ public abstract class ClassEntityView extends AbstractEntityView
 	 * @param display
 	 *            the new display state for attributes.
 	 */
-	public void setDisplayAttributes(boolean display)
+	public void setDisplayFields(boolean display)
 	{
 		displayAttributes = display;
 

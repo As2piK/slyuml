@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import abstractDiagram.AbstractDiagram;
+import abstractDiagram.AbstractIComponentsObserver;
 import abstractDiagram.AbstractIDiagramComponent;
 import utility.Utility;
 import classDiagram.components.AssociationClass;
@@ -60,8 +61,8 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	@Override
 	public void addAggregation(Aggregation component)
 	{
-		for (final IClassComponentsObserver c : observers)
-			c.addAggregation(component);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addAggregation(component);
 
 		addComponent(component);
 	}
@@ -69,8 +70,8 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	@Override
 	public void addAssociationClass(AssociationClass component)
 	{
-		for (final IClassComponentsObserver c : observers)
-			c.addAssociationClass(component);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addAssociationClass(component);
 
 		addComponent(component);
 		entities.addFirst(component);
@@ -79,18 +80,19 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	@Override
 	public void addBinary(Binary component)
 	{
-		for (final IClassComponentsObserver c : observers)
-			c.addBinary(component);
-
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addBinary(component);
 		addComponent(component);
 	}
 
 	@Override
 	public void addClass(ClassEntity component)
 	{
-		for (final IClassComponentsObserver c : observers)
+		for (final AbstractIComponentsObserver c : observers) {
 
-			c.addClass(component);
+			((IClassComponentsObserver)c).addClass(component);
+			
+		}
 
 		addComponent(component);
 		entities.addFirst(component);
@@ -125,16 +127,16 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	 * @return true if the observer has been added; false otherwise.
 	 */
 	@Override
-	public boolean addComponentsObserver(IClassComponentsObserver c)
+	public boolean addComponentsObserver(AbstractIComponentsObserver c)
 	{
-		return observers.add(c);
+		return observers.add((IClassComponentsObserver)c);
 	}
 
 	@Override
 	public void addComposition(Composition component)
 	{
-		for (final IClassComponentsObserver c : observers)
-			c.addComposition(component);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addComposition(component);
 
 		addComponent(component);
 	}
@@ -142,8 +144,8 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	@Override
 	public void addDependency(Dependency component)
 	{
-		for (final IClassComponentsObserver c : observers)
-			c.addDependency(component);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addDependency(component);
 
 		addComponent(component);
 	}
@@ -151,8 +153,8 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	@Override
 	public void addInheritance(Inheritance component)
 	{
-		for (final IClassComponentsObserver c : observers)
-			c.addInheritance(component);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addInheritance(component);
 
 		addComponent(component);
 	}
@@ -161,8 +163,8 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	public void addInnerClass(InnerClass component)
 	{
 
-		for (final IClassComponentsObserver c : observers)
-			c.addInnerClass(component);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addInnerClass(component);
 
 		addComponent(component);
 	}
@@ -170,8 +172,8 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	@Override
 	public void addInterface(InterfaceEntity component)
 	{
-		for (final IClassComponentsObserver c : observers)
-			c.addInterface(component);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addInterface(component);
 
 		addComponent(component);
 		entities.addFirst(component);
@@ -183,8 +185,8 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 		if (components.contains(component))
 			return;
 		
-		for (final IClassComponentsObserver c : observers)
-			c.addMulti(component);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).addMulti(component);
 
 		addComponent(component);
 	}
@@ -202,8 +204,8 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 		
 		//Change.push(new BufferZOrder(entity, index));
 
-		for (final IClassComponentsObserver c : observers)
-			c.changeZOrder(entity, index);
+		for (final AbstractIComponentsObserver c : observers)
+			((IClassComponentsObserver)c).changeZOrder(entity, index);
 	}
 
 	/**
@@ -235,24 +237,6 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 		while (components.size() > 0)
 
 			removeComponent(components.get(0));
-	}
-
-	@Override
-	public void removeComponent(IClassDiagramComponent component)
-	{
-		components.remove(component);
-
-		// Optimizes this (create more array for specific elements, not just an
-		// array for all components.
-		if (component instanceof Entity)
-			entities.remove(component);
-
-		for (final IClassComponentsObserver c : observers)
-			if (component instanceof IClassDiagramComponent) {
-				c.removeComponent((IClassDiagramComponent)component);
-			} else {
-				JOptionPane.showMessageDialog(null, "ERREUR #724");
-			}
 	}
 
 	/**
@@ -332,7 +316,16 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 
 	@Override
 	public void removeComponent(AbstractIDiagramComponent component) {
-		removeComponent((IClassDiagramComponent)component);
+
+		components.remove(component);
 		
+		// Optimizes this (create more array for specific elements, not just an
+		// array for all components.
+		if (component instanceof Entity)
+			entities.remove(component);
+
+		for (final AbstractIComponentsObserver c : observers) {
+			c.removeComponent(component);
+		}
 	}
 }

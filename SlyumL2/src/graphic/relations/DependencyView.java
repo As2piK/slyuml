@@ -175,8 +175,8 @@ public class DependencyView extends RelationView
 	public void restore()
 	{
 		super.restore();
-		if (parent.getDiagram() instanceof ClassDiagram)
-			((ClassDiagram)parent.getDiagram()).addDependency((Dependency)getAssociedComponent());
+		if (parent.getClassDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getClassDiagram()).addDependency((Dependency)getAssociedComponent());
 		//TODO ERREUR
 		
 		repaint();

@@ -20,7 +20,7 @@ import classDiagram.relationships.Aggregation;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class AggregationFactory extends RelationFactory
+public class AggregationFactory extends ClassRelationFactory
 {
 
 	/**

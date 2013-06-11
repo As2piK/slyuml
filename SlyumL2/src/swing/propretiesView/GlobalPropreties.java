@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import abstractDiagram.AbstractIDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
 
 /**
@@ -38,27 +39,50 @@ public abstract class GlobalPropreties extends JPanel implements Observer
 	@Override
 	public void update(Observable arg0, Object arg1)
 	{
+		
 		if (arg1 != null && arg1 instanceof UpdateMessage)
 			switch ((UpdateMessage) arg1)
 			{
 				case SELECT:
 					currentObject = arg0;
-					updateComponentInformations((UpdateMessage) arg1);
+					updateClassComponentInformations((UpdateMessage) arg1);
 					showInProperties();
 
 					break;
 				case UNSELECT:
 					if (arg0.equals(currentObject))
 						PropretiesChanger.getInstance().setViewportView(null);
-					updateComponentInformations((UpdateMessage) arg1);
+					updateClassComponentInformations((UpdateMessage) arg1);
+
 					break;
 				default:
-					updateComponentInformations((UpdateMessage) arg1);
+					updateClassComponentInformations((UpdateMessage) arg1);
+
 					break;
 			}
-		else
-			updateComponentInformations(null);
+		else if (arg1 != null && arg1 instanceof dbDiagram.IDBDiagramComponent.UpdateMessage)
+		switch ((dbDiagram.IDBDiagramComponent.UpdateMessage) arg1)
+		{
+			case SELECT:
+				currentObject = arg0;
+				updateClassComponentInformations(UpdateMessage.SELECT);
+				showInProperties();
+
+				break;
+			case UNSELECT:
+				if (arg0.equals(currentObject))
+					PropretiesChanger.getInstance().setViewportView(null);
+				updateClassComponentInformations(UpdateMessage.UNSELECT);
+
+				break;
+			default:
+				updateClassComponentInformations(UpdateMessage.UNSELECT);
+
+				break;
+		}
+	 else
+			updateClassComponentInformations(null);
 	}
 
-	public abstract void updateComponentInformations(UpdateMessage msg);
+	public abstract void updateClassComponentInformations(UpdateMessage msg);
 }

@@ -154,7 +154,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 		final AbstractIDiagramComponent associed = getAssociedComponent();
 		
 		if (associed != null)
-			parent.getDiagram().removeComponent(associed);
+			parent.getClassDiagram().removeComponent(associed);
 		
 		// Search and delete all lines (relations, associations, etc...)
 		// associated with this component.

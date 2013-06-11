@@ -5,8 +5,6 @@ import graphic.GraphicView;
 import graphic.textbox.TextBox;
 import graphic.textbox.TextBoxAttribute;
 import graphic.textbox.TextBoxEntityName;
-import graphic.textbox.TextBoxMethod;
-import graphic.textbox.TextBoxMethod.ParametersViewStyle;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -32,15 +30,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
 
-import abstractDiagram.AbstractIDiagramComponent;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.components.Method;
 import swing.PropertyLoader;
 import swing.SPanelZOrder;
 import swing.Slyum;
 import utility.PersonalizedIcon;
 import utility.SMessageDialog;
 import utility.Utility;
+import abstractDiagram.AbstractIDiagramComponent;
 import change.BufferBounds;
 import change.Change;
 import dbDiagram.IDBDiagramComponent;
@@ -181,18 +177,15 @@ public abstract class TableEntityView extends AbstractEntityView
 		basicColor = new Color(color.getRGB());
 	}
 
-	protected LinkedList<TextBoxAttribute> attributesView = new LinkedList<TextBoxAttribute>();
+	protected LinkedList<TextBoxAttribute> fieldView = new LinkedList<TextBoxAttribute>();
 
 	private Rectangle bounds = new Rectangle();
 	protected Entity component;
 	private Color defaultColor;
 
-	private boolean displayAttributes = true;
-	protected boolean displayMethods = true;
+	private boolean displayFields = true;
 
 	private final TextBoxEntityName entityName;
-
-	protected LinkedList<TextBoxMethod> methodsView = new LinkedList<TextBoxMethod>();
 
 	private TextBox pressedTextBox;
 	private JMenuItem menuItemDelete, menuItemMoveUp, menuItemMoveDown;
@@ -224,9 +217,6 @@ public abstract class TableEntityView extends AbstractEntityView
 		menuItem = makeMenuItem("Add attribute", "AddAttribute", "attribute");
 		popupMenu.add(menuItem);
 
-		menuItem = makeMenuItem("Add method", "AddMethod", "method");
-		popupMenu.add(menuItem);
-
 		popupMenu.addSeparator();
 		
 		menuItemMoveUp = menuItem = makeMenuItem("Move up", Slyum.ACTION_TEXTBOX_UP, "direction_up");
@@ -252,32 +242,16 @@ public abstract class TableEntityView extends AbstractEntityView
 		rbMenuItem.setSelected(true);
 		subMenu.add(rbMenuItem);
 
-		rbMenuItem = makeRadioButtonMenuItem("Only Attributes", "ViewAttribute", group);
+		rbMenuItem = makeRadioButtonMenuItem("Only Fields", "ViewAttribute", group);
 		subMenu.add(rbMenuItem, 1);
-
-		rbMenuItem = makeRadioButtonMenuItem("Only Methods", "ViewMethods", group);
-		subMenu.add(rbMenuItem, 2);
 
 		rbMenuItem = makeRadioButtonMenuItem("Nothing", "ViewNothing", group);
 		subMenu.add(rbMenuItem);
 
 		popupMenu.add(subMenu);
 
-		subMenu = new JMenu("Methods View");
-		subMenu.setIcon(PersonalizedIcon.createImageIcon("resources/icon/visibility.png"));
-		group = new ButtonGroup();
-
 		rbMenuItem = makeRadioButtonMenuItem("Type and Name", "ViewTypeAndName", group);
 		rbMenuItem.setSelected(true);
-		subMenu.add(rbMenuItem);
-
-		rbMenuItem = makeRadioButtonMenuItem("Type", "ViewType", group);
-		subMenu.add(rbMenuItem, 1);
-
-		rbMenuItem = makeRadioButtonMenuItem("Name", "ViewName", group);
-		subMenu.add(rbMenuItem, 2);
-
-		rbMenuItem = makeRadioButtonMenuItem("Nothing", "ViewMethodNothing", group);
 		subMenu.add(rbMenuItem);
 
 		popupMenu.add(subMenu);
@@ -311,13 +285,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	{
 		super.actionPerformed(e);
 
-		if ("AddMethod".equals(e.getActionCommand()))
-			addMethod();
-
-		else if ("AddAttribute".equals(e.getActionCommand()))
-			addAttribute();
-
-		else if ("Delete".equals(e.getActionCommand()))
+		if ("Delete".equals(e.getActionCommand()))
 		{
 			if (SMessageDialog.showQuestionMessageYesNo("Are you sur to delete this component and all its associated components?") == JOptionPane.NO_OPTION)
 
@@ -333,31 +301,15 @@ public abstract class TableEntityView extends AbstractEntityView
 		else if ("ViewAttribute".equals(e.getActionCommand()))
 		{
 			parent.showAttributsForSelectedEntity(true);
-			parent.showMethodsForSelectedEntity(false);
-		}
-		else if ("ViewMethods".equals(e.getActionCommand()))
-		{
-			parent.showAttributsForSelectedEntity(false);
-			parent.showMethodsForSelectedEntity(true);
 		}
 		else if ("ViewAll".equals(e.getActionCommand()))
 		{
 			parent.showAttributsForSelectedEntity(true);
-			parent.showMethodsForSelectedEntity(true);
 		}
 		else if ("ViewNothing".equals(e.getActionCommand()))
 		{
 			parent.showAttributsForSelectedEntity(false);
-			parent.showMethodsForSelectedEntity(false);
 		}
-		else if ("ViewTypeAndName".equals(e.getActionCommand()))
-			methodViewChangeClicked(ParametersViewStyle.TYPE_AND_NAME);
-		else if ("ViewType".equals(e.getActionCommand()))
-			methodViewChangeClicked(ParametersViewStyle.TYPE);
-		else if ("ViewName".equals(e.getActionCommand()))
-			methodViewChangeClicked(ParametersViewStyle.NAME);
-		else if ("ViewMethodNothing".equals(e.getActionCommand()))
-			methodViewChangeClicked(ParametersViewStyle.NOTHING);
 		else if (Slyum.ACTION_TEXTBOX_UP.equals(e.getActionCommand()) || Slyum.ACTION_TEXTBOX_DOWN.equals(e.getActionCommand()))
 		{
 			int offset = 1;
@@ -375,18 +327,6 @@ public abstract class TableEntityView extends AbstractEntityView
 			component.notifyObservers();
 		}
 	}
-	
-	/**
-	 * Create a new attribute with default type and name.
-	 */
-	public void addAttribute()
-	{
-		final Field field = new Field("field", null); //TODO Default type
-		prepareNewAttribute(field);
-
-		component.addField(field);
-		component.notifyObservers(UpdateMessage.ADD_FIELD);
-	}
 
 	/**
 	 * Create a new attribute view with the given attribute. If editing is a
@@ -401,33 +341,12 @@ public abstract class TableEntityView extends AbstractEntityView
 	public void addField(Field field, boolean editing)
 	{
 		final TextBoxAttribute newTextBox = new TextBoxAttribute(parent, field);
-		attributesView.add(newTextBox);
+		fieldView.add(newTextBox);
 
 		updateHeight();
 
 		if (editing)
 			newTextBox.editing();
-	}
-
-	/**
-	 * Create a new method with default type and name, without parameter.
-	 */
-	public void addMethod() //TODO DELETE
-	{
-	}
-
-	/**
-	 * Create a new method view with the given method. If editing is a true, the
-	 * new method view will be in editing mode while it created.
-	 * 
-	 * @param method
-	 *            the method UML
-	 * @param editing
-	 *            true if creating a new method view in editing mode; false
-	 *            otherwise
-	 */
-	public void addMethod(Method method, boolean editing) //TODO TO DELETE
-	{
 	}
 
 	/**
@@ -467,7 +386,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	 * @param stereotypeHeight
 	 *            the height of stereotype
 	 * @param elementsHeight
-	 *            the height of each element (methods, attributes)
+	 *            the height of each element (fields)
 	 * @return the height of the class
 	 */
 	public int computeHeight(int classNameHeight, int stereotypeHeight, int elementsHeight)
@@ -479,11 +398,8 @@ public abstract class TableEntityView extends AbstractEntityView
 
 		height += classNameHeight;
 
-		if (displayMethods)
-			height += elementsHeight * methodsView.size();
-
-		if (displayAttributes)
-			height += elementsHeight * attributesView.size();
+		if (displayFields)
+			height += elementsHeight * fieldView.size();
 
 		return height + 30;
 	}
@@ -540,7 +456,7 @@ public abstract class TableEntityView extends AbstractEntityView
 
 	/**
 	 * get all textBox displayed by the entity. TextBox returned are: - textBox
-	 * for entity name - textBox for attributes - textBox for methods
+	 * for entity name - textBox for fields
 	 * 
 	 * @return an array containing all TextBox
 	 */
@@ -549,8 +465,7 @@ public abstract class TableEntityView extends AbstractEntityView
 		final LinkedList<TextBox> tb = new LinkedList<TextBox>();
 
 		tb.add(entityName);
-		tb.addAll(methodsView);
-		tb.addAll(attributesView);
+		tb.addAll(fieldView);
 
 		return tb;
 	}
@@ -591,7 +506,7 @@ public abstract class TableEntityView extends AbstractEntityView
 		if (textBox != null)
 		{
 			final AbstractIDiagramComponent idc = textBox.getAssociedComponent();
-
+			
 			if (idc != null)
 			{
 				idc.select();
@@ -648,7 +563,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	}
 	
 	/**
-	 * Search and return the Textbox (methods and attributes) at the given location.
+	 * Search and return the Textbox (fields) at the given location.
 	 * @param location the location where find a TextBox
 	 * @return the found TextBox
 	 */
@@ -672,17 +587,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	 */
 	public boolean isAttributeDisplayed()
 	{
-		return displayAttributes;
-	}
-
-	/**
-	 * Return if methods are displayed or not.
-	 * 
-	 * @return true if methods are displayed; false otherwise
-	 */
-	public boolean isMethodsDisplayed()
-	{
-		return displayMethods;
+		return displayFields;
 	}
 
 	@Override
@@ -696,8 +601,8 @@ public abstract class TableEntityView extends AbstractEntityView
 			if (pressedTextBox != null)
 			{
 				text += pressedTextBox.getText();
-				menuItemMoveUp.setEnabled(attributesView.indexOf(pressedTextBox) != 0 && methodsView.indexOf(pressedTextBox) != 0);
-				menuItemMoveDown.setEnabled((attributesView.size() == 0 || attributesView.indexOf(pressedTextBox) != attributesView.size() - 1) && (methodsView.size() == 0 || methodsView.indexOf(pressedTextBox) != methodsView.size() - 1));
+				menuItemMoveUp.setEnabled(fieldView.indexOf(pressedTextBox) != 0);
+				menuItemMoveDown.setEnabled((fieldView.size() == 0 || fieldView.indexOf(pressedTextBox) != fieldView.size() - 1));
 			}
 			else
 			{
@@ -709,40 +614,6 @@ public abstract class TableEntityView extends AbstractEntityView
 		}
 		
 		super.maybeShowPopup(e, popupMenu);
-	}
-
-	/**
-	 * Change the display style of parameters for all methods.
-	 * 
-	 * @param newStyle
-	 *            the new display style
-	 */
-	public void methodViewChange(ParametersViewStyle newStyle)
-	{
-		for (final TextBoxMethod tbm : methodsView)
-
-			tbm.setParametersViewStyle(newStyle);
-	}
-
-	/**
-	 * Change the display style of parameters for the pressed TextBox if exists,
-	 * or for all otherwise.
-	 * 
-	 * @param newStyle
-	 *            the new display style
-	 */
-	private void methodViewChangeClicked(ParametersViewStyle newStyle)
-	{
-		if (pressedTextBox instanceof TextBoxMethod)
-
-			((TextBoxMethod) pressedTextBox).setParametersViewStyle(newStyle);
-
-		else
-
-			for (final AbstractEntityView ev : parent.getSelectedEntities())
-
-				if (ev instanceof TableEntityView)
-				((TableEntityView)ev).methodViewChange(newStyle);
 	}
 
 	@Override
@@ -822,9 +693,8 @@ public abstract class TableEntityView extends AbstractEntityView
 		g2.drawLine(bounds.x, offset, bounds.x + bounds.width, offset);
 
 		// draw attributes
-		if (displayAttributes && attributesView.size() > 0)
-			// draw methods
-			for (final TextBoxAttribute tb : attributesView)
+		if (displayFields && fieldView.size() > 0)
+			for (final TextBoxAttribute tb : fieldView)
 			{
 				tb.setBounds(new Rectangle(bounds.x + 8, offset + 2, bounds.width - 15, textBoxHeight + 2));
 				tb.paintComponent(g2);
@@ -837,17 +707,6 @@ public abstract class TableEntityView extends AbstractEntityView
 		g2.setStroke(new BasicStroke(BORDER_WIDTH));
 		g2.setColor(borderColor);
 		g2.drawLine(bounds.x, offset, bounds.x + bounds.width, offset);
-
-		// draw methods
-		if (displayMethods && methodsView.size() > 0)
-			// draw methods
-			for (final TextBoxMethod tb : methodsView)
-			{
-				tb.setBounds(new Rectangle(bounds.x + 8, offset + 2, bounds.width - 15, textBoxHeight + 2));
-				tb.paintComponent(g2);
-
-				offset += textBoxHeight;
-			}
 
 		// is component selected? -> draw selected style
 		if (parent.getSelectedComponents().contains(this))
@@ -864,15 +723,6 @@ public abstract class TableEntityView extends AbstractEntityView
 	protected abstract void prepareNewAttribute(Field field);
 
 	/**
-	 * Method called before creating a new method, if modifications on method is
-	 * necessary.
-	 * 
-	 * @param method
-	 *            the method to prepare
-	 */
-	protected abstract void prepareNewMethod(Method method);
-
-	/**
 	 * Delete all TextBox and regenerate them. !! This method take time !!
 	 */
 	public void regenerateEntity()
@@ -880,8 +730,7 @@ public abstract class TableEntityView extends AbstractEntityView
 		boolean isStopRepaint = parent.getStopRepaint();
 		parent.setStopRepaint(true);
 
-		methodsView.clear();
-		attributesView.clear();
+		fieldView.clear();
 
 		entityName.setText(component.getName());
 
@@ -916,17 +765,6 @@ public abstract class TableEntityView extends AbstractEntityView
 	}
 
 	/**
-	 * Remove the method associated with TextBoxMethod from model (UML)
-	 * 
-	 * @param tbMethod
-	 *            the method to remove.
-	 * @return true if component has been removed; false otherwise.
-	 */
-	public boolean removeMethod(TextBoxMethod tbMethod)
-	{return false; //TODO DELETE
-	}
-
-	/**
 	 * Generic method for remove the associated component for the given TextBox.
 	 * 
 	 * @param tb
@@ -940,9 +778,6 @@ public abstract class TableEntityView extends AbstractEntityView
 
 			return removeAttribute((TextBoxAttribute) tb);
 
-		else if (tb instanceof TextBoxMethod)
-
-			return removeMethod((TextBoxMethod) tb);
 
 		return false;
 	}
@@ -1007,22 +842,9 @@ public abstract class TableEntityView extends AbstractEntityView
 	 * @param display
 	 *            the new display state for attributes.
 	 */
-	public void setDisplayAttributes(boolean display)
+	public void setDisplayFields(boolean display)
 	{
-		displayAttributes = display;
-
-		updateHeight();
-	}
-
-	/**
-	 * Set the display state for methods.
-	 * 
-	 * @param display
-	 *            the new display state for methods.
-	 */
-	public void setDisplayMethods(boolean display)
-	{
-		displayMethods = display;
+		displayFields = display;
 
 		updateHeight();
 	}
@@ -1038,9 +860,9 @@ public abstract class TableEntityView extends AbstractEntityView
 	public void setSelected(boolean select)
 	{
 		super.setSelected(select);
-
+		
 		component.select();
-
+		
 		if (select)
 			component.notifyObservers(UpdateMessage.SELECT);
 		else

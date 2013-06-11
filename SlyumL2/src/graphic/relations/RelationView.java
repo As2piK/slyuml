@@ -3,14 +3,14 @@ package graphic.relations;
 import graphic.GraphicComponent;
 import graphic.GraphicView;
 import graphic.entity.AssociationClassView;
-import graphic.textbox.TextBoxRole;
+import graphic.textbox.ClassTextBoxRole;
 
 import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 
 import utility.Utility;
-import classDiagram.IClassDiagramComponent;
+import abstractDiagram.AbstractIDiagramComponent;
 import classDiagram.IClassDiagramComponent.UpdateMessage;
 
 /**
@@ -29,9 +29,9 @@ import classDiagram.IClassDiagramComponent.UpdateMessage;
  */
 public abstract class RelationView extends LineView implements Observer
 {
-	private final IClassDiagramComponent component;
+	private final AbstractIDiagramComponent component;
 
-	public RelationView(GraphicView graphicView, GraphicComponent source, GraphicComponent target, IClassDiagramComponent component, Point posSource, Point posTarget, boolean checkRecursivity)
+	public RelationView(GraphicView graphicView, GraphicComponent source, GraphicComponent target, AbstractIDiagramComponent component, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(graphicView, source, target, posSource, posTarget, checkRecursivity);
 
@@ -76,8 +76,8 @@ public abstract class RelationView extends LineView implements Observer
 			{
 				xml += utility.Utility.boundsToXML(depth, tbRoles.get(1).getBounds(), "roleAssociation");
 				xml += utility.Utility.boundsToXML(depth, tbRoles.get(2).getBounds(), "roleAssociation");
-				xml += utility.Utility.boundsToXML(depth, ((TextBoxRole) tbRoles.get(1)).getTextBoxMultiplicity().getBounds(), "multipliciteAssociation");
-				xml += utility.Utility.boundsToXML(depth, ((TextBoxRole) tbRoles.get(2)).getTextBoxMultiplicity().getBounds(), "multipliciteAssociation");
+				xml += utility.Utility.boundsToXML(depth, ((ClassTextBoxRole) tbRoles.get(1)).getTextBoxMultiplicity().getBounds(), "multipliciteAssociation");
+				xml += utility.Utility.boundsToXML(depth, ((ClassTextBoxRole) tbRoles.get(2)).getTextBoxMultiplicity().getBounds(), "multipliciteAssociation");
 			}
 		}
 

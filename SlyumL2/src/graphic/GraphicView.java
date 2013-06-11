@@ -7,10 +7,10 @@ import graphic.entity.ClassEntityView;
 import graphic.entity.InterfaceView;
 import graphic.factory.CreateClassComponent;
 import graphic.factory.CreateGenericComponent;
-import graphic.factory.CreateTableComponent;
+import graphic.factory.CreateDBComponent;
 import graphic.factory.MultiFactory;
 import graphic.relations.AggregationView;
-import graphic.relations.BinaryView;
+import graphic.relations.ClassBinaryView;
 import graphic.relations.CompositionView;
 import graphic.relations.DependencyView;
 import graphic.relations.InheritanceView;
@@ -65,6 +65,8 @@ import swing.SPanelElement;
 import swing.SPanelStyleComponent;
 import swing.SPanelZOrder;
 import swing.Slyum;
+import swing.Slyum.DIAGRAM_TYPE;
+import swing.propretiesView.PropretiesChanger;
 import utility.PersonalizedIcon;
 import utility.SMessageDialog;
 import utility.SizedCursor;
@@ -74,6 +76,7 @@ import abstractDiagram.AbstractIDiagramComponent;
 import change.BufferBounds;
 import change.BufferColor;
 import change.Change;
+import classDiagram.ClassDiagram;
 import classDiagram.IClassComponentsObserver;
 import classDiagram.IClassDiagramComponent;
 import classDiagram.components.AssociationClass;
@@ -88,6 +91,7 @@ import classDiagram.relationships.Inheritance;
 import classDiagram.relationships.InnerClass;
 import classDiagram.relationships.Multi;
 import classDiagram.relationships.Role;
+import dbDiagram.DBDiagram;
 
 /**
  * This class is the main container for all diagrams components view
@@ -367,7 +371,8 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		repaint();
 	}
 
-	private final AbstractDiagram diagram;
+	private ClassDiagram classDiagram;
+	private DBDiagram dbDiagram;
 	// last component mouse pressed
 	private GraphicComponent componentMousePressed;
 
@@ -416,17 +421,18 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 	 * graphic view is empty when created. If classDiagram given is not empty,
 	 * you must manually add existing component.
 	 * 
-	 * @param diagram
+	 * @param classDiagram
 	 *            the class diagram associated with this graphic view.
 	 */
-	public GraphicView(AbstractDiagram diagram)
+	public GraphicView(ClassDiagram classDiagram, DBDiagram dbDiagram)
 	{
 		super();
 
-		if (diagram == null)
+		if (classDiagram == null)
 			throw new IllegalArgumentException("Diagram is null");
 
-		this.diagram = diagram;
+		this.classDiagram = classDiagram;
+		this.dbDiagram = dbDiagram;
 
 		scene = new JPanel(null) {
 
@@ -499,7 +505,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		
 		saveComponentMouseHover = this;
 
-		diagram.addComponentsObserver(this);
+		classDiagram.addComponentsObserver(this);
 
 		setColor(getBasicColor());
 
@@ -608,7 +614,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 
 		if (result == null)
 		{
-			final BinaryView bv = (BinaryView) searchAssociedComponent(component.getAssociation());
+			final ClassBinaryView bv = (ClassBinaryView) searchAssociedComponent(component.getAssociation());
 			addComponentIn(new AssociationClassView(this, component, bv, new Rectangle(100, 100, 100, 100)), entities);
 		}
 	}
@@ -624,7 +630,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 			final ClassEntityView source = (ClassEntityView) searchAssociedComponent(roles.getFirst().getEntity());
 			final ClassEntityView target = (ClassEntityView) searchAssociedComponent(roles.getLast().getEntity());
 
-			addComponentIn(new BinaryView(this, source, target, component, source.middleBounds(), target.middleBounds(), false), linesView);
+			addComponentIn(new ClassBinaryView(this, source, target, component, source.middleBounds(), target.middleBounds(), false), linesView);
 		}
 	}
 
@@ -1158,9 +1164,13 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 	 * 
 	 * @return
 	 */
-	public AbstractDiagram getDiagram()
+	public ClassDiagram getClassDiagram()
 	{
-		return diagram;
+		return classDiagram;
+	}
+	
+	public DBDiagram getDBDiagram() {
+		return dbDiagram;
 	}
 	
 	@Override
@@ -1440,7 +1450,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 
 		for (final GraphicComponent c : entities)
 			if (c.isSelected())
-				selectedEntities.add((ClassEntityView) c);
+				selectedEntities.add((AbstractEntityView) c);
 
 		return selectedEntities;
 	}
@@ -1840,7 +1850,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		Change.record();
 		
 		for (AbstractEntityView ev : evsSorted)
-			getDiagram().changeZOrder(ev.getComponent(), getEntitiesView().indexOf(ev) + 1);
+			getClassDiagram().changeZOrder(ev.getComponent(), getEntitiesView().indexOf(ev) + 1);
 		
 		if (!isRecord)
 			Change.stopRecord();
@@ -1853,7 +1863,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		
 		for (AbstractEntityView ev : getSelectedEntities())
 			
-			getDiagram().changeZOrder(ev.getComponent(), getEntitiesView().indexOf(ev) - 1);
+			getClassDiagram().changeZOrder(ev.getComponent(), getEntitiesView().indexOf(ev) - 1);
 		
 		if (!isRecord)
 			Change.stopRecord();
@@ -1866,7 +1876,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		
 		for (AbstractEntityView ev : getSelectedEntities())
 			
-			getDiagram().changeZOrder(ev.getComponent(), getEntitiesView().size() - 1);
+			getClassDiagram().changeZOrder(ev.getComponent(), getEntitiesView().size() - 1);
 		
 		if (!isRecord)
 			Change.stopRecord();
@@ -1879,7 +1889,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		
 		for (AbstractEntityView ev : getSelectedEntities())
 			
-			getDiagram().changeZOrder(ev.getComponent(), 0);
+			getClassDiagram().changeZOrder(ev.getComponent(), 0);
 		
 		if (!isRecord)
 			Change.stopRecord();
@@ -2151,16 +2161,6 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 	}
 
 	@Override
-	public void removeComponent(IClassDiagramComponent component)
-	{
-		final GraphicComponent g = searchAssociedComponent(component);
-
-		if (g != null)
-
-			removeComponent(g);
-	}
-
-	@Override
 	public void repaint()
 	{		
 		scene.repaint();
@@ -2335,7 +2335,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 	{
 		for (final AbstractEntityView ev : getSelectedEntities())
 
-			ev.setDisplayAttributes(show);
+			ev.setDisplayFields(show);
 	}
 
 	/**
@@ -2363,7 +2363,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 	 */
 	public LinkedList<AbstractEntityView> sortXLocation(LinkedList<AbstractEntityView> list)
 	{
-		@SuppressWarnings("unchecked") final LinkedList<ClassEntityView> cpyList = (LinkedList<ClassEntityView>) list.clone();
+		@SuppressWarnings("unchecked") final LinkedList<AbstractEntityView> cpyList = (LinkedList<AbstractEntityView>) list.clone();
 		final LinkedList<AbstractEntityView> sorted = new LinkedList<AbstractEntityView>();
 
 		// sort list from x location
@@ -2458,7 +2458,10 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 
 	@Override
 	public void removeComponent(AbstractIDiagramComponent component) {
-		//TODO
-		JOptionPane.showMessageDialog(null, "ERREUR #115");
+		final GraphicComponent g = searchAssociedComponent(component);
+
+		if (g != null)
+
+			removeComponent(g);
 	}
 }

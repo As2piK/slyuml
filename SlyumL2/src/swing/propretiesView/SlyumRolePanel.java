@@ -1,6 +1,6 @@
 package swing.propretiesView;
 
-import graphic.textbox.TextBoxMultiplicity;
+import graphic.textbox.ClassTextBoxMultiplicity;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -102,7 +102,7 @@ public class SlyumRolePanel extends JPanelRounded implements Observer
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				role.setMultiplicity(TextBoxMultiplicity.convertStringToMultiplicity(comboBoxMultiplicity.getSelectedItem().toString()));
+				role.setMultiplicity(ClassTextBoxMultiplicity.convertStringToMultiplicity(comboBoxMultiplicity.getSelectedItem().toString()));
 				role.getMultiplicity().notifyObservers();
 			}
 		});

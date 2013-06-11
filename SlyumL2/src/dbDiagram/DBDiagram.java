@@ -2,11 +2,16 @@ package dbDiagram;
 
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
+import classDiagram.IClassComponentsObserver;
 import utility.Utility;
 import abstractDiagram.AbstractDiagram;
+import abstractDiagram.AbstractIComponentsObserver;
 import abstractDiagram.AbstractIDiagramComponent;
 import dbDiagram.components.Entity;
 import dbDiagram.components.TableEntity;
+import dbDiagram.relationships.Binary;
 
 /**
  * This class contains all structurals UML components. Add classes, interfaces,
@@ -49,10 +54,10 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	@Override
 	public void addTable(TableEntity component)
 	{
-		for (final IDBComponentsObserver c : observers)
+		for (final AbstractIComponentsObserver c : observers) {
 
-			c.addTable(component);
-
+			((IDBComponentsObserver)c).addTable(component);
+		} 
 		addComponent(component);
 		entities.addFirst(component);
 	}
@@ -85,9 +90,12 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	 *            the new obserer.
 	 * @return true if the observer has been added; false otherwise.
 	 */
-	public boolean addComponentsObserver(IDBComponentsObserver c)
+	@Override
+	public boolean addComponentsObserver(AbstractIComponentsObserver c)
 	{
-		return observers.add(c);
+		
+		return observers.add((IDBComponentsObserver)c);
+		
 	}
 
 	@Override
@@ -162,6 +170,14 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	public boolean removeComponentsObserver(IDBComponentsObserver c)
 	{
 		return observers.remove(c);
+	}
+
+	public void addBinary(Binary component)
+	{
+		for (final IDBComponentsObserver c : observers)
+			c.addBinary(component);
+
+		addComponent(component);
 	}
 
 	/**

@@ -41,11 +41,11 @@ public class ClassSPanelFileComponent extends JPanelRounded implements ActionLis
 	public void actionPerformed(ActionEvent e)
 	{
 		if (Slyum.ACTION_NEW_CLASS_DIAGRAM.equals(e.getActionCommand())) {
-			PanelClassDiagram.getInstance().newProject();
 			Slyum.currentDiagramType = DIAGRAM_TYPE.CLASS;
+			PanelClassDiagram.getInstance().newProject(DIAGRAM_TYPE.CLASS);
 			SPanelDiagramComponent.getInstance().switchButtonStatus();
 		} else if (Slyum.ACTION_NEW_DATABASE_DIAGRAM.equals(e.getActionCommand())) {
-			PanelClassDiagram.getInstance().newProject();
+			PanelClassDiagram.getInstance().newProject(DIAGRAM_TYPE.DB);
 			Slyum.currentDiagramType = DIAGRAM_TYPE.DB;
 			SPanelDiagramComponent.getInstance().switchButtonStatus();
 		} else if (Slyum.ACTION_OPEN.equals(e.getActionCommand())) {

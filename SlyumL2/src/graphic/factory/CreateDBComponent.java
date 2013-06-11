@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JOptionPane;
 
+import swing.Slyum;
 import classDiagram.ClassDiagram;
 import dbDiagram.DBDiagram;
 
@@ -21,18 +22,15 @@ import dbDiagram.DBDiagram;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public abstract class CreateTableComponent extends CreateGenericComponent
+public abstract class CreateDBComponent extends CreateGenericComponent
 {
 	protected DBDiagram dbDiagram;
 
-	public CreateTableComponent(GraphicView parent)
+	public CreateDBComponent(GraphicView parent)
 	{
 		super(parent);
-
-		if (parent.getDiagram() instanceof DBDiagram)
-			this.dbDiagram = (DBDiagram)parent.getDiagram();
-		else
-			JOptionPane.showMessageDialog(null, "ERREUR #374"); //TODO
+		
+		this.dbDiagram = parent.getDBDiagram();
 	}
 
 	/**

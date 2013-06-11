@@ -31,11 +31,11 @@ import classDiagram.relationships.Role;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public abstract class AssociationView extends RelationView
+public abstract class ClassAssociationView extends RelationView
 {
 	private final Association association;
 
-	public AssociationView(GraphicView parent, ClassEntityView source, ClassEntityView target, Association association, Point posSource, Point posTarget, boolean checkRecursivity)
+	public ClassAssociationView(GraphicView parent, ClassEntityView source, ClassEntityView target, Association association, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, association, posSource, posTarget, checkRecursivity);
 

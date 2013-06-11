@@ -98,6 +98,7 @@ public class Slyum extends JFrame implements ActionListener
 	public static final String ACTION_NEW_INNER_CLASS = "NewInnerClass";
 	public static final String ACTION_NEW_DEPENDENCY = "NewDependency";
 	public static final String ACTION_NEW_ASSOCIATION = "NewAssociation";
+	public static final String ACTION_NEW_RELATION = "NewRelation";
 	public static final String ACTION_NEW_AGGREGATION = "NewAggregation";
 	public static final String ACTION_NEW_COMPOSITION = "NewComposition";
 	public static final String ACTION_NEW_CLASS_ASSOCIATION = "NewClassAssociation";

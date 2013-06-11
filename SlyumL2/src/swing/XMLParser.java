@@ -9,7 +9,7 @@ import graphic.relations.RelationGrip;
 import graphic.textbox.TextBox;
 import graphic.textbox.TextBoxCommentary;
 import graphic.textbox.TextBoxLabel;
-import graphic.textbox.TextBoxRole;
+import graphic.textbox.ClassTextBoxRole;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -110,7 +110,7 @@ public class XMLParser extends DefaultHandler
 
 	public enum EntityType
 	{
-		ASSOCIATION_CLASS, CLASS, INTERFACE
+		ASSOCIATION_CLASS, CLASS, INTERFACE, TABLE
 	}
 
 	private class Inheritance
@@ -821,8 +821,8 @@ public class XMLParser extends DefaultHandler
 						((TextBoxLabel) tb.get(1)).computeDeplacement(new Point(rl.roleAssociations.get(0).x, rl.roleAssociations.get(0).y));
 						((TextBoxLabel) tb.get(2)).computeDeplacement(new Point(rl.roleAssociations.get(1).x, rl.roleAssociations.get(1).y));
 
-						((TextBoxRole) tb.get(1)).getTextBoxMultiplicity().computeDeplacement(new Point(rl.multipliciteAssociations.get(0).x, rl.multipliciteAssociations.get(0).y));
-						((TextBoxRole) tb.get(2)).getTextBoxMultiplicity().computeDeplacement(new Point(rl.multipliciteAssociations.get(1).x, rl.multipliciteAssociations.get(1).y));
+						((ClassTextBoxRole) tb.get(1)).getTextBoxMultiplicity().computeDeplacement(new Point(rl.multipliciteAssociations.get(0).x, rl.multipliciteAssociations.get(0).y));
+						((ClassTextBoxRole) tb.get(2)).getTextBoxMultiplicity().computeDeplacement(new Point(rl.multipliciteAssociations.get(1).x, rl.multipliciteAssociations.get(1).y));
 					}
 				}
 			}
@@ -868,7 +868,7 @@ public class XMLParser extends DefaultHandler
 					if (tb.size() == 1)
 					{
 						((TextBoxLabel) tb.getFirst()).computeDeplacement(new Point(rl.roleAssociations.get(0).x, rl.roleAssociations.get(0).y));
-						((TextBoxRole) tb.getFirst()).getTextBoxMultiplicity().computeDeplacement(new Point(rl.multipliciteAssociations.get(0).x, rl.multipliciteAssociations.get(0).y));
+						((ClassTextBoxRole) tb.getFirst()).getTextBoxMultiplicity().computeDeplacement(new Point(rl.multipliciteAssociations.get(0).x, rl.multipliciteAssociations.get(0).y));
 					}
 				}
 

@@ -76,7 +76,7 @@ public class LineCommentary extends LineView
 
 		setStroke(new BasicStroke(1.2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] { 4.f }, 0.0f));
 		
-		NoteProperties.getInstance().updateComponentInformations(null);
+		NoteProperties.getInstance().updateClassComponentInformations(null);
 		
 		graphicView.selectOnly(this);
 		notifyNoteProperties();

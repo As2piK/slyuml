@@ -13,10 +13,8 @@ import dbDiagram.verifyName.TypeName;
  */
 public class Field extends Variable
 {	
-	private boolean _isConstant = false;
-	private boolean _isStatic = false;
 	private String defaultValue;
-	private Visibility visibility = Visibility.PRIVATE;
+	private String type; //TODO
 
 	/**
 	 * Construct a new attribute.
@@ -50,11 +48,8 @@ public class Field extends Variable
 		Change.setBlocked(true);
 		
 		name = field.name;
-		type = new Type(field.getType().getName());
+		type = "test";
 		defaultValue = field.defaultValue;
-		visibility = field.visibility;
-		_isStatic = field._isStatic;
-		_isConstant = field._isConstant;
 		
 		Change.setBlocked(isBlocked);
 	}
@@ -67,9 +62,6 @@ public class Field extends Variable
 		setName(attribute.getName());
 		setType(new Type(attribute.getType().getName()));
 		setDefaultValue(attribute.getDefaultValue());
-		setVisibility(attribute.getVisibility());
-		setStatic(attribute.isStatic());
-		setConstant(attribute.isConstant());
 		
 		if(!isRecord)
 			Change.stopRecord();
@@ -88,50 +80,6 @@ public class Field extends Variable
 	}
 
 	/**
-	 * Get the visibility of the attribute.
-	 * 
-	 * @return the visibility of the attribute
-	 */
-	public Visibility getVisibility()
-	{
-		return visibility;
-	}
-
-	/**
-	 * Get the constant state of the attribute.
-	 * 
-	 * @return true if attribute is constant; false otherwise
-	 */
-	public boolean isConstant()
-	{
-		return _isConstant;
-	}
-
-	/**
-	 * Get the static state of the attribute.
-	 * 
-	 * @return true if attribute is static; false otherwise
-	 */
-	public boolean isStatic()
-	{
-		return _isStatic;
-	}
-
-	/**
-	 * Set the constant state of the attribut.
-	 * 
-	 * @param isConst
-	 *            the new constant state.
-	 */
-	public void setConstant(boolean isConst)
-	{
-		Change.push(new BufferField(this));
-		_isConstant = isConst;
-		Change.push(new BufferField(this));
-		setChanged();
-	}
-
-	/**
 	 * Set the default value of the attribute.
 	 * 
 	 * @param defaultValue
@@ -141,20 +89,6 @@ public class Field extends Variable
 	{
 		Change.push(new BufferField(this));
 		this.defaultValue = defaultValue;
-		Change.push(new BufferField(this));
-		setChanged();
-	}
-
-	/**
-	 * Set the static state of the attribute.
-	 * 
-	 * @param isStatic
-	 *            the new static state
-	 */
-	public void setStatic(boolean isStatic)
-	{
-		Change.push(new BufferField(this));
-		_isStatic = isStatic;
 		Change.push(new BufferField(this));
 		setChanged();
 	}
@@ -176,11 +110,6 @@ public class Field extends Variable
 		text = text.trim();
 		Visibility newVisibility = Visibility.getVisibility(text.charAt(0));
 
-		if (newVisibility == null)
-			newVisibility = getVisibility();
-		else
-			text = text.substring(1); // Delete the first car (visibility).
-
 		final String[] subString = text.split(":");
 
 		newName = subString[0].trim();
@@ -200,7 +129,6 @@ public class Field extends Variable
 		
 		setType(type);
 		setName(newName);
-		setVisibility(newVisibility);
 		
 		if(!isRecord)
 			Change.stopRecord();
@@ -208,31 +136,11 @@ public class Field extends Variable
 		notifyObservers();
 	}
 
-	/**
-	 * Set the visibility of the attribute.
-	 * 
-	 * @param visibility
-	 *            the new visibility
-	 */
-	public void setVisibility(Visibility visibility)
-	{
-		if (visibility == null)
-			throw new IllegalArgumentException("visibility is null");
-		
-		if (visibility.getName().equals(getVisibility().getName()))
-			return;
-
-		Change.push(new BufferField(this));
-		this.visibility = visibility;
-		Change.push(new BufferField(this));
-		setChanged();
-	}
-
 	@Override
 	public String toXML(int depth)
 	{
 		final String tab = Utility.generateTab(depth);
-		return tab + "<attribute " + "name=\"" + name + "\" type=\"" + type.toXML(depth+1) + "\" const=\"" + constant + "\" visibility=\"" + visibility + "\" " + (defaultValue == null ? "" : "defaultValue=\"" + defaultValue) + "\" isStatic=\"" + _isStatic + "\" " + "/>";
+		return tab + "<attribute " + "name=\"" + name + "\" type=\"" + type + "\" const=\"" + constant + "\" visibility=\"\" " + (defaultValue == null ? "" : "defaultValue=\"" + defaultValue) + "\" isStatic=\"\" " + "/>";
 	}
 
 	@Override
@@ -245,5 +153,10 @@ public class Field extends Variable
 	public void select() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	//TODO
+	public Type getType() {
+		return super.type;
 	}
 }

@@ -22,7 +22,7 @@ import classDiagram.relationships.Inheritance;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class InheritanceFactory extends RelationFactory
+public class InheritanceFactory extends ClassRelationFactory
 {
 	public final String ERROR_CREATION_MESSAGE = "Inheritance creation failed.\nYou must make a bond between two classes or class -> interface.";
 

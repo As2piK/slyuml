@@ -19,7 +19,7 @@ import change.Change;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class NoteFactory extends RelationFactory
+public class NoteFactory extends ClassRelationFactory
 {
 	/**
 	 * Create a new factory allowing the creation of a note.

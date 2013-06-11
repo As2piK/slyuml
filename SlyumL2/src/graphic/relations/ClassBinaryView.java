@@ -2,7 +2,7 @@ package graphic.relations;
 
 import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
-import graphic.textbox.TextBoxRole;
+import graphic.textbox.ClassTextBoxRole;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -29,7 +29,7 @@ import classDiagram.relationships.Role;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class BinaryView extends AssociationView
+public class ClassBinaryView extends ClassAssociationView
 {
 	/**
 	 * Create a new BinaryView between source and target.
@@ -49,17 +49,17 @@ public class BinaryView extends AssociationView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public BinaryView(GraphicView parent, ClassEntityView source, ClassEntityView target, Binary binary, Point posSource, Point posTarget, boolean checkRecursivity)
+	public ClassBinaryView(GraphicView parent, ClassEntityView source, ClassEntityView target, Binary binary, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(parent, source, target, binary, posSource, posTarget, checkRecursivity);
 
 		final LinkedList<Role> roles = binary.getRoles();
 
-		TextBoxRole tb = new TextBoxRole(parent, roles.getFirst(), getFirstPoint());
+		ClassTextBoxRole tb = new ClassTextBoxRole(parent, roles.getFirst(), getFirstPoint());
 		tbRoles.add(tb);
 		parent.addOthersComponents(tb);
 
-		tb = new TextBoxRole(parent, roles.getLast(), getLastPoint());
+		tb = new ClassTextBoxRole(parent, roles.getLast(), getLastPoint());
 		tbRoles.add(tb);
 		parent.addOthersComponents(tb);
 	}
@@ -69,10 +69,10 @@ public class BinaryView extends AssociationView
 	{
 		super.restore();
 		
-		if (this.getClass().equals(BinaryView.class))
+		if (this.getClass().equals(ClassBinaryView.class))
 
-			if (parent.getDiagram() instanceof ClassDiagram)
-				((ClassDiagram)parent.getDiagram()).addBinary((Binary)getAssociedComponent());
+			if (parent.getClassDiagram() instanceof ClassDiagram)
+				((ClassDiagram)parent.getClassDiagram()).addBinary((Binary)getAssociedComponent());
 			//TODO ERREUR
 		
 		repaint();

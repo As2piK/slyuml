@@ -1,6 +1,7 @@
 package classDiagram;
 
 import abstractDiagram.AbstractIComponentsObserver;
+import abstractDiagram.AbstractIDiagramComponent;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
@@ -108,13 +109,4 @@ public interface IClassComponentsObserver extends AbstractIComponentsObserver
 	 *            the index to move the entity.
 	 */
 	public void changeZOrder(Entity entity, int index);
-
-	/**
-	 * Removes the given component and notify that this component has been
-	 * removed.
-	 * 
-	 * @param component
-	 *            the component to remove.
-	 */
-	public void removeComponent(IClassDiagramComponent component);
 }

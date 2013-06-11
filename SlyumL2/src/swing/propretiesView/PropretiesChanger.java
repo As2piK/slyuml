@@ -26,6 +26,9 @@ import classDiagram.relationships.Inheritance;
 import classDiagram.relationships.InnerClass;
 import classDiagram.relationships.Multi;
 import classDiagram.relationships.Role;
+import dbDiagram.IDBComponentsObserver;
+import dbDiagram.IDBDiagramComponent;
+import dbDiagram.components.TableEntity;
 
 /**
  * Represent a view in Slyum implementing IComponentsObserver. This view is
@@ -36,7 +39,7 @@ import classDiagram.relationships.Role;
  * @version 1.0 - 28.07.2011
  */
 @SuppressWarnings("serial")
-public class PropretiesChanger extends JScrollPane implements IClassComponentsObserver
+public class PropretiesChanger extends JScrollPane implements IClassComponentsObserver, IDBComponentsObserver
 {
 	private static PropretiesChanger instance = new PropretiesChanger();
 
@@ -153,12 +156,6 @@ public class PropretiesChanger extends JScrollPane implements IClassComponentsOb
 	}
 
 	@Override
-	public void removeComponent(IClassDiagramComponent component)
-	{
-		// no components saving in this view
-	}
-
-	@Override
 	public void setViewportView(Component view)
 	{
 		if (view == null)
@@ -169,7 +166,28 @@ public class PropretiesChanger extends JScrollPane implements IClassComponentsOb
 
 	@Override
 	public void removeComponent(AbstractIDiagramComponent component) {
-		// TODO Auto-generated method stub
+			// no components saving in this view
+	}
+
+	@Override
+	public void addTable(TableEntity component) {
+		component.addObserver(EntityPropreties.getInstance());
+	}
+
+	@Override
+	public void addBinary(dbDiagram.relationships.Binary binary) {
+		binary.addObserver(EntityPropreties.getInstance());
 		
+	}
+
+	@Override
+	public void changeZOrder(dbDiagram.components.Entity entity, int index) {
+		// Nothing to do...
+
+	}
+
+	@Override
+	public void removeComponent(IDBDiagramComponent component) {
+			// no components saving in this view
 	}
 }

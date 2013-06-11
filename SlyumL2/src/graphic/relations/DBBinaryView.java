@@ -2,13 +2,17 @@ package graphic.relations;
 
 import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
+import graphic.entity.TableEntityView;
+import graphic.textbox.ClassTextBoxRole;
+import graphic.textbox.DBTextBoxRole;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.LinkedList;
 
-import classDiagram.ClassDiagram;
-import classDiagram.relationships.Composition;
+import dbDiagram.DBDiagram;
+import dbDiagram.relationships.Binary;
+import dbDiagram.relationships.Role;
+
 
 /**
  * The LineView class represent a collection of lines making a link between two
@@ -23,15 +27,15 @@ import classDiagram.relationships.Composition;
  * 
  * An AssociationView is associated with an association UML component.
  * 
- * A CompositionView is associated with an Composition UML component.
+ * A BinaryView is associated with an Binary UML component.
  * 
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class CompositionView extends ClassBinaryView
+public class DBBinaryView extends DBAssociationView
 {
 	/**
-	 * Create a new CompositionView between source and target.
+	 * Create a new BinaryView between source and target.
 	 * 
 	 * @param parent
 	 *            the graphic view
@@ -39,8 +43,8 @@ public class CompositionView extends ClassBinaryView
 	 *            the entity source
 	 * @param target
 	 *            the entity target
-	 * @param composition
-	 *            the composition UML
+	 * @param binary
+	 *            the binary UML
 	 * @param posSource
 	 *            the position for put the first MagneticGrip
 	 * @param posTarget
@@ -48,24 +52,29 @@ public class CompositionView extends ClassBinaryView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public CompositionView(GraphicView parent, ClassEntityView source, ClassEntityView target, Composition composition, Point posSource, Point posTarget, boolean checkRecursivity)
+	public DBBinaryView(GraphicView parent, TableEntityView source, TableEntityView target, Binary binary, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
-		super(parent, source, target, composition, posSource, posTarget, checkRecursivity);
-	}
+		super(parent, source, target, binary, posSource, posTarget, checkRecursivity);
 
-	@Override
-	protected void drawExtremity(Graphics2D g2, Point source, Point target)
-	{
-		AggregationView.paintExtremity(g2, points.get(1).getAnchor(), points.getFirst().getAnchor(), Color.BLACK, getColor());
+		final LinkedList<Role> roles = binary.getRoles();
+
+		DBTextBoxRole tb = new DBTextBoxRole(parent, roles.getFirst(), getFirstPoint());
+		tbRoles.add(tb);
+		parent.addOthersComponents(tb);
+
+		tb = new DBTextBoxRole(parent, roles.getLast(), getLastPoint());
+		tbRoles.add(tb);
+		parent.addOthersComponents(tb);
 	}
 	
 	@Override
 	public void restore()
 	{
 		super.restore();
-		if (parent.getClassDiagram() instanceof ClassDiagram)
-			((ClassDiagram)parent.getClassDiagram()).addComposition((Composition)getAssociedComponent());
-		//TODO ERREUR
+		
+		if (this.getClass().equals(DBBinaryView.class))
+
+			parent.getDBDiagram().addBinary((Binary)getAssociedComponent());
 		
 		repaint();
 	}

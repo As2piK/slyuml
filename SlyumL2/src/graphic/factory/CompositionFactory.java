@@ -21,7 +21,7 @@ import classDiagram.relationships.Composition;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class CompositionFactory extends RelationFactory
+public class CompositionFactory extends ClassRelationFactory
 {
 	/**
 	 * Create a new factory allowing the creation of a composition.

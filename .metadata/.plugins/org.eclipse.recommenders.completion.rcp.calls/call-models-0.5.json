@@ -8,5 +8,10 @@
     "coordinate": "jre:jre:zip:call:1.0.0",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
     "status": "RESOLVED"
+  },
+  "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\slyumOriginal\\src": {
+    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\slyumOriginal\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\slyumOriginal\\src\u0027. Skipped."
   }
 }

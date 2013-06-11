@@ -34,11 +34,7 @@ public class TableView extends TableEntityView
 	@Override
 	protected void prepareNewAttribute(Field field)
 	{
-	}
-
-	@Override
-	protected void prepareNewMethod(Method method)
-	{
+		//TODO
 	}
 
 	@Override
@@ -54,10 +50,6 @@ public class TableView extends TableEntityView
 	
 	protected void restoreEntity()
 	{
-		if (! (parent.getDiagram() instanceof DBDiagram)) {
-			JOptionPane.showMessageDialog(null, "ERREUR 339");
-		} else {
-			((DBDiagram)parent.getDiagram()).addTable((TableEntity)getAssociedComponent());
-		}
+		parent.getDBDiagram().addTable((TableEntity)getAssociedComponent());
 	}
 }

@@ -5,7 +5,7 @@ import graphic.GraphicComponent;
 import graphic.GraphicView;
 import graphic.entity.AssociationClassView;
 import graphic.entity.ClassView;
-import graphic.relations.BinaryView;
+import graphic.relations.ClassBinaryView;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -26,7 +26,7 @@ import classDiagram.relationships.Binary;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class AssociationClassFactory extends RelationFactory
+public class AssociationClassFactory extends ClassRelationFactory
 {
 	public final String ERROR_CREATION_MESSAGE = "Association class creation failed.\nYou must make a bond between two classes or click on an existing association.";
 
@@ -80,7 +80,7 @@ public class AssociationClassFactory extends RelationFactory
 			    SMessageDialog.showErrorMessage(a.getMessage());
 			}
 		}
-		else if (componentMousePressed instanceof BinaryView)
+		else if (componentMousePressed instanceof ClassBinaryView)
 		{
 
 			final Rectangle bounds = new Rectangle(mouseReleased.x, mouseReleased.y, ClassEntityFactory.DEFAULT_SIZE.width, ClassEntityFactory.DEFAULT_SIZE.height - 5);
@@ -92,7 +92,7 @@ public class AssociationClassFactory extends RelationFactory
     			boolean isRecord = Change.isRecord();
     			Change.record();
     			
-    			acv = new AssociationClassView(parent, ac, (BinaryView) componentMousePressed, bounds);
+    			acv = new AssociationClassView(parent, ac, (ClassBinaryView) componentMousePressed, bounds);
     
     			if (!isRecord)
     				Change.stopRecord();

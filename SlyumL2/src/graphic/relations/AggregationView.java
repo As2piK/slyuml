@@ -29,7 +29,7 @@ import classDiagram.relationships.Aggregation;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class AggregationView extends BinaryView
+public class AggregationView extends ClassBinaryView
 {
 	/**
 	 * Paint the extremity of the relation in the direction given by the source
@@ -112,8 +112,8 @@ public class AggregationView extends BinaryView
 	public void restore()
 	{
 		super.restore();
-		if (parent.getDiagram() instanceof ClassDiagram)
-			((ClassDiagram)parent.getDiagram()).addAggregation((Aggregation)getAssociedComponent());
+		if (parent.getClassDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getClassDiagram()).addAggregation((Aggregation)getAssociedComponent());
 		//TODO ERREUR
 		repaint();
 	}

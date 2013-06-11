@@ -40,7 +40,7 @@ public class AssociationClasseLine extends LineView
 	 * @param checkRecursivity
 	 *            check if the relation is on itself
 	 */
-	public AssociationClasseLine(GraphicView graphicView, ClassEntityView source, AssociationView target, Point posSource, Point posTarget, boolean checkRecursivity)
+	public AssociationClasseLine(GraphicView graphicView, ClassEntityView source, ClassAssociationView target, Point posSource, Point posTarget, boolean checkRecursivity)
 	{
 		super(graphicView, source, target, posSource, posTarget, checkRecursivity);
 

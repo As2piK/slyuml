@@ -23,13 +23,13 @@ import utility.Utility;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public abstract class RelationFactory extends ClassComponentFactory
+public abstract class ClassRelationFactory extends ClassComponentFactory
 {
 	private GraphicComponent componentMouseHover;
 	protected Point mouseLocation = new Point();
 	protected BasicStroke stroke = new BasicStroke(1.2f);
 
-	public RelationFactory(GraphicView parent)
+	public ClassRelationFactory(GraphicView parent)
 	{
 		super(parent);
 

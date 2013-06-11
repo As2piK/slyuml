@@ -22,7 +22,7 @@ import classDiagram.relationships.Dependency;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public class DependencyFactory extends RelationFactory
+public class DependencyFactory extends ClassRelationFactory
 {
 	public final String ERROR_CREATION_MESSAGE = "Dependency creation failed.\nYou must make a bond between two entities (class or interface).";
 

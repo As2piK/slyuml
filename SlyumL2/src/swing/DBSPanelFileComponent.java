@@ -41,12 +41,10 @@ public class DBSPanelFileComponent extends JPanelRounded implements ActionListen
 	public void actionPerformed(ActionEvent e)
 	{
 		if (Slyum.ACTION_NEW_CLASS_DIAGRAM.equals(e.getActionCommand())) {
-			PanelClassDiagram.getInstance().newProject();
-			Slyum.currentDiagramType = DIAGRAM_TYPE.CLASS;
 			SPanelDiagramComponent.getInstance().switchButtonStatus();
+			PanelClassDiagram.getInstance().newProject(DIAGRAM_TYPE.CLASS);
 		} else if (Slyum.ACTION_NEW_DATABASE_DIAGRAM.equals(e.getActionCommand())) {
-			PanelClassDiagram.getInstance().newProject();
-			Slyum.currentDiagramType = DIAGRAM_TYPE.DB;
+			PanelClassDiagram.getInstance().newProject(DIAGRAM_TYPE.DB);
 			SPanelDiagramComponent.getInstance().switchButtonStatus();
 		} else if (Slyum.ACTION_OPEN.equals(e.getActionCommand())) {
 			if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {

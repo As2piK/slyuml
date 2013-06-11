@@ -3,6 +3,7 @@ package swing;
 import graphic.GraphicView;
 import graphic.factory.AggregationFactory;
 import graphic.factory.AssociationClassFactory;
+import graphic.factory.BinaryDBRelationFactory;
 import graphic.factory.BinaryFactory;
 import graphic.factory.ClassFactory;
 import graphic.factory.CompositionFactory;
@@ -25,6 +26,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import swing.Slyum.DIAGRAM_TYPE;
@@ -43,8 +45,9 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 	private static final String TT_GENERALIZE = "Generalize & Realize " + Utility.keystrokeToString(Slyum.KEY_INHERITANCE);
 	private static final String TT_DEPENDENCY = "Dependency " + Utility.keystrokeToString(Slyum.KEY_DEPENDENCY);
 	private static final String TT_INNER_CLASS = "Inner class " + Utility.keystrokeToString(Slyum.KEY_INNER_CLASS);
-	
+
 	private static final String TT_ASSOCIATION = "Association " + Utility.keystrokeToString(Slyum.KEY_ASSOCIATION);
+	private static final String TT_RELATION = "Relation " + Utility.keystrokeToString(Slyum.KEY_ASSOCIATION);
 	private static final String TT_AGGREGATION = "Aggregation " + Utility.keystrokeToString(Slyum.KEY_AGGREGATION);
 	private static final String TT_COMPOSITION = "Composition " + Utility.keystrokeToString(Slyum.KEY_COMPOSITION);
 	
@@ -137,6 +140,9 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 		else if (Slyum.ACTION_NEW_ASSOCIATION.equals(e.getActionCommand()))
 			gv.initNewComponent(new BinaryFactory(gv));
 
+		else if (Slyum.ACTION_NEW_RELATION.equals(e.getActionCommand()))
+			gv.initNewComponent(new BinaryDBRelationFactory(gv));
+
 		else if (Slyum.ACTION_NEW_AGGREGATION.equals(e.getActionCommand()))
 			gv.initNewComponent(new AggregationFactory(gv));
 
@@ -159,9 +165,17 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 	public void switchButtonStatus() {
 		
 		if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
-			btnClass = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class.png"), Slyum.ACTION_NEW_CLASS, Color.RED, TT_CLASS);
+			btnClass.setToolTipText(TT_CLASS);
+			btnClass.setActionCommand(Slyum.ACTION_NEW_CLASS);
+		
+			btnAssociation.setToolTipText(TT_ASSOCIATION);
+			btnAssociation.setActionCommand(Slyum.ACTION_NEW_ASSOCIATION);
 		} else {
-			btnClass = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class.png"), Slyum.ACTION_NEW_TABLE, Color.RED, TT_TABLE); //TODO ICON
+			btnClass.setToolTipText(TT_TABLE);
+			btnClass.setActionCommand(Slyum.ACTION_NEW_TABLE);
+			
+			btnAssociation.setToolTipText(TT_ASSOCIATION);
+			btnAssociation.setActionCommand(Slyum.ACTION_NEW_RELATION);
 		}
 		
 		btnInterface.setEnabled(Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS);

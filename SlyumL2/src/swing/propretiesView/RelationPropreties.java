@@ -191,7 +191,7 @@ public class RelationPropreties extends GlobalPropreties
 	}
 
 	@Override
-	public void updateComponentInformations(UpdateMessage msg)
+	public void updateClassComponentInformations(UpdateMessage msg)
 	{
 		if (currentObject != null)
 			if (currentObject instanceof Association)
@@ -246,5 +246,4 @@ public class RelationPropreties extends GlobalPropreties
 				textFieldLabel.setText(dependency.getLabel());
 			}
 	}
-
 }

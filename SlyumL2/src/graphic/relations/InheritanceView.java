@@ -242,8 +242,8 @@ public class InheritanceView extends RelationView
 	public void restore()
 	{
 		super.restore();
-		if (parent.getDiagram() instanceof ClassDiagram)
-			((ClassDiagram)parent.getDiagram()).addInheritance((Inheritance)getAssociedComponent());
+		if (parent.getClassDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getClassDiagram()).addInheritance((Inheritance)getAssociedComponent());
 		else {
 			//TODO ERREUR
 		}

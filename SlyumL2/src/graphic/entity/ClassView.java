@@ -51,7 +51,7 @@ public class ClassView extends ClassEntityView
 	
 	protected void restoreEntity()
 	{
-		if (parent.getDiagram() instanceof ClassDiagram)
-			((ClassDiagram)parent.getDiagram()).addClass((ClassEntity)getAssociedComponent());
+		if (parent.getClassDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getClassDiagram()).addClass((ClassEntity)getAssociedComponent());
 	}
 }

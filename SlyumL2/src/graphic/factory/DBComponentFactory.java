@@ -19,7 +19,7 @@ import swing.Slyum;
  * @author David Miserez
  * @version 1.0 - 25.07.2011
  */
-public abstract class TableComponentFactory extends CreateDBComponent
+public abstract class DBComponentFactory extends CreateDBComponent
 {
 	protected GraphicComponent componentMousePressed;
 
@@ -27,7 +27,7 @@ public abstract class TableComponentFactory extends CreateDBComponent
 	protected Point mousePressed;
 	protected Point mouseReleased;
 
-	public TableComponentFactory(GraphicView parent)
+	public DBComponentFactory(GraphicView parent)
 	{
 		super(parent);
 	}

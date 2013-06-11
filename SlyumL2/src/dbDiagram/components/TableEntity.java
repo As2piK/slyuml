@@ -42,6 +42,6 @@ public class TableEntity extends Entity
 	@Override
 	protected String getEntityType()
 	{
-		return EntityType.CLASS.toString();
+		return EntityType.TABLE.toString();
 	}
 }

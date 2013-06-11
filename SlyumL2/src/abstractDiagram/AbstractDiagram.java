@@ -16,9 +16,7 @@ import dbDiagram.IDBComponentsObserver;
 public abstract class AbstractDiagram implements AbstractIComponentsObserver
 {
 
-	public boolean addComponentsObserver(IClassComponentsObserver c) {return false;}
-
-	public boolean addComponentsObserver(IDBComponentsObserver c) {return false;}
+	public boolean addComponentsObserver(AbstractIComponentsObserver c) {return false;}
 	
 	/**
 	 * Changes the index of entity in the array and notifiy observers.

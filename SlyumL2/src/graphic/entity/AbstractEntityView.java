@@ -22,7 +22,7 @@ public abstract class AbstractEntityView extends MovableComponent implements Obs
 
 	public abstract void adjustWidth();
 	
-	public abstract void setDisplayAttributes(boolean display);
+	public abstract void setDisplayFields(boolean display);
 	
 	public abstract void updateHeight();
 	

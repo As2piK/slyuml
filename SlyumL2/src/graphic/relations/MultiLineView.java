@@ -3,7 +3,7 @@ package graphic.relations;
 import graphic.GraphicComponent;
 import graphic.GraphicView;
 import graphic.entity.ClassEntityView;
-import graphic.textbox.TextBoxRole;
+import graphic.textbox.ClassTextBoxRole;
 
 import java.awt.Point;
 
@@ -49,7 +49,7 @@ public class MultiLineView extends LineView
 	{
 		super(graphicView, source, target, posSource, posTarget, checkRecursivity);
 
-		final TextBoxRole tb = new TextBoxRole(parent, role, getLastPoint());
+		final ClassTextBoxRole tb = new ClassTextBoxRole(parent, role, getLastPoint());
 		tbRoles.add(tb);
 		parent.addOthersComponents(tb);
 	}
@@ -77,7 +77,7 @@ public class MultiLineView extends LineView
 		
 		MultiView mv = (MultiView) getFirstPoint().getAssociedComponentView();
 		Multi m = (Multi) mv.getAssociedComponent();
-		TextBoxRole tbr = (TextBoxRole)tbRoles.getFirst();
+		ClassTextBoxRole tbr = (ClassTextBoxRole)tbRoles.getFirst();
 		m.addRole(tbr.getRole());
 		mv.addMultiLineView(this);
 		
@@ -103,7 +103,7 @@ public class MultiLineView extends LineView
 		if (tbRoles.size() >= 1)
 		{
 			xml += utility.Utility.boundsToXML(depth, tbRoles.get(0).getBounds(), "roleAssociation");
-			xml += utility.Utility.boundsToXML(depth, ((TextBoxRole) tbRoles.get(0)).getTextBoxMultiplicity().getBounds(), "multipliciteAssociation");
+			xml += utility.Utility.boundsToXML(depth, ((ClassTextBoxRole) tbRoles.get(0)).getTextBoxMultiplicity().getBounds(), "multipliciteAssociation");
 		}
 
 		return xml + tab + "</multiLineView>\n";

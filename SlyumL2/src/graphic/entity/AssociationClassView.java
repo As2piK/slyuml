@@ -2,7 +2,7 @@ package graphic.entity;
 
 import graphic.GraphicView;
 import graphic.relations.AssociationClasseLine;
-import graphic.relations.BinaryView;
+import graphic.relations.ClassBinaryView;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -20,7 +20,7 @@ import classDiagram.components.AssociationClass;
  */
 public class AssociationClassView extends ClassView
 {
-	private final BinaryView binaryView;
+	private final ClassBinaryView binaryView;
 	private AssociationClasseLine acl;
 
 	/**
@@ -36,7 +36,7 @@ public class AssociationClassView extends ClassView
 	 * @param bounds
 	 *            the default bounds
 	 */
-	public AssociationClassView(GraphicView parent, AssociationClass component, BinaryView binaryView, Rectangle bounds)
+	public AssociationClassView(GraphicView parent, AssociationClass component, ClassBinaryView binaryView, Rectangle bounds)
 	{
 		super(parent, component);
 
@@ -78,7 +78,7 @@ public class AssociationClassView extends ClassView
 
 		setBounds(bounds);
 
-		binaryView = new BinaryView(parent, source, target, component.getAssociation(), posSource, posTarget, true);
+		binaryView = new ClassBinaryView(parent, source, target, component.getAssociation(), posSource, posTarget, true);
 
 		parent.addLineView(binaryView);
 		parent.addLineView(acl = new AssociationClasseLine(parent, this, binaryView, new Point(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2), new Point(posSource.x + (posTarget.x - posSource.x) / 2, posSource.y + (posTarget.y + posSource.y) / 2), true));
@@ -98,8 +98,8 @@ public class AssociationClassView extends ClassView
 	@Override
 	protected void restoreEntity()
 	{
-		if (parent.getDiagram() instanceof ClassDiagram)
-			((ClassDiagram)parent.getDiagram()).addAssociationClass((AssociationClass)getAssociedComponent());
+		if (parent.getClassDiagram() instanceof ClassDiagram)
+			((ClassDiagram)parent.getClassDiagram()).addAssociationClass((AssociationClass)getAssociedComponent());
 			//TODO ERREUR
 	}
 	
