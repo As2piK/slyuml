@@ -13,19 +13,6 @@
     "javaRuntime": false
   },
   {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "32b135e1fa8fb49ca5039e019214538e0d1725a5",
-    "jarFileModificationDate": "2013-05-15T15:04:08.006+02:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\jsse.jar",
-    "javaRuntime": true
-  },
-  {
     "symbolicName": "Slyum 1.2b",
     "version": {
       "major": -1,
@@ -46,9 +33,9 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "ef634c0c4c3550ff0ca6576f3af159b517b5aafe",
-    "jarFileModificationDate": "2013-05-15T15:04:06.568+02:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\zipfs.jar",
+    "jarFileFingerprint": "32b135e1fa8fb49ca5039e019214538e0d1725a5",
+    "jarFileModificationDate": "2013-05-15T15:04:08.006+02:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\jsse.jar",
     "javaRuntime": true
   },
   {
@@ -62,6 +49,19 @@
     "jarFileFingerprint": "6d88fb58238f3dcfeb71ac071cf85a104d16f509",
     "jarFileModificationDate": "2013-05-15T15:04:06.565+02:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\access-bridge-64.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "ef634c0c4c3550ff0ca6576f3af159b517b5aafe",
+    "jarFileModificationDate": "2013-05-15T15:04:06.568+02:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\zipfs.jar",
     "javaRuntime": true
   },
   {
@@ -104,19 +104,6 @@
     "javaRuntime": false
   },
   {
-    "symbolicName": "Slyum2.0",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "08c1d7aaeead7d53d3b38b167ef8ea5f1958bc44",
-    "jarFileModificationDate": "2013-03-19T14:41:13.620+01:00",
-    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\older_versions\\Slyum2.0.jar",
-    "javaRuntime": false
-  },
-  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
@@ -128,6 +115,19 @@
     "jarFileModificationDate": "2011-08-31T00:05:02+02:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\dns_sd.jar",
     "javaRuntime": true
+  },
+  {
+    "symbolicName": "Slyum2.0",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "08c1d7aaeead7d53d3b38b167ef8ea5f1958bc44",
+    "jarFileModificationDate": "2013-03-19T14:41:13.620+01:00",
+    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\older_versions\\Slyum2.0.jar",
+    "javaRuntime": false
   },
   {
     "symbolicName": "Slyum 1.0",
@@ -299,19 +299,6 @@
     "javaRuntime": false
   },
   {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "c4c7923b11e98bc8d1d32bfd2ff6363d212ead80",
-    "jarFileModificationDate": "2013-05-15T15:04:06.567+02:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunec.jar",
-    "javaRuntime": true
-  },
-  {
     "symbolicName": "Slyum 1.0",
     "version": {
       "major": -1,
@@ -332,9 +319,9 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "f831655c50b92c41e366442d09511ea84270c45e",
-    "jarFileModificationDate": "2013-05-15T15:04:06.578+02:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\jce.jar",
+    "jarFileFingerprint": "c4c7923b11e98bc8d1d32bfd2ff6363d212ead80",
+    "jarFileModificationDate": "2013-05-15T15:04:06.567+02:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunec.jar",
     "javaRuntime": true
   },
   {
@@ -358,9 +345,9 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "a3d1a9689f1c8e36ab64fb669df92076771c42f2",
-    "jarFileModificationDate": "2013-05-15T15:04:06.567+02:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunmscapi.jar",
+    "jarFileFingerprint": "f831655c50b92c41e366442d09511ea84270c45e",
+    "jarFileModificationDate": "2013-05-15T15:04:06.578+02:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\jce.jar",
     "javaRuntime": true
   },
   {
@@ -374,6 +361,19 @@
     "jarFileFingerprint": "abd730a724364204bff29f4e0b3ced4d08f09a47",
     "jarFileModificationDate": "2013-05-15T15:04:07.864+02:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\charsets.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "a3d1a9689f1c8e36ab64fb669df92076771c42f2",
+    "jarFileModificationDate": "2013-05-15T15:04:06.567+02:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunmscapi.jar",
     "javaRuntime": true
   },
   {
@@ -429,19 +429,6 @@
     "javaRuntime": true
   },
   {
-    "symbolicName": "Slyum 1.1",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "42b7eea5f1e40ca7bde205f03396e8268a1866df",
-    "jarFileModificationDate": "2013-03-19T14:41:13.586+01:00",
-    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\older_versions\\Slyum 1.1.jar",
-    "javaRuntime": false
-  },
-  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
@@ -455,16 +442,16 @@
     "javaRuntime": true
   },
   {
-    "symbolicName": "Slyum 1.2",
+    "symbolicName": "Slyum 1.1",
     "version": {
       "major": -1,
       "minor": -1,
       "micro": -1,
       "qualifier": ""
     },
-    "jarFileFingerprint": "73dd261a0f127d93bf802bfcf44956244b06b831",
-    "jarFileModificationDate": "2013-03-19T14:41:13.599+01:00",
-    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\older_versions\\Slyum 1.2.jar",
+    "jarFileFingerprint": "42b7eea5f1e40ca7bde205f03396e8268a1866df",
+    "jarFileModificationDate": "2013-03-19T14:41:13.586+01:00",
+    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\older_versions\\Slyum 1.1.jar",
     "javaRuntime": false
   },
   {
@@ -478,6 +465,19 @@
     "jarFileFingerprint": "73dd261a0f127d93bf802bfcf44956244b06b831",
     "jarFileModificationDate": "2013-03-19T14:41:13.599+01:00",
     "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\slyumOriginal\\older_versions\\Slyum 1.2.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "Slyum 1.2",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "73dd261a0f127d93bf802bfcf44956244b06b831",
+    "jarFileModificationDate": "2013-03-19T14:41:13.599+01:00",
+    "location": "G:\\As2piK\\Dropbox\\Bachelor\\SlyumL\\SlyumL\\older_versions\\Slyum 1.2.jar",
     "javaRuntime": false
   },
   {

@@ -1006,7 +1006,7 @@ public class EntityPropreties extends GlobalPropreties
 	JPanel panelParameters;
 
 	private JScrollPane scrollPaneAttributes, scrollPaneMethods,
-			scrollPaneParameters;
+			scrollPaneParameters, scrollPaneFields;
 
 	JTextField textName = new JTextField();
 
@@ -1143,6 +1143,10 @@ public class EntityPropreties extends GlobalPropreties
 		scrollPane.setBorder(new LineBorder(Color.GRAY, 1, true));
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setVisible(false);
+		
+		//TODO Créer scrollPaneFields
+		scrollPaneFields = new JScrollPane(fieldsTable);
+		
 		panel.add(createTitleLabel("Attributes"));
 		panel.add(scrollPane);
 		panel.add(imgNoAttribute);
@@ -1580,50 +1584,86 @@ public class EntityPropreties extends GlobalPropreties
 		if (currentObject == null)
 			return;
 
-		final Entity entity = (Entity) currentObject;
-		final AttributeTableModel modelAttributes = (AttributeTableModel) attributesTable.getModel();
-		final MethodTableModel modelMethods = (MethodTableModel) methodsTable.getModel();
-
-		final LinkedList<Attribute> attributes = entity.getAttributes();
-		final LinkedList<Method> methods = entity.getMethods();
-
-		if (msg != null && msg.equals(UpdateMessage.UNSELECT))
-			if (!entity.getName().equals(textName.getText()))
-				if (!entity.setName(textName.getText()))
-					textName.setText(entity.getName());
-				else
-					entity.notifyObservers();
-
-		textName.setText(entity.getName());
-		checkBoxAbstract.setSelected(entity.isAbstract());
-		checkBoxAbstract.setEnabled(currentObject.getClass() != InterfaceEntity.class);
-		comboBox.setSelectedItem(entity.getVisibility().getName());
-
-		modelAttributes.clearAll();
-		modelMethods.clearAll();
-
-		for (int i = 0; i < attributes.size(); i++)
-			modelAttributes.addAttribute(attributes.get(i));
-
-		for (int i = 0; i < methods.size(); i++)
-			modelMethods.addMethod(methods.get(i));
-
-		scrollPaneAttributes.setVisible(attributes.size() > 0);
-		scrollPaneMethods.setVisible(methods.size() > 0);
-
-		imgNoAttribute.setVisible(attributes.size() <= 0);
-		imgNoMethod.setVisible(methods.size() <= 0);
-
-		btnRemoveMethod.setEnabled(false);
-		btnRemoveAttribute.setEnabled(false);
-		btnUpAttribute.setEnabled(false);
-		btnDownAttribute.setEnabled(false);
-		btnUpMethod.setEnabled(false);
-		btnDownMethod.setEnabled(false);
-		btnRemoveParameters.setEnabled(false);
-		btnRightParameters.setEnabled(false);
-		btnLeftParameters.setEnabled(false);
-
-		validate();
+		if (currentObject instanceof Entity) {
+		
+			final Entity entity = (Entity) currentObject;
+			final AttributeTableModel modelAttributes = (AttributeTableModel) attributesTable.getModel();
+			final MethodTableModel modelMethods = (MethodTableModel) methodsTable.getModel();
+	
+			final LinkedList<Attribute> attributes = entity.getAttributes();
+			final LinkedList<Method> methods = entity.getMethods();
+	
+			if (msg != null && msg.equals(UpdateMessage.UNSELECT))
+				if (!entity.getName().equals(textName.getText()))
+					if (!entity.setName(textName.getText()))
+						textName.setText(entity.getName());
+					else
+						entity.notifyObservers();
+	
+			textName.setText(entity.getName());
+			checkBoxAbstract.setSelected(entity.isAbstract());
+			checkBoxAbstract.setEnabled(currentObject.getClass() != InterfaceEntity.class);
+			comboBox.setSelectedItem(entity.getVisibility().getName());
+	
+			modelAttributes.clearAll();
+			modelMethods.clearAll();
+	
+			for (int i = 0; i < attributes.size(); i++)
+				modelAttributes.addAttribute(attributes.get(i));
+	
+			for (int i = 0; i < methods.size(); i++)
+				modelMethods.addMethod(methods.get(i));
+	
+			scrollPaneAttributes.setVisible(attributes.size() > 0);
+			scrollPaneMethods.setVisible(methods.size() > 0);
+	
+			imgNoAttribute.setVisible(attributes.size() <= 0);
+			imgNoMethod.setVisible(methods.size() <= 0);
+	
+			btnRemoveMethod.setEnabled(false);
+			btnRemoveAttribute.setEnabled(false);
+			btnUpAttribute.setEnabled(false);
+			btnDownAttribute.setEnabled(false);
+			btnUpMethod.setEnabled(false);
+			btnDownMethod.setEnabled(false);
+			btnRemoveParameters.setEnabled(false);
+			btnRightParameters.setEnabled(false);
+			btnLeftParameters.setEnabled(false);
+	
+			validate();
+		} else if (currentObject instanceof dbDiagram.components.Entity) {
+		
+			final dbDiagram.components.Entity entity = (dbDiagram.components.Entity) currentObject;
+			final FieldTableModel modelFields = (FieldTableModel) fieldsTable.getModel();
+	
+			final LinkedList<Field> field = entity.getFields();
+	
+			if (msg != null && msg.equals(UpdateMessage.UNSELECT))
+				if (!entity.getName().equals(textName.getText()))
+					if (!entity.setName(textName.getText()))
+						textName.setText(entity.getName());
+					else
+						entity.notifyObservers();
+	
+			textName.setText(entity.getName());
+			//checkBoxAbstract.setSelected(entity.isAbstract());
+			//checkBoxAbstract.setEnabled(currentObject.getClass() != InterfaceEntity.class);
+			//comboBox.setSelectedItem(entity.getVisibility().getName()); //TODO Selection //TODO supprimer les checkbox
+	
+			modelFields.clearAll();
+	
+			for (int i = 0; i < field.size(); i++)
+				modelFields.addField(field.get(i));
+	
+			scrollPaneAttributes.setVisible(field.size() > 0);
+	
+			imgNoAttribute.setVisible(field.size() <= 0);
+	
+			btnRemoveField.setEnabled(false);
+			btnUpField.setEnabled(false);
+			btnDownField.setEnabled(false);
+	
+			validate();
+		}
 	}
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="graphic.entity.TableView"/>
 <fullyQualifiedTypeName name="abstractDiagram.components.AbstractEntity"/>
 <fullyQualifiedTypeName name="classDiagram.components.Type"/>
 <fullyQualifiedTypeName name="classDiagram.components.Entity"/>
@@ -41,16 +40,12 @@
 <fullyQualifiedTypeName name="swing.hierarchicalView.ClassHierarchicalView"/>
 <fullyQualifiedTypeName name="abstractDiagram.AbstractDiagram"/>
 <fullyQualifiedTypeName name="classDiagram.IClassComponentsObserver"/>
-<fullyQualifiedTypeName name="dbDiagram.components.Entity"/>
 <fullyQualifiedTypeName name="dbDiagram.IDBDiagramComponent"/>
-<fullyQualifiedTypeName name="dbDiagram.components.Field"/>
-<fullyQualifiedTypeName name="dbDiagram.IDBDiagramComponent.UpdateMessage"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="abstractDiagram.AbstractIComponentsObserver"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="dbDiagram.IDBComponentsObserver"/>
 <fullyQualifiedTypeName name="classDiagram.IDiagramComponent"/>
-<fullyQualifiedTypeName name="abstractDiagram.AbstractIDiagramComponent"/>
 <fullyQualifiedTypeName name="swing.Slyum.DIAGRAM_TYPE"/>
 <fullyQualifiedTypeName name="swing.Slyum"/>
 <fullyQualifiedTypeName name="classDiagram.ClassDiagram"/>
@@ -60,4 +55,9 @@
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
 <fullyQualifiedTypeName name="graphic.entity.EntityView"/>
+<fullyQualifiedTypeName name="dbDiagram.components.Field"/>
+<fullyQualifiedTypeName name="swing.propretiesView.EntityPropreties.FieldTableModel"/>
+<fullyQualifiedTypeName name="abstractDiagram.AbstractIDiagramComponent"/>
+<fullyQualifiedTypeName name="dbDiagram.components.Entity"/>
+<fullyQualifiedTypeName name="dbDiagram.IDBDiagramComponent.UpdateMessage"/>
 </qualifiedTypeNameHistroy>
