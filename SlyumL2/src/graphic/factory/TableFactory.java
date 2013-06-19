@@ -39,7 +39,7 @@ public class TableFactory extends TableEntityFactory
 	@Override
 	public GraphicComponent create()
 	{
-		final TableEntity tableEntity = new TableEntity("Table", Visibility.PUBLIC);
+		final TableEntity tableEntity = new TableEntity("Table");
 		final TableEntityView c = new TableView(parent, tableEntity);
 
 		c.setBounds(new Rectangle(mouseReleased.x - DEFAULT_SIZE.width / 2, mouseReleased.y - DEFAULT_SIZE.height / 2, DEFAULT_SIZE.width, DEFAULT_SIZE.height));

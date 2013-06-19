@@ -2,33 +2,29 @@ package dbDiagram.relationships;
 
 import java.util.Observable;
 
-import swing.OverridesAndImplementationsDialog;
 import utility.SMessageDialog;
 import utility.Utility;
 import dbDiagram.DBDiagram;
 import dbDiagram.IDBDiagramComponent;
 import dbDiagram.components.TableEntity;
-import dbDiagram.components.Entity;
-import dbDiagram.components.InterfaceEntity;
-import dbDiagram.components.Method;
 
 /**
  * Represent a inheritance in UML structure. This inheritance, depends on the
  * entites participating in inheritance, will be a generalization or a
  * relalization.
- * 
+ *
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
 public class Inheritance extends Observable implements IDBDiagramComponent
 {
-	public static boolean validate(Entity child, Entity parent)
+	public static boolean validate(TableEntity child, TableEntity parent)
 	{
 		boolean valide = true;
 
 		valide &= child != parent;
 
-		for (final Entity e : child.getAllChilds())
+		for (final TableEntity e : child.getAllChilds())
 			valide &= !parent.equals(e);
 
 		if (!valide)
@@ -37,19 +33,19 @@ public class Inheritance extends Observable implements IDBDiagramComponent
 		return valide;
 	}
 
-	protected Entity child, parent;
+	protected TableEntity child, parent;
 
 	protected final int id;
 
 	/**
 	 * Create a new inheritance with the given entities child and parent.
-	 * 
+	 *
 	 * @param child
-	 *            the child entity
+	 * the child entity
 	 * @param parent
-	 *            the parent entity
+	 * the parent entity
 	 */
-	public Inheritance(Entity child, Entity parent)
+	public Inheritance(TableEntity child, TableEntity parent)
 	{
 		init(child, parent);
 
@@ -59,13 +55,13 @@ public class Inheritance extends Observable implements IDBDiagramComponent
 	/**
 	 * Create a new inheritance with the given entities child and parent. Don't
 	 * generate a new id and use this given in parameter.
-	 * 
+	 *
 	 * @param child
-	 *            the child entity
+	 * the child entity
 	 * @param parent
-	 *            the parent entity
+	 * the parent entity
 	 */
-	public Inheritance(Entity child, Entity parent, int id)
+	public Inheritance(TableEntity child, TableEntity parent, int id)
 	{
 		init(child, parent);
 
@@ -74,10 +70,10 @@ public class Inheritance extends Observable implements IDBDiagramComponent
 
 	/**
 	 * Get the child for this inheritance.
-	 * 
+	 *
 	 * @return the child for this inheritance
 	 */
-	public Entity getChild()
+	public TableEntity getChild()
 	{
 		return child;
 	}
@@ -90,27 +86,24 @@ public class Inheritance extends Observable implements IDBDiagramComponent
 
 	/**
 	 * Get the parent for this inheritance.
-	 * 
+	 *
 	 * @return the parent for this inheritance
 	 */
-	public Entity getParent()
+	public TableEntity getParent()
 	{
 		return parent;
 	}
 
 	/**
 	 * Call by construtor for init parameters.
-	 * 
+	 *
 	 * @param child
-	 *            the child given in constructor
+	 * the child given in constructor
 	 * @param parent
-	 *            the parent given in constructor
+	 * the parent given in constructor
 	 */
-	private void init(Entity child, Entity parent)
+	private void init(TableEntity child, TableEntity parent)
 	{
-		if (child.getClass() == InterfaceEntity.class && parent.getClass() == TableEntity.class)
-			throw new IllegalArgumentException("interface cannot implements class");
-
 		this.child = child;
 		this.child.addParent(this);
 
@@ -126,11 +119,11 @@ public class Inheritance extends Observable implements IDBDiagramComponent
 
 	/**
 	 * Set the child for this inheritance.
-	 * 
+	 *
 	 * @param child
-	 *            the new child for this inheritance
+	 * the new child for this inheritance
 	 */
-	public void setChild(Entity child)
+	public void setChild(TableEntity child)
 	{
 		this.child.removeParent(this);
 		this.child = child;
@@ -139,11 +132,11 @@ public class Inheritance extends Observable implements IDBDiagramComponent
 
 	/**
 	 * Set the parent for this inheritance.
-	 * 
+	 *
 	 * @param parent
-	 *            the new parent for this inheritance
+	 * the new parent for this inheritance
 	 */
-	public void setParent(Entity parent)
+	public void setParent(TableEntity parent)
 	{
 		this.parent.removeChild(this);
 		this.parent = parent;
@@ -154,18 +147,13 @@ public class Inheritance extends Observable implements IDBDiagramComponent
 	{
 	}
 
-	private void showDeAbstractMessage()
-	{
-		SMessageDialog.showInformationMessage("Child class is not abstract.\nAbstract methods have been de-abstracted.");
-	}
-
 	@Override
 	public String toString()
 	{
 		return getChild().getName() + " - " + getParent().getName();
 	}
-	
-	
+
+
 
 	@Override
 	public String toXML(int depth)

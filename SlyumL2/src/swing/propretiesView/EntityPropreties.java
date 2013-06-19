@@ -375,7 +375,7 @@ public class EntityPropreties extends GlobalPropreties
 			final Field field = Utility.getKeysByValue(mapIndex, index).iterator().next();
 
 			// Unselect all attributes
-			for (final Field a : ((dbDiagram.components.Entity) currentObject).getFields())
+			for (final Field a : ((dbDiagram.components.TableEntity) currentObject).getFields())
 			{
 				if (a.equals(field))
 					continue;
@@ -1578,7 +1578,7 @@ public class EntityPropreties extends GlobalPropreties
 	}
 
 	@Override
-	public void updateClassComponentInformations(UpdateMessage msg)
+	public void updateComponentInformations(UpdateMessage msg)
 	{
 
 		if (currentObject == null)
@@ -1631,9 +1631,9 @@ public class EntityPropreties extends GlobalPropreties
 			btnLeftParameters.setEnabled(false);
 	
 			validate();
-		} else if (currentObject instanceof dbDiagram.components.Entity) {
+		} else if (currentObject instanceof dbDiagram.components.TableEntity) {
 		
-			final dbDiagram.components.Entity entity = (dbDiagram.components.Entity) currentObject;
+			final dbDiagram.components.TableEntity entity = (dbDiagram.components.TableEntity) currentObject;
 			final FieldTableModel modelFields = (FieldTableModel) fieldsTable.getModel();
 	
 			final LinkedList<Field> field = entity.getFields();

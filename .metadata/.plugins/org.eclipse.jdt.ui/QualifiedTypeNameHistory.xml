@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="abstractDiagram.components.AbstractEntity"/>
-<fullyQualifiedTypeName name="classDiagram.components.Type"/>
-<fullyQualifiedTypeName name="classDiagram.components.Entity"/>
-<fullyQualifiedTypeName name="classDiagram.components.PrimitiveType"/>
-<fullyQualifiedTypeName name="classDiagram.components.Attribute"/>
-<fullyQualifiedTypeName name="classDiagram.components.Method"/>
-<fullyQualifiedTypeName name="abstractDiagram.AbstractEntity"/>
-<fullyQualifiedTypeName name="abstractDiagram.components.AbstractType"/>
-<fullyQualifiedTypeName name="dbDiagram.components.Variable"/>
 <fullyQualifiedTypeName name="classDiagram.components.Variable"/>
 <fullyQualifiedTypeName name="dbDiagram.components.Visibility"/>
 <fullyQualifiedTypeName name="abstractDiagram.components.AbstractVariable"/>
@@ -56,8 +47,17 @@
 <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
 <fullyQualifiedTypeName name="graphic.entity.EntityView"/>
 <fullyQualifiedTypeName name="dbDiagram.components.Field"/>
-<fullyQualifiedTypeName name="swing.propretiesView.EntityPropreties.FieldTableModel"/>
 <fullyQualifiedTypeName name="abstractDiagram.AbstractIDiagramComponent"/>
+<fullyQualifiedTypeName name="classDiagram.components.Entity"/>
+<fullyQualifiedTypeName name="swing.propretiesView.EntityPropreties.FieldTableModel"/>
 <fullyQualifiedTypeName name="dbDiagram.components.Entity"/>
 <fullyQualifiedTypeName name="dbDiagram.IDBDiagramComponent.UpdateMessage"/>
+<fullyQualifiedTypeName name="dbDiagram.verifyName.TypeName"/>
+<fullyQualifiedTypeName name="dbDiagram.components.Type"/>
+<fullyQualifiedTypeName name="dbDiagram.components.PrimitiveType"/>
+<fullyQualifiedTypeName name="classDiagram.IDiagramComponent.UpdateMessage"/>
+<fullyQualifiedTypeName name="classDiagram.IClassDiagramComponent.UpdateMessage"/>
+<fullyQualifiedTypeName name="abstractDiagram.AbstractEntity"/>
+<fullyQualifiedTypeName name="swing.XMLParser.EntityType"/>
+<fullyQualifiedTypeName name="swing.propretiesView.TableProperties"/>
 </qualifiedTypeNameHistroy>

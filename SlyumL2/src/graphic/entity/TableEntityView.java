@@ -41,7 +41,7 @@ import change.BufferBounds;
 import change.Change;
 import dbDiagram.IDBDiagramComponent;
 import dbDiagram.IDBDiagramComponent.UpdateMessage;
-import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
 import dbDiagram.components.Field;
 
 /**
@@ -180,7 +180,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	protected LinkedList<TextBoxAttribute> fieldView = new LinkedList<TextBoxAttribute>();
 
 	private Rectangle bounds = new Rectangle();
-	protected Entity component;
+	protected TableEntity component;
 	private Color defaultColor;
 
 	private boolean displayFields = true;
@@ -197,7 +197,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	private static final Font stereotypeFontBasic = new Font(Slyum.getInstance().defaultFont.getFamily(), 0, 11); // TODO
 	private Font stereotypeFont = stereotypeFontBasic;
 
-	public TableEntityView(final GraphicView parent, Entity component)
+	public TableEntityView(final GraphicView parent, TableEntity component)
 	{
 		super(parent);
 
@@ -321,7 +321,7 @@ public abstract class TableEntityView extends AbstractEntityView
 			if (pressedTextBox.getClass() == TextBoxAttribute.class)
 			{
 				final Field field = (Field) ((TextBoxAttribute) pressedTextBox).getAssociedComponent();
-				component.moveAttributePosition(field, offset);
+				component.moveFieldPosition(field, offset);
 			}
 
 			component.notifyObservers();
@@ -491,7 +491,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	 * 
 	 * @return the component associed.
 	 */
-	public Entity getComponent()
+	public TableEntity getComponent()
 	{
 		return component;
 	}

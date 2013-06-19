@@ -35,7 +35,7 @@ import utility.Utility;
 
 public class SPanelDiagramComponent extends JPanelRounded implements ActionListener
 {
-	private static final String TITLE = "Class diagram";
+	private static String TITLE = "Class diagram";
 
 	private static final String TT_CLASS = "Class " + Utility.keystrokeToString(Slyum.KEY_CLASS);
 	private static final String TT_TABLE = "Table " + Utility.keystrokeToString(Slyum.KEY_CLASS);
@@ -57,6 +57,8 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 	
 	private SButton btnClass, btnInterface, btnClassAssociation, btnGeneralize, btnDependeny, btnInnerClass,
 	                btnAssociation, btnAggregation, btnComposition, btnMulti, btnNote, btnLinkNote;
+	
+	private final JLabel labelTitle;
 	
 	private static final long serialVersionUID = -8198486630670114549L;
 
@@ -84,7 +86,7 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 		panelBottom.setLayout(new GridLayout(4, 3));
 		panelBottom.setOpaque(false);
 		
-		JLabel labelTitle = new JLabel(TITLE);
+		labelTitle = new JLabel(TITLE);
 		panelTop.add(labelTitle);
 
 		panelBottom.add(btnClass = createSButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class.png"), Slyum.ACTION_NEW_CLASS, Color.RED, TT_CLASS));
@@ -165,12 +167,15 @@ public class SPanelDiagramComponent extends JPanelRounded implements ActionListe
 	public void switchButtonStatus() {
 		
 		if (Slyum.currentDiagramType == DIAGRAM_TYPE.CLASS) {
+			
+			labelTitle.setText("Class diagram");
 			btnClass.setToolTipText(TT_CLASS);
 			btnClass.setActionCommand(Slyum.ACTION_NEW_CLASS);
 		
 			btnAssociation.setToolTipText(TT_ASSOCIATION);
 			btnAssociation.setActionCommand(Slyum.ACTION_NEW_ASSOCIATION);
 		} else {
+			labelTitle.setText("Database diagram");
 			btnClass.setToolTipText(TT_TABLE);
 			btnClass.setActionCommand(Slyum.ACTION_NEW_TABLE);
 			

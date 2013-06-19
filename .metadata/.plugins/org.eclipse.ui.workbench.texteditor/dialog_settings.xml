@@ -10,21 +10,23 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
 		<item value="false" key="isRegEx"/>
-		<item value="false" key="casesensitive"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="currentObject = " key="selection"/>
+		<item value="move" key="selection"/>
 		<list key="findhistory">
+			<item value="move"/>
+			<item value="attribute"/>
+			<item value="Attribute"/>
+			<item value="New class"/>
+			<item value="swit"/>
 			<item value="currentObject = "/>
 			<item value="UpdateComponentInform"/>
 			<item value="msg"/>
-			<item value="UpdateMessage"/>
-			<item value="UpdateMessage.SELECT"/>
-			<item value="SELECT"/>
-			<item value="setSelec"/>
-			<item value="setSelected"/>
 		</list>
 		<list key="replacehistory">
+			<item value="field"/>
+			<item value="Field"/>
 			<item value=""/>
 			<item value="dbDiagram"/>
 		</list>

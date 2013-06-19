@@ -11,7 +11,7 @@ import javax.swing.tree.TreePath;
 
 import dbDiagram.IDBDiagramComponent;
 import dbDiagram.IDBDiagramComponent.UpdateMessage;
-import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
 import dbDiagram.components.Field;
 
 
@@ -24,7 +24,7 @@ import dbDiagram.components.Field;
 public class TableNodeEntity extends DefaultMutableTreeNode implements Observer, IDiagramNode, ICustomizedIconNode
 {
 	private static final long serialVersionUID = 1L;
-	private final Entity entity;
+	private final TableEntity entity;
 	private final ImageIcon icon;
 	private final JTree tree;
 
@@ -42,7 +42,7 @@ public class TableNodeEntity extends DefaultMutableTreeNode implements Observer,
 	 * @param icon
 	 *            the customized icon
 	 */
-	public TableNodeEntity(Entity entity, DefaultTreeModel treeModel, JTree tree, ImageIcon icon)
+	public TableNodeEntity(TableEntity entity, DefaultTreeModel treeModel, JTree tree, ImageIcon icon)
 	{
 		super(entity.getName());
 

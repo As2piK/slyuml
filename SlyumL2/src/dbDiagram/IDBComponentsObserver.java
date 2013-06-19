@@ -1,7 +1,7 @@
 package dbDiagram;
 
 import abstractDiagram.AbstractIComponentsObserver;
-import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
 import dbDiagram.components.TableEntity;
 import dbDiagram.relationships.Binary;
 
@@ -34,7 +34,7 @@ public interface IDBComponentsObserver extends AbstractIComponentsObserver
 	 * @param index
 	 *            the index to move the entity.
 	 */
-	public void changeZOrder(Entity entity, int index);
+	public void changeZOrder(TableEntity entity, int index);
 
 	/**
 	 * Removes the given component and notify that this component has been

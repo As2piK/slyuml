@@ -114,7 +114,7 @@ public class NoteProperties extends GlobalPropreties
 				for (LineCommentary lc : list.getSelectedValuesList())
 					lc.delete();
 				
-				updateClassComponentInformations(null);
+				updateComponentInformations(null);
 				
 				SwingUtilities.invokeLater(new Runnable() {
 
@@ -137,7 +137,7 @@ public class NoteProperties extends GlobalPropreties
 	}
 
 	@Override
-	public void updateClassComponentInformations(UpdateMessage msg)
+	public void updateComponentInformations(UpdateMessage msg)
 	{
 		SwingUtilities.invokeLater(new Runnable() {
 			

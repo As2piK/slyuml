@@ -1,6 +1,6 @@
 package dbDiagram.relationships;
 
-import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
 
 /**
  * Represent a binary association in UML structure. A binary association can
@@ -27,7 +27,7 @@ public class Binary extends Association
 	 * @param directed
 	 *            true if the association is directed; false otherwise
 	 */
-	public Binary(Entity source, Entity target, boolean directed)
+	public Binary(TableEntity source, TableEntity target, boolean directed)
 	{
 		super();
 
@@ -57,7 +57,7 @@ public class Binary extends Association
 	 * @param id
 	 *            the id for this association
 	 */
-	public Binary(Entity source, Entity target, boolean directed, int id)
+	public Binary(TableEntity source, TableEntity target, boolean directed, int id)
 	{
 		super(id);
 

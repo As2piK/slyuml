@@ -353,7 +353,7 @@ public class HierarchicalView extends JPanelRounded implements IClassComponentsO
 	}
 
 	@Override
-	public void changeZOrder(dbDiagram.components.Entity entity, int index) {
+	public void changeZOrder(dbDiagram.components.TableEntity entity, int index) {
 		// TODO Auto-generated method stub
 		
 	}

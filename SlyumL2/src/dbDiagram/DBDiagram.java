@@ -9,7 +9,7 @@ import utility.Utility;
 import abstractDiagram.AbstractDiagram;
 import abstractDiagram.AbstractIComponentsObserver;
 import abstractDiagram.AbstractIDiagramComponent;
-import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
 import dbDiagram.components.TableEntity;
 import dbDiagram.relationships.Binary;
 
@@ -33,7 +33,7 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	}
 
 	LinkedList<IDBDiagramComponent> components = new LinkedList<>();
-	LinkedList<Entity> entities = new LinkedList<>();
+	LinkedList<TableEntity> entities = new LinkedList<>();
 	private String name;
 	LinkedList<IDBComponentsObserver> observers = new LinkedList<>();
 
@@ -99,7 +99,7 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	}
 
 	@Override
-	public void changeZOrder(Entity entity, int index)
+	public void changeZOrder(TableEntity entity, int index)
 	{
 		if (index < 0 || index >= entities.size())
 			return;
@@ -153,7 +153,7 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 
 		// Optimizes this (create more array for specific elements, not just an
 		// array for all components.
-		if (component instanceof Entity)
+		if (component instanceof TableEntity)
 			entities.remove(component);
 
 		for (final IDBComponentsObserver c : observers)

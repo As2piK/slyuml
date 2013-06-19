@@ -191,7 +191,7 @@ public class RelationPropreties extends GlobalPropreties
 	}
 
 	@Override
-	public void updateClassComponentInformations(UpdateMessage msg)
+	public void updateComponentInformations(UpdateMessage msg)
 	{
 		if (currentObject != null)
 			if (currentObject instanceof Association)

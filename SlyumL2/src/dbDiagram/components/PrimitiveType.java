@@ -7,6 +7,8 @@ package dbDiagram.components;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
+
+//TODO Types
 public class PrimitiveType extends Type
 {
 	public static final Type BOOLEAN_TYPE = new PrimitiveType("boolean");
@@ -16,8 +18,7 @@ public class PrimitiveType extends Type
 	public static final Type FLOAT_TYPE = new PrimitiveType("float");
 	public static final Type INTEGER_TYPE = new PrimitiveType("int");
 	public static final Type LONG_TYPE = new PrimitiveType("long");
-	public static final Type STRING_TYPE = new PrimitiveType("string");
-	public static final Type VOID_TYPE = new PrimitiveType("void");
+	public static final Type STRING_TYPE = new PrimitiveType("varchar");
 
 	/**
 	 * Create a new primitive type.

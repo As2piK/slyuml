@@ -15,6 +15,7 @@ public class Field extends Variable
 {	
 	private String defaultValue;
 	private String type; //TODO
+	private boolean isPK;
 
 	/**
 	 * Construct a new attribute.
@@ -136,6 +137,14 @@ public class Field extends Variable
 		notifyObservers();
 	}
 
+	public void setPK(boolean isPK) {
+		this.isPK = isPK;
+	}
+	
+	public boolean isPK() {
+		return isPK;
+	}
+	
 	@Override
 	public String toXML(int depth)
 	{

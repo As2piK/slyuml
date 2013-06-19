@@ -5,7 +5,7 @@ import java.util.Observable;
 import utility.Utility;
 import dbDiagram.DBDiagram;
 import dbDiagram.IDBDiagramComponent;
-import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
 import dbDiagram.components.Visibility;
 
 /**
@@ -21,7 +21,7 @@ public class Role extends Observable implements IDBDiagramComponent
 {
 	private Association associations;
 
-	private Entity entity;
+	private TableEntity entity;
 	protected final int id = DBDiagram.getNextId();
 	private final Multiplicity multiplicity;
 
@@ -40,7 +40,7 @@ public class Role extends Observable implements IDBDiagramComponent
 	 * @param name
 	 *            the name (label) for this association
 	 */
-	public Role(Association association, Entity component, String name)
+	public Role(Association association, TableEntity component, String name)
 	{
 		associations = association;
 		entity = component;
@@ -67,7 +67,7 @@ public class Role extends Observable implements IDBDiagramComponent
 	 * 
 	 * @return the entity for this role
 	 */
-	public Entity getEntity()
+	public TableEntity getEntity()
 	{
 		return entity;
 	}
@@ -132,7 +132,7 @@ public class Role extends Observable implements IDBDiagramComponent
 	 * @param entity
 	 *            the new entity for this role
 	 */
-	public void setEntity(Entity entity)
+	public void setEntity(TableEntity entity)
 	{
 		this.entity = entity;
 		setChanged();

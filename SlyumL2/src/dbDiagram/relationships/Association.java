@@ -8,7 +8,7 @@ import java.util.Observable;
 import utility.Utility;
 import dbDiagram.DBDiagram;
 import dbDiagram.IDBDiagramComponent;
-import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
 
 /**
  * This abstract class is the upper-class for all associations in UML structure.
@@ -126,7 +126,7 @@ public abstract class Association extends Observable implements IDBDiagramCompon
 	 *            the entity for find a role
 	 * @return the role corresponding to the entity, or null.
 	 */
-	public Role searchRoleByEntity(Entity entity)
+	public Role searchRoleByEntity(TableEntity entity)
 	{
 		for (final Role role : roles)
 

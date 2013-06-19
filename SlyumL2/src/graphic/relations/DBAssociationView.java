@@ -12,7 +12,7 @@ import java.awt.Point;
 
 import abstractDiagram.AbstractIDiagramComponent;
 import dbDiagram.IDBDiagramComponent.UpdateMessage;
-import dbDiagram.components.Entity;
+import dbDiagram.components.TableEntity;
 import dbDiagram.relationships.Association;
 import dbDiagram.relationships.Role;
 
@@ -70,9 +70,9 @@ public abstract class DBAssociationView extends RelationView
 
 			return false;
 
-		final Entity oldEntity = (Entity) oldCompo.getAssociedComponent();
+		final TableEntity oldEntity = (TableEntity) oldCompo.getAssociedComponent();
 		final Role role = association.searchRoleByEntity(oldEntity);
-		role.setEntity((Entity) newCompo.getAssociedComponent());
+		role.setEntity((TableEntity) newCompo.getAssociedComponent());
 
 		return super.relationChanged(oldCompo, newCompo);
 	}

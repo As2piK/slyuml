@@ -32,7 +32,7 @@ public class Variable extends AbstractVariable
 
 	protected final int id = DBDiagram.getNextId();
 	protected String name;
-	protected Type type = PrimitiveType.VOID_TYPE;
+	protected Type type = PrimitiveType.INTEGER_TYPE;
 
 	/**
 	 * Create a new variable with the given name and type.

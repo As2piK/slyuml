@@ -171,7 +171,7 @@ public class PropretiesChanger extends JScrollPane implements IClassComponentsOb
 
 	@Override
 	public void addTable(TableEntity component) {
-		component.addObserver(EntityPropreties.getInstance());
+		component.addObserver(TableProperties.getInstance());
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public class PropretiesChanger extends JScrollPane implements IClassComponentsOb
 	}
 
 	@Override
-	public void changeZOrder(dbDiagram.components.Entity entity, int index) {
+	public void changeZOrder(dbDiagram.components.TableEntity entity, int index) {
 		// Nothing to do...
 
 	}
