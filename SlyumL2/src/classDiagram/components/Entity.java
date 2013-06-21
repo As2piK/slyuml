@@ -1,12 +1,5 @@
 package classDiagram.components;
 
-import abstractDiagram.AbstractEntity;
-import change.BufferClass;
-import change.BufferCreationAttribute;
-import change.BufferCreationMethod;
-import change.BufferClassIndex;
-import change.Change;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +7,12 @@ import javax.swing.JOptionPane;
 
 import utility.SMessageDialog;
 import utility.Utility;
+import abstractDiagram.AbstractEntity;
+import change.BufferClass;
+import change.BufferClassIndex;
+import change.BufferCreationAttribute;
+import change.BufferCreationMethod;
+import change.Change;
 import classDiagram.relationships.Inheritance;
 import classDiagram.relationships.Role;
 

@@ -8,11 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import abstractDiagram.AbstractIDiagramComponent;
 import swing.Slyum;
 import utility.PersonalizedIcon;
+import abstractDiagram.IDiagramComponent;
 import classDiagram.IClassComponentsObserver;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
@@ -27,7 +26,6 @@ import classDiagram.relationships.InnerClass;
 import classDiagram.relationships.Multi;
 import classDiagram.relationships.Role;
 import dbDiagram.IDBComponentsObserver;
-import dbDiagram.IDBDiagramComponent;
 import dbDiagram.components.TableEntity;
 
 /**
@@ -165,11 +163,6 @@ public class PropretiesChanger extends JScrollPane implements IClassComponentsOb
 	}
 
 	@Override
-	public void removeComponent(AbstractIDiagramComponent component) {
-			// no components saving in this view
-	}
-
-	@Override
 	public void addTable(TableEntity component) {
 		component.addObserver(TableProperties.getInstance());
 	}
@@ -187,7 +180,7 @@ public class PropretiesChanger extends JScrollPane implements IClassComponentsOb
 	}
 
 	@Override
-	public void removeComponent(IDBDiagramComponent component) {
+	public void removeComponent(IDiagramComponent component) {
 			// no components saving in this view
 	}
 }

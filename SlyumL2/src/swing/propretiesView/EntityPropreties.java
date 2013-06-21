@@ -38,13 +38,12 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-import swing.SButton;
 import swing.JPanelRounded;
+import swing.SButton;
 import swing.Slyum;
-import swing.propretiesView.GlobalPropreties;
 import utility.PersonalizedIcon;
 import utility.Utility;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import classDiagram.components.Attribute;
 import classDiagram.components.Entity;
 import classDiagram.components.InterfaceEntity;
@@ -386,7 +385,7 @@ public class EntityPropreties extends GlobalPropreties
 
 			// Select the selected attribute
 			field.select();
-			field.notifyObservers(dbDiagram.IDBDiagramComponent.UpdateMessage.SELECT);
+			field.notifyObservers(UpdateMessage.SELECT);
 		}
 
 		@Override
@@ -442,7 +441,7 @@ public class EntityPropreties extends GlobalPropreties
 					break;
 			}
 
-			field.notifyObservers(dbDiagram.IDBDiagramComponent.UpdateMessage.SELECT);
+			field.notifyObservers(UpdateMessage.SELECT);
 			field.getType().notifyObservers();
 
 			fieldsTable.addRowSelectionInterval(row, row);
@@ -459,8 +458,8 @@ public class EntityPropreties extends GlobalPropreties
 				if (index == -1)
 					return;
 
-				if (arg1 != null && arg1 instanceof dbDiagram.IDBDiagramComponent.UpdateMessage)
-					switch ((dbDiagram.IDBDiagramComponent.UpdateMessage) arg1)
+				if (arg1 != null && arg1 instanceof UpdateMessage)
+					switch ((UpdateMessage) arg1)
 					{
 						case SELECT:
 							btnRemoveField.setEnabled(true);

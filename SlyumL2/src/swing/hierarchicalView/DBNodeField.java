@@ -11,8 +11,8 @@ import javax.swing.tree.TreePath;
 
 import swing.Slyum;
 import utility.PersonalizedIcon;
-import abstractDiagram.AbstractIDiagramComponent;
-import dbDiagram.IDBDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import dbDiagram.components.Field;
 
 /**
@@ -56,7 +56,7 @@ public class DBNodeField extends DefaultMutableTreeNode implements ICustomizedIc
 	}
 
 	@Override
-	public AbstractIDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return field;
 	}

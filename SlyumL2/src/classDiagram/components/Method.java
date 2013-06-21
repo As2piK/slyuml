@@ -1,19 +1,20 @@
 package classDiagram.components;
 
-import change.BufferMethod;
-import change.Change;
+import graphic.textbox.TextBoxMethod;
+
 import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
 import utility.SMessageDialog;
 import utility.Utility;
+import abstractDiagram.IDiagramComponent;
+import change.BufferMethod;
+import change.Change;
 import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.verifyName.MethodName;
 import classDiagram.verifyName.TypeName;
 import classDiagram.verifyName.VariableName;
-import graphic.textbox.TextBoxMethod;
 
 /**
  * Represent a method in UML structure.
@@ -21,7 +22,7 @@ import graphic.textbox.TextBoxMethod;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Method extends Observable implements IClassDiagramComponent, Observer
+public class Method extends Observable implements IDiagramComponent, Observer
 {
 	public static final String REGEX_SEMANTIC_METHOD = Variable.REGEX_SEMANTIC_ATTRIBUTE;
 	

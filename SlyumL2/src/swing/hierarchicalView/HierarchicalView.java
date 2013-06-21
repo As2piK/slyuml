@@ -25,10 +25,10 @@ import swing.PanelClassDiagram;
 import swing.Slyum;
 import swing.Slyum.DIAGRAM_TYPE;
 import utility.PersonalizedIcon;
-import abstractDiagram.AbstractIDiagramComponent;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import classDiagram.ClassDiagram;
 import classDiagram.IClassComponentsObserver;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
@@ -43,7 +43,6 @@ import classDiagram.relationships.InnerClass;
 import classDiagram.relationships.Multi;
 import dbDiagram.DBDiagram;
 import dbDiagram.IDBComponentsObserver;
-import dbDiagram.IDBDiagramComponent;
 import dbDiagram.components.TableEntity;
 
 /**
@@ -317,7 +316,7 @@ public class HierarchicalView extends JPanelRounded implements IClassComponentsO
 				// node ?
 				continue;
 
-			final AbstractIDiagramComponent component = ((IDiagramNode) o).getAssociedComponent();
+			final IDiagramComponent component = ((IDiagramNode) o).getAssociedComponent();
 			component.select();
 
 			if (e.isAddedPath(treePath))
@@ -329,7 +328,7 @@ public class HierarchicalView extends JPanelRounded implements IClassComponentsO
 	}
 
 	@Override
-	public void removeComponent(AbstractIDiagramComponent component) {
+	public void removeComponent(IDiagramComponent component) {
 		final IDiagramNode associedNode = searchAssociedNode(component);
 
 		if (associedNode != null)
@@ -354,12 +353,6 @@ public class HierarchicalView extends JPanelRounded implements IClassComponentsO
 
 	@Override
 	public void changeZOrder(dbDiagram.components.TableEntity entity, int index) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeComponent(IDBDiagramComponent component) {
 		// TODO Auto-generated method stub
 		
 	}

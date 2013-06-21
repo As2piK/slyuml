@@ -7,8 +7,7 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import abstractDiagram.AbstractIDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 
 /**
  * This is a JPanel that is notified when an UML component is selected. When
@@ -39,48 +38,28 @@ public abstract class GlobalPropreties extends JPanel implements Observer
 	@Override
 	public void update(Observable arg0, Object arg1)
 	{
-		
+
 		if (arg1 != null && arg1 instanceof UpdateMessage)
 			switch ((UpdateMessage) arg1)
 			{
-				case SELECT:
-					currentObject = arg0;
-					updateComponentInformations((UpdateMessage) arg1);
-					showInProperties();
-
-					break;
-				case UNSELECT:
-					if (arg0.equals(currentObject))
-						PropretiesChanger.getInstance().setViewportView(null);
-					updateComponentInformations((UpdateMessage) arg1);
-
-					break;
-				default:
-					updateComponentInformations((UpdateMessage) arg1);
-
-					break;
-			}
-		else if (arg1 != null && arg1 instanceof dbDiagram.IDBDiagramComponent.UpdateMessage)
-		switch ((dbDiagram.IDBDiagramComponent.UpdateMessage) arg1)
-		{
 			case SELECT:
 				currentObject = arg0;
-				updateComponentInformations(UpdateMessage.SELECT);
+				updateComponentInformations((UpdateMessage) arg1);
 				showInProperties();
 
 				break;
 			case UNSELECT:
 				if (arg0.equals(currentObject))
 					PropretiesChanger.getInstance().setViewportView(null);
-				updateComponentInformations(UpdateMessage.UNSELECT);
+				updateComponentInformations((UpdateMessage) arg1);
 
 				break;
 			default:
-				updateComponentInformations(UpdateMessage.UNSELECT);
+				updateComponentInformations((UpdateMessage) arg1);
 
 				break;
-		}
-	 else
+			}
+		else
 			updateComponentInformations(null);
 	}
 

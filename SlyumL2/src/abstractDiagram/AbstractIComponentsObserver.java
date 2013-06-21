@@ -12,5 +12,5 @@ package abstractDiagram;
  */
 public interface AbstractIComponentsObserver
 {
-	public void removeComponent(AbstractIDiagramComponent component);
+	public void removeComponent(IDiagramComponent component);
 }

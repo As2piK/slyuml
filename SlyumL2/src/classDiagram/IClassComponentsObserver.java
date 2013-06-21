@@ -1,7 +1,7 @@
 package classDiagram;
 
 import abstractDiagram.AbstractIComponentsObserver;
-import abstractDiagram.AbstractIDiagramComponent;
+import abstractDiagram.IDiagramComponent;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;

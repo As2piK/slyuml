@@ -10,11 +10,9 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import swing.Slyum;
-import swing.hierarchicalView.IDiagramNode;
-import swing.hierarchicalView.ICustomizedIconNode;
 import utility.PersonalizedIcon;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import classDiagram.components.Method;
 
 /**
@@ -58,7 +56,7 @@ public class NodeMethod extends DefaultMutableTreeNode implements Observer, IDia
 	}
 
 	@Override
-	public IClassDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return method;
 	}

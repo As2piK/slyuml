@@ -2,14 +2,10 @@ package dbDiagram;
 
 import java.util.LinkedList;
 
-import javax.swing.JOptionPane;
-
-import classDiagram.IClassComponentsObserver;
 import utility.Utility;
 import abstractDiagram.AbstractDiagram;
 import abstractDiagram.AbstractIComponentsObserver;
-import abstractDiagram.AbstractIDiagramComponent;
-import dbDiagram.components.TableEntity;
+import abstractDiagram.IDiagramComponent;
 import dbDiagram.components.TableEntity;
 import dbDiagram.relationships.Binary;
 
@@ -32,7 +28,7 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 		return ++currentID;
 	}
 
-	LinkedList<IDBDiagramComponent> components = new LinkedList<>();
+	LinkedList<IDiagramComponent> components = new LinkedList<>();
 	LinkedList<TableEntity> entities = new LinkedList<>();
 	private String name;
 	LinkedList<IDBComponentsObserver> observers = new LinkedList<>();
@@ -69,7 +65,7 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	 *            the new component.
 	 * @return true if the component has been added; false otherwise
 	 */
-	private boolean addComponent(IDBDiagramComponent component)
+	private boolean addComponent(IDiagramComponent component)
 	{
 		if (component.getId() > currentID)
 			setCurrentId(component.getId() + 1);
@@ -121,9 +117,9 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	 * @return a copy of the array containing all class diagram elements
 	 */
 	@SuppressWarnings("unchecked")
-	public LinkedList<IDBDiagramComponent> getComponents()
+	public LinkedList<IDiagramComponent> getComponents()
 	{
-		return (LinkedList<IDBDiagramComponent>) components.clone();
+		return (LinkedList<IDiagramComponent>) components.clone();
 	}
 
 	/**
@@ -147,7 +143,7 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	}
 
 	@Override
-	public void removeComponent(IDBDiagramComponent component)
+	public void removeComponent(IDiagramComponent component)
 	{
 		components.remove(component);
 
@@ -189,9 +185,9 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 	 * @return the component corresponding to the given id, or null if no
 	 *         component are found.
 	 */
-	public IDBDiagramComponent searchComponentById(int id)
+	public IDiagramComponent searchComponentById(int id)
 	{
-		for (final IDBDiagramComponent c : components)
+		for (final IDiagramComponent c : components)
 
 			if (c.getId() == id)
 
@@ -237,14 +233,9 @@ public class DBDiagram extends AbstractDiagram implements IDBComponentsObserver
 		String xml = tab + "<diagramElements>\n";
 
 		// write for each component its XML structure.
-		for (final IDBDiagramComponent component : components)
+		for (final IDiagramComponent component : components)
 			xml += component.toXML(depth + 1) + "\n";
 
 		return xml + tab + "</diagramElements>";
-	}
-
-	@Override
-	public void removeComponent(AbstractIDiagramComponent component) {
-		removeComponent((IDBDiagramComponent) component);
 	}
 }

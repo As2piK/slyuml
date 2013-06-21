@@ -5,8 +5,8 @@ import graphic.textbox.ILabelTitle;
 import java.util.Observable;
 
 import utility.Utility;
+import abstractDiagram.IDiagramComponent;
 import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.components.Entity;
 
 /**
@@ -15,7 +15,7 @@ import classDiagram.components.Entity;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Dependency extends Observable implements IClassDiagramComponent, ILabelTitle
+public class Dependency extends Observable implements IDiagramComponent, ILabelTitle
 {
 	protected final int id;
 

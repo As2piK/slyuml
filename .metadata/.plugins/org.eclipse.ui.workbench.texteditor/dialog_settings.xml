@@ -10,21 +10,22 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
 		<item value="false" key="isRegEx"/>
-		<item value="true" key="casesensitive"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="move" key="selection"/>
+		<item value="JCombo" key="selection"/>
 		<list key="findhistory">
-			<item value="move"/>
-			<item value="attribute"/>
-			<item value="Attribute"/>
-			<item value="New class"/>
-			<item value="swit"/>
-			<item value="currentObject = "/>
-			<item value="UpdateComponentInform"/>
-			<item value="msg"/>
+			<item value="JCombo"/>
+			<item value="pk"/>
+			<item value="editor"/>
+			<item value="PK"/>
+			<item value="Check"/>
+			<item value="JCheckBox"/>
+			<item value="JTable"/>
+			<item value="edit"/>
 		</list>
 		<list key="replacehistory">
+			<item value="IDiagramComponent"/>
 			<item value="field"/>
 			<item value="Field"/>
 			<item value=""/>

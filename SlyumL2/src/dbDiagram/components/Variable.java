@@ -1,16 +1,15 @@
 package dbDiagram.components;
 
-import java.util.Observable;
-
 import javax.swing.JOptionPane;
 
-import abstractDiagram.components.AbstractVariable;
 import utility.Utility;
-import change.BufferClassVariable;
+import abstractDiagram.components.AbstractVariable;
 import change.BufferDBVariable;
 import change.Change;
 import dbDiagram.DBDiagram;
-import dbDiagram.IDBDiagramComponent;
+import dbDiagram.components.dataType.AbstractDataType;
+import dbDiagram.components.dataType.AbstractDataType.DataType;
+import dbDiagram.components.dataType.IntDataType;
 import dbDiagram.verifyName.VariableName;
 
 /**
@@ -21,7 +20,7 @@ import dbDiagram.verifyName.VariableName;
  */
 public class Variable extends AbstractVariable
 {
-	public static final String REGEX_SEMANTIC_ATTRIBUTE = "[a-zA-Z_"+Type.accents+"][\\w_"+Type.accents+"]*";
+	public static final String REGEX_SEMANTIC_ATTRIBUTE = "[a-zA-Z_][\\w_]*";
 	
 	public static boolean checkSemantic(String name)
 	{
@@ -32,7 +31,7 @@ public class Variable extends AbstractVariable
 
 	protected final int id = DBDiagram.getNextId();
 	protected String name;
-	protected Type type = PrimitiveType.INTEGER_TYPE;
+	protected AbstractDataType type = new IntDataType();
 
 	/**
 	 * Create a new variable with the given name and type.
@@ -43,7 +42,7 @@ public class Variable extends AbstractVariable
 	 *            the type for the variable
 	 * @throws SyntaxeException 
 	 */
-	public Variable(String name, Type type)
+	public Variable(String name, AbstractDataType type)
 	{
 		boolean isBlocked = Change.isBlocked();
 		Change.setBlocked(true);
@@ -63,7 +62,7 @@ public class Variable extends AbstractVariable
 	public Variable(Variable variable)
 	{
 		this.name = variable.name;
-		this.type = new Type(variable.type.getName());
+		this.type = DataType.getNewDataTypeFromObject(variable.type);
 	}
 	
 	public void setVariable(Variable variable)
@@ -101,7 +100,7 @@ public class Variable extends AbstractVariable
 	 * 
 	 * @return the type for this variable.
 	 */
-	public Type getType()
+	public AbstractDataType getType()
 	{
 		setChanged();
 
@@ -140,7 +139,7 @@ public class Variable extends AbstractVariable
 	 * @param type
 	 *            the new type for this variable
 	 */
-	public void setType(Type type)
+	public void setType(AbstractDataType type)
 	{		
 		if (getType() != null && type.getName().equals(getType().getName()))
 			return;

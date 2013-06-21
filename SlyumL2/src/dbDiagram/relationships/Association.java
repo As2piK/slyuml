@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.Observable;
 
 import utility.Utility;
+import abstractDiagram.IDiagramComponent;
 import dbDiagram.DBDiagram;
-import dbDiagram.IDBDiagramComponent;
 import dbDiagram.components.TableEntity;
 
 /**
@@ -17,7 +17,7 @@ import dbDiagram.components.TableEntity;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public abstract class Association extends Observable implements IDBDiagramComponent, ILabelTitle
+public abstract class Association extends Observable implements IDiagramComponent, ILabelTitle
 {
 	protected boolean directed;
 

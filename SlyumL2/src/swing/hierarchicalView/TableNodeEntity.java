@@ -9,10 +9,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import dbDiagram.IDBDiagramComponent;
-import dbDiagram.IDBDiagramComponent.UpdateMessage;
-import dbDiagram.components.TableEntity;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import dbDiagram.components.Field;
+import dbDiagram.components.TableEntity;
 
 
 /**
@@ -63,7 +63,7 @@ public class TableNodeEntity extends DefaultMutableTreeNode implements Observer,
 	}
 
 	@Override
-	public IDBDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return entity;
 	}

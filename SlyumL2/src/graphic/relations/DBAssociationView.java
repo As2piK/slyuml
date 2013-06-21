@@ -10,8 +10,8 @@ import graphic.textbox.TextBoxLabelTitle;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
-import abstractDiagram.AbstractIDiagramComponent;
-import dbDiagram.IDBDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import dbDiagram.components.TableEntity;
 import dbDiagram.relationships.Association;
 import dbDiagram.relationships.Role;
@@ -49,7 +49,7 @@ public abstract class DBAssociationView extends RelationView
 	}
 
 	@Override
-	public AbstractIDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return association;
 	}

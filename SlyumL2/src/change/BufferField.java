@@ -4,7 +4,7 @@
  */
 package change;
 
-import dbDiagram.IDBDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import dbDiagram.components.Field;
 
 /**
@@ -26,7 +26,7 @@ public class BufferField extends BufferDBVariable
 	public void restore()
 	{
 		super.restore();
-		attribute.setAttribute(copy);
+		attribute.setField(copy);
 		
 		attribute.select();
 		attribute.notifyObservers(UpdateMessage.SELECT);

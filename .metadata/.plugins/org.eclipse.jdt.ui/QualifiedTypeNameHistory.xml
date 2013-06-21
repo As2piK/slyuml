@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="classDiagram.components.Variable"/>
-<fullyQualifiedTypeName name="dbDiagram.components.Visibility"/>
-<fullyQualifiedTypeName name="abstractDiagram.components.AbstractVariable"/>
-<fullyQualifiedTypeName name="graphic.entity.ClassEntityView"/>
-<fullyQualifiedTypeName name="classDiagram.IClassDiagramComponent"/>
-<fullyQualifiedTypeName name="graphic.factory.CreateTableComponent"/>
-<fullyQualifiedTypeName name="graphic.factory.CreateGenericComponent"/>
-<fullyQualifiedTypeName name="swing.hierarchicalView.DBNodeAssociation"/>
-<fullyQualifiedTypeName name="swing.hierarchicalView.DBNodeAttribute"/>
-<fullyQualifiedTypeName name="swing.PanelDBDiagram"/>
 <fullyQualifiedTypeName name="swing.ClassSPanelFileComponent"/>
 <fullyQualifiedTypeName name="swing.PanelDiagram"/>
 <fullyQualifiedTypeName name="graphic.entity.AbstractEntityView"/>
@@ -34,7 +24,6 @@
 <fullyQualifiedTypeName name="dbDiagram.IDBDiagramComponent"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="abstractDiagram.AbstractIComponentsObserver"/>
-<fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="dbDiagram.IDBComponentsObserver"/>
 <fullyQualifiedTypeName name="classDiagram.IDiagramComponent"/>
 <fullyQualifiedTypeName name="swing.Slyum.DIAGRAM_TYPE"/>
@@ -46,7 +35,6 @@
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
 <fullyQualifiedTypeName name="graphic.entity.EntityView"/>
-<fullyQualifiedTypeName name="dbDiagram.components.Field"/>
 <fullyQualifiedTypeName name="abstractDiagram.AbstractIDiagramComponent"/>
 <fullyQualifiedTypeName name="classDiagram.components.Entity"/>
 <fullyQualifiedTypeName name="swing.propretiesView.EntityPropreties.FieldTableModel"/>
@@ -60,4 +48,16 @@
 <fullyQualifiedTypeName name="abstractDiagram.AbstractEntity"/>
 <fullyQualifiedTypeName name="swing.XMLParser.EntityType"/>
 <fullyQualifiedTypeName name="swing.propretiesView.TableProperties"/>
+<fullyQualifiedTypeName name="abstractDiagram.IDiagramComponent"/>
+<fullyQualifiedTypeName name="abstractDiagram.IDiagramComponent.UpdateMessage"/>
+<fullyQualifiedTypeName name="dbDiagram.components.Field"/>
+<fullyQualifiedTypeName name="dbDiagram.components.dataType.VarcharDataType"/>
+<fullyQualifiedTypeName name="dbDiagram.components.dataType.IntDataType"/>
+<fullyQualifiedTypeName name="javax.swing.table.TableColumn"/>
+<fullyQualifiedTypeName name="swing.propretiesView.TableProperties.FieldTableModel"/>
+<fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+<fullyQualifiedTypeName name="javax.swing.DefaultCellEditor"/>
+<fullyQualifiedTypeName name="dbDiagram.components.dataType.AbstractDataType"/>
+<fullyQualifiedTypeName name="dbDiagram.components.dataType.AbstractDataType.DataType"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
 </qualifiedTypeNameHistroy>

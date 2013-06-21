@@ -6,10 +6,10 @@ import graphic.relations.LineCommentary;
 import graphic.relations.LineView;
 import graphic.relations.MultiLineView;
 import graphic.relations.RelationGrip;
+import graphic.textbox.ClassTextBoxRole;
 import graphic.textbox.TextBox;
 import graphic.textbox.TextBoxCommentary;
 import graphic.textbox.TextBoxLabel;
-import graphic.textbox.ClassTextBoxRole;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -20,11 +20,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import abstractDiagram.AbstractIDiagramComponent;
 import utility.SDialogProjectLoading;
 import utility.SMessageDialog;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.Attribute;
 import classDiagram.components.ClassEntity;
@@ -767,7 +766,7 @@ public class XMLParser extends DefaultHandler
 		// Generals bounds
 		for (final GraphicComponent g : graphicView.getAllComponents())
 		{
-			final AbstractIDiagramComponent component = g.getAssociedComponent();
+			final IDiagramComponent component = g.getAssociedComponent();
 
 			if (component != null)
 			{
@@ -784,7 +783,7 @@ public class XMLParser extends DefaultHandler
 		// Associations
 		for (final LineView l : graphicView.getLinesView())
 		{
-			final AbstractIDiagramComponent component = l.getAssociedComponent();
+			final IDiagramComponent component = l.getAssociedComponent();
 
 			if (component != null)
 			{
@@ -831,7 +830,7 @@ public class XMLParser extends DefaultHandler
 		// Multi-association
 		for (final graphic.relations.MultiView mv : graphicView.getMultiView())
 		{
-			final IClassDiagramComponent component = mv.getAssociedComponent();
+			final IDiagramComponent component = mv.getAssociedComponent();
 
 			if (component != null)
 			{

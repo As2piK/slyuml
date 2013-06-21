@@ -9,9 +9,9 @@ import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Entity;
 import classDiagram.relationships.Dependency;
 
@@ -114,7 +114,7 @@ public class DependencyView extends RelationView
 	}
 
 	@Override
-	public IClassDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return dependency;
 	}

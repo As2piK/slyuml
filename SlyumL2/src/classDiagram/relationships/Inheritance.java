@@ -5,8 +5,8 @@ import java.util.Observable;
 import swing.OverridesAndImplementationsDialog;
 import utility.SMessageDialog;
 import utility.Utility;
+import abstractDiagram.IDiagramComponent;
 import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
 import classDiagram.components.InterfaceEntity;
@@ -20,7 +20,7 @@ import classDiagram.components.Method;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Inheritance extends Observable implements IClassDiagramComponent
+public class Inheritance extends Observable implements IDiagramComponent
 {
 	public static boolean validate(Entity child, Entity parent)
 	{

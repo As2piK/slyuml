@@ -23,7 +23,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -38,19 +37,17 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-import classDiagram.IClassDiagramComponent.UpdateMessage;
-import classDiagram.components.Entity;
-import swing.SButton;
 import swing.JPanelRounded;
+import swing.SButton;
 import swing.Slyum;
-import swing.propretiesView.GlobalPropreties;
 import utility.PersonalizedIcon;
 import utility.Utility;
-import dbDiagram.components.TableEntity;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
+import classDiagram.verifyName.TypeName;
 import dbDiagram.components.Field;
-import dbDiagram.components.PrimitiveType;
-import dbDiagram.components.Type;
-import dbDiagram.verifyName.TypeName;
+import dbDiagram.components.TableEntity;
+import dbDiagram.components.dataType.AbstractDataType;
+import dbDiagram.components.dataType.AbstractDataType.DataType;
 
 /**
  * Show the propreties of an UML entity with Swing components. All inner classes
@@ -65,7 +62,7 @@ public class TableProperties extends GlobalPropreties
 	{
 		private static final long serialVersionUID = 5735895585153401565L;
 
-		private final String[] columnNames = { "Name", "Type", "PK" };
+		private final String[] columnNames = { "Name", "Type", "Size", "Default", "PK", "Nullable" };
 
 		private final LinkedList<Object[]> data = new LinkedList<Object[]>();
 
@@ -73,7 +70,7 @@ public class TableProperties extends GlobalPropreties
 
 		public void addField(Field field)
 		{
-			data.add(new Object[] { field.getName(), field.getType(), field.isPK() });
+			data.add(new Object[] { field.getName(), field.getType(), field.getType().getSize(), field.getType().getDefaultValue(), field.isPK(), field.isNullable() });
 
 			field.addObserver(this);
 			mapIndex.put(field, data.size() - 1);
@@ -91,6 +88,9 @@ public class TableProperties extends GlobalPropreties
 		@Override
 		public Class<? extends Object> getColumnClass(int c)
 		{
+			if (getValueAt(0, c) == null) {
+				System.out.println(c);
+			}
 			return getValueAt(0, c).getClass();
 		}
 
@@ -127,7 +127,7 @@ public class TableProperties extends GlobalPropreties
 		@Override
 		public boolean isCellEditable(int row, int col)
 		{
-			return !(col == 0); //TODO 
+			return true;
 		}
 
 		@Override
@@ -170,6 +170,7 @@ public class TableProperties extends GlobalPropreties
 			field.notifyObservers(UpdateMessage.SELECT);
 		}
 
+		
 		@Override
 		public void mouseReleased(MouseEvent e)
 		{
@@ -177,7 +178,7 @@ public class TableProperties extends GlobalPropreties
 
 		public void setField(Field field, int index)
 		{
-			data.set(index, new Object[] { field.getName(), field.getType().getName(), field.isPK() });
+			data.set(index, new Object[] { field.getName(), field.getType().getName(), field.getType().getSize(), field.getType().getDefaultValue(), field.isPK(), field.isNullable() });
 
 			fireTableRowsUpdated(index, index);
 		}
@@ -202,7 +203,7 @@ public class TableProperties extends GlobalPropreties
 			final TableModel model = (TableModel) e.getSource();
 			final Object data = model.getValueAt(row, column);
 			final Field field = Utility.getKeysByValue(mapIndex, row).iterator().next();
-
+			
 			switch (column)
 			{
 				case 0: // nom
@@ -213,17 +214,26 @@ public class TableProperties extends GlobalPropreties
 					break;
 
 				case 1: // type
-					String s = (String) data;
+					String s = ((AbstractDataType) data).toString();
 					
-					if (!TypeName.getInstance().verifyName(s))
-						setValueAt(field.getType().getName(), row, column); //TODO Type
-					else
-						field.setType(new Type(s));
+					field.setType(DataType.getNewDataTypeObjectFromDataType(DataType.getDataTypeFromName(s)));
 
 					break;
 
-				case 2: // PK
+				case 2 : // Size
+					field.getType().setSize((Integer)data);
+					break;
+					
+				case 3 : // DefaultValue
+					field.getType().setDefaultValue(data);
+					break;
+					
+				case 4: // PK
 					field.setPK((Boolean) data);
+					break;
+					
+				case 5: // Nullable
+					field.setNullable((Boolean) data);
 					break;
 			}
 
@@ -304,7 +314,7 @@ public class TableProperties extends GlobalPropreties
 			btnRemoveField,
 			btnUpField,
 			btnDownField;
-
+	
 	private final JLabel imgNoField, imgNoMethod, imgMethodSelected,
 			imgNoParameter;
 
@@ -358,7 +368,15 @@ public class TableProperties extends GlobalPropreties
 				column.setPreferredWidth(20);
 			else
 				column.setPreferredWidth(10);
-
+			
+			if (i == 1) {
+				JComboBox<AbstractDataType> typeBox = new JComboBox<AbstractDataType>();
+				for (DataType t : DataType.values()) {
+					typeBox.addItem(DataType.getNewDataTypeObjectFromDataType(t));
+				}
+				column.setCellEditor(new DefaultCellEditor(typeBox));
+			}
+			
 		}
 
 		JPanelRounded p = new JPanelRounded();
@@ -419,8 +437,8 @@ public class TableProperties extends GlobalPropreties
 				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
-					((TableEntity) currentObject).addField(new Field("field", PrimitiveType.INTEGER_TYPE));
-					//((Entity) currentObject).notifyObservers(UpdateMessage.ADD_);
+					((TableEntity) currentObject).addField(new Field("field", DataType.getNewDataTypeObjectFromDataType(DataType.INT)));
+					((TableEntity) currentObject).notifyObservers(UpdateMessage.ADD_FIELD);
 				}
 			});
 
@@ -628,9 +646,6 @@ public class TableProperties extends GlobalPropreties
 						entity.notifyObservers();
 	
 			textName.setText(entity.getName());
-			//checkBoxAbstract.setSelected(entity.isAbstract());
-			//checkBoxAbstract.setEnabled(currentObject.getClass() != InterfaceEntity.class);
-			//comboBox.setSelectedItem(entity.getVisibility().getName()); //TODO Selection //TODO supprimer les checkbox
 	
 			modelFields.clearAll();
 	

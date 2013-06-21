@@ -1,6 +1,6 @@
 package change;
 
-import dbDiagram.IDBDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import dbDiagram.components.Field;
 import dbDiagram.components.TableEntity;
 

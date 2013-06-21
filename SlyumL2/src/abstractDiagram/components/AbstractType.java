@@ -1,15 +1,8 @@
 package abstractDiagram.components;
 
-import change.Change;
-
-import java.util.LinkedList;
 import java.util.Observable;
 
-import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.components.Type;
-import classDiagram.verifyName.TypeName;
-import dbDiagram.IDBDiagramComponent;
+import abstractDiagram.IDiagramComponent;
 
 /**
  * Represent a type in UML structure.
@@ -17,10 +10,10 @@ import dbDiagram.IDBDiagramComponent;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public abstract class AbstractType extends Observable implements IClassDiagramComponent, IDBDiagramComponent
+public abstract class AbstractType extends Observable implements IDiagramComponent
 {
 
-	protected String name = "void";
+	protected String name = "";
 	
 	public abstract String getName();
 	

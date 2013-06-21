@@ -1,15 +1,11 @@
 package classDiagram.components;
 
+import java.util.LinkedList;
+
 import abstractDiagram.components.AbstractType;
 import change.Change;
-
-import java.util.LinkedList;
-import java.util.Observable;
-
 import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.verifyName.TypeName;
-import dbDiagram.IDBDiagramComponent;
 
 /**
  * Represent a type in UML structure.

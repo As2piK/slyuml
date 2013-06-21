@@ -1,15 +1,12 @@
 package swing.propretiesView;
 
-import classDiagram.IClassDiagramComponent.UpdateMessage;
 import graphic.GraphicComponent;
 import graphic.relations.LineCommentary;
 import graphic.relations.LineView;
 
-import java.awt.GridBagLayout;
-import javax.swing.JList;
-
 import java.awt.Color;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,19 +16,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
+import javax.swing.BoxLayout;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import swing.JPanelRounded;
 import swing.SButton;
 import swing.Slyum;
 import utility.PersonalizedIcon;
-import javax.swing.border.EmptyBorder;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import swing.JPanelRounded;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 
 public class NoteProperties extends GlobalPropreties
 {

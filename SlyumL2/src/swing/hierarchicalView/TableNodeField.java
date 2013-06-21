@@ -9,11 +9,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import dbDiagram.IDBDiagramComponent.UpdateMessage;
-import dbDiagram.components.Field;
-import abstractDiagram.AbstractIDiagramComponent;
 import swing.Slyum;
 import utility.PersonalizedIcon;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
+import dbDiagram.components.Field;
 
 /**
  * A JTree node associated with an attribute UML.
@@ -56,7 +56,7 @@ public class TableNodeField extends DefaultMutableTreeNode implements ICustomize
 	}
 
 	@Override
-	public AbstractIDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return field;
 	}

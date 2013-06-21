@@ -3,7 +3,9 @@ package dbDiagram.components;
 import utility.Utility;
 import change.BufferField;
 import change.Change;
-import dbDiagram.verifyName.TypeName;
+import dbDiagram.components.dataType.AbstractDataType;
+import dbDiagram.components.dataType.AbstractDataType.DataType;
+import dbDiagram.components.dataType.IntDataType;
 
 /**
  * Represent an attribute in UML structure.
@@ -14,8 +16,9 @@ import dbDiagram.verifyName.TypeName;
 public class Field extends Variable
 {	
 	private String defaultValue;
-	private String type; //TODO
+	private AbstractDataType type; //TODO
 	private boolean isPK;
+	private boolean isNullable;
 
 	/**
 	 * Construct a new attribute.
@@ -25,7 +28,7 @@ public class Field extends Variable
 	 * @param type
 	 *            the type of the attribute.
 	 */
-	public Field(String name, Type type)
+	public Field(String name, AbstractDataType type)
 	{
 		super(name, type);
 
@@ -43,26 +46,28 @@ public class Field extends Variable
 	 */
 	public Field(Field field)
 	{
-		super(field.getName(), new Type(field.getType().getName()));
+		super(field.getName(), new IntDataType());
 		
 		boolean isBlocked = Change.isBlocked();
 		Change.setBlocked(true);
 		
 		name = field.name;
-		type = "test";
+		type = DataType.getNewDataTypeFromObject(field.getType());
 		defaultValue = field.defaultValue;
 		
 		Change.setBlocked(isBlocked);
 	}
 	
-	public void setAttribute(Field attribute)
+	public void setField(Field field)
 	{
 		boolean isRecord = Change.isRecord();
 		Change.record();
 		
-		setName(attribute.getName());
-		setType(new Type(attribute.getType().getName()));
-		setDefaultValue(attribute.getDefaultValue());
+		setName(field.getName());
+		
+		setType(DataType.getNewDataTypeFromObject(field.getType()));
+		
+		setDefaultValue(field.getDefaultValue());
 		
 		if(!isRecord)
 			Change.stopRecord();
@@ -101,35 +106,20 @@ public class Field extends Variable
 	 * @param text
 	 *            the text representing an UML Attribute
 	 */
-	public void setText(String text)
+	public void setText(String text)	//TODO Check for adding type in name
 	{
 		if (text.length() == 0)
 			return;
 
-		String newName;
-		Type type = getType();
+		AbstractDataType type = getType();
 		text = text.trim();
-		Visibility newVisibility = Visibility.getVisibility(text.charAt(0));
 
-		final String[] subString = text.split(":");
-
-		newName = subString[0].trim();
-
-		if (subString.length == 2)
-		{
-			subString[1] = subString[1].trim();
-			
-			if (!TypeName.getInstance().verifyName(subString[1]))
-				return;
-			
-			type = new Type(subString[1]);
-		}
 		
 		boolean isRecord = Change.isRecord();
 		Change.record();
 		
 		setType(type);
-		setName(newName);
+		setName(text);
 		
 		if(!isRecord)
 			Change.stopRecord();
@@ -143,6 +133,14 @@ public class Field extends Variable
 	
 	public boolean isPK() {
 		return isPK;
+	}
+	
+	public void setNullable(boolean isNullable) {
+		this.isNullable = isNullable;
+	}
+	
+	public boolean isNullable() {
+		return isNullable;
 	}
 	
 	@Override
@@ -165,7 +163,7 @@ public class Field extends Variable
 	}
 	
 	//TODO
-	public Type getType() {
+	public AbstractDataType getType() {
 		return super.type;
 	}
 }

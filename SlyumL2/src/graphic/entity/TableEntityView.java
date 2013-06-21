@@ -36,13 +36,12 @@ import swing.Slyum;
 import utility.PersonalizedIcon;
 import utility.SMessageDialog;
 import utility.Utility;
-import abstractDiagram.AbstractIDiagramComponent;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import change.BufferBounds;
 import change.Change;
-import dbDiagram.IDBDiagramComponent;
-import dbDiagram.IDBDiagramComponent.UpdateMessage;
-import dbDiagram.components.TableEntity;
 import dbDiagram.components.Field;
+import dbDiagram.components.TableEntity;
 
 /**
  * Represent the view of an entity in UML structure.
@@ -471,7 +470,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	}
 
 	@Override
-	public IDBDiagramComponent getAssociedComponent() //TODO
+	public IDiagramComponent getAssociedComponent() //TODO
 	{
 		return component;
 	}
@@ -505,7 +504,7 @@ public abstract class TableEntityView extends AbstractEntityView
 
 		if (textBox != null)
 		{
-			final AbstractIDiagramComponent idc = textBox.getAssociedComponent();
+			final IDiagramComponent idc = textBox.getAssociedComponent();
 			
 			if (idc != null)
 			{
@@ -898,7 +897,7 @@ public abstract class TableEntityView extends AbstractEntityView
 	{
 		boolean enable = false;
 		if (arg1 != null && arg1.getClass() == UpdateMessage.class)
-			switch ((dbDiagram.IDBDiagramComponent.UpdateMessage) arg1)
+			switch ((UpdateMessage) arg1)
 			{
 				case SELECT:
 					super.setSelected(true);

@@ -2,12 +2,10 @@ package graphic;
 
 import graphic.entity.AbstractEntityView;
 import graphic.entity.AssociationClassView;
-import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
+import graphic.entity.ClassView;
 import graphic.entity.InterfaceView;
-import graphic.factory.CreateClassComponent;
 import graphic.factory.CreateGenericComponent;
-import graphic.factory.CreateDBComponent;
 import graphic.factory.MultiFactory;
 import graphic.relations.AggregationView;
 import graphic.relations.ClassBinaryView;
@@ -58,27 +56,22 @@ import javax.swing.SwingUtilities;
 
 import swing.IListenerComponentSelectionChanged;
 import swing.PanelClassDiagram;
-import swing.PanelClassDiagram;
 import swing.PropertyLoader;
 import swing.SColorChooser;
 import swing.SPanelElement;
 import swing.SPanelStyleComponent;
 import swing.SPanelZOrder;
 import swing.Slyum;
-import swing.Slyum.DIAGRAM_TYPE;
-import swing.propretiesView.PropretiesChanger;
 import utility.PersonalizedIcon;
 import utility.SMessageDialog;
 import utility.SizedCursor;
 import utility.Utility;
-import abstractDiagram.AbstractDiagram;
-import abstractDiagram.AbstractIDiagramComponent;
+import abstractDiagram.IDiagramComponent;
 import change.BufferBounds;
 import change.BufferColor;
 import change.Change;
 import classDiagram.ClassDiagram;
 import classDiagram.IClassComponentsObserver;
-import classDiagram.IClassDiagramComponent;
 import classDiagram.components.AssociationClass;
 import classDiagram.components.ClassEntity;
 import classDiagram.components.Entity;
@@ -2457,7 +2450,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 	}
 
 	@Override
-	public void removeComponent(AbstractIDiagramComponent component) {
+	public void removeComponent(IDiagramComponent component) {
 		final GraphicComponent g = searchAssociedComponent(component);
 
 		if (g != null)

@@ -9,8 +9,8 @@ import graphic.textbox.TextBoxLabelTitle;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import classDiagram.components.Entity;
 import classDiagram.relationships.Association;
 import classDiagram.relationships.Role;
@@ -47,7 +47,7 @@ public abstract class ClassAssociationView extends RelationView
 	}
 
 	@Override
-	public IClassDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return association;
 	}

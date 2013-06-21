@@ -4,7 +4,7 @@
  */
 package change;
 
-import classDiagram.IClassDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import classDiagram.components.Attribute;
 
 /**

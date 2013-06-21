@@ -18,16 +18,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
 
-import abstractDiagram.AbstractIDiagramComponent;
 import swing.PanelClassDiagram;
-import swing.PanelClassDiagram;
+import swing.SColorChooser;
 import swing.SPanelDiagramComponent;
 import swing.Slyum;
-import swing.SColorChooser;
 import utility.PersonalizedIcon;
+import abstractDiagram.IDiagramComponent;
 import change.BufferCreation;
 import change.Change;
-import classDiagram.IClassDiagramComponent;
 
 /**
  * Represent a graphic component in Slyum. Graphics components can't be draw
@@ -151,7 +149,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 		parent.removeComponent(this);
 
 		// Search and remove the UML associated component.
-		final AbstractIDiagramComponent associed = getAssociedComponent();
+		final IDiagramComponent associed = getAssociedComponent();
 		
 		if (associed != null)
 			parent.getClassDiagram().removeComponent(associed);
@@ -184,7 +182,7 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 	 * 
 	 * @return
 	 */
-	public AbstractIDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return null;
 	}

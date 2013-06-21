@@ -2,8 +2,8 @@ package graphic.relations;
 
 import graphic.GraphicView;
 import graphic.MovableComponent;
-import graphic.entity.ClassView;
 import graphic.entity.ClassEntityView;
+import graphic.entity.ClassView;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -21,9 +21,9 @@ import java.util.Observer;
 import javax.swing.JMenuItem;
 
 import utility.Utility;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import classDiagram.ClassDiagram;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.relationships.Binary;
 import classDiagram.relationships.Multi;
 import classDiagram.relationships.Role;
@@ -180,7 +180,7 @@ public class MultiView extends MovableComponent implements Observer
 	}
 
 	@Override
-	public IClassDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return multi;
 	}

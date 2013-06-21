@@ -38,11 +38,10 @@ import swing.Slyum;
 import utility.PersonalizedIcon;
 import utility.SMessageDialog;
 import utility.Utility;
-import abstractDiagram.AbstractIDiagramComponent;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import change.BufferBounds;
 import change.Change;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
 import classDiagram.components.Attribute;
 import classDiagram.components.Entity;
 import classDiagram.components.Method;
@@ -574,7 +573,7 @@ public abstract class ClassEntityView extends AbstractEntityView
 	}
 
 	@Override
-	public IClassDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return component;
 	}
@@ -608,7 +607,7 @@ public abstract class ClassEntityView extends AbstractEntityView
 
 		if (textBox != null)
 		{
-			final AbstractIDiagramComponent idc = textBox.getAssociedComponent();
+			final IDiagramComponent idc = textBox.getAssociedComponent();
 
 			if (idc != null)
 			{

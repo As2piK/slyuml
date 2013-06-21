@@ -4,8 +4,8 @@ import java.util.Observable;
 
 import utility.SMessageDialog;
 import utility.Utility;
+import abstractDiagram.IDiagramComponent;
 import dbDiagram.DBDiagram;
-import dbDiagram.IDBDiagramComponent;
 import dbDiagram.components.TableEntity;
 
 /**
@@ -16,7 +16,7 @@ import dbDiagram.components.TableEntity;
  * @author David Miserez
  * @version 1.0 - 24.07.2011
  */
-public class Inheritance extends Observable implements IDBDiagramComponent
+public class Inheritance extends Observable implements IDiagramComponent
 {
 	public static boolean validate(TableEntity child, TableEntity parent)
 	{

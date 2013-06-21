@@ -8,7 +8,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 
-import dbDiagram.IDBDiagramComponent;
+import abstractDiagram.IDiagramComponent;
 import dbDiagram.relationships.Role;
 
 
@@ -132,7 +132,7 @@ public class DBTextBoxRole extends TextBoxLabel
 	}
 
 	@Override
-	public IDBDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return role;
 	}

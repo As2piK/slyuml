@@ -21,16 +21,15 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JMenuItem;
 
-import abstractDiagram.AbstractIDiagramComponent;
 import swing.EditCommentaryDialog;
 import swing.Slyum;
 import swing.propretiesView.NoteProperties;
 import utility.PersonalizedIcon;
 import utility.Utility;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
 import change.BufferNote;
 import change.Change;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
 
 /**
  * A TextBoxCommentary is not a subclass of TextBox becauseit is not on signle
@@ -414,7 +413,7 @@ public class TextBoxCommentary extends MovableComponent
 
 		for (final LineView lv : parent.getLinesViewAssociedWith(this))
 		{
-			AbstractIDiagramComponent associedComponent = lv.getLastPoint().getAssociedComponentView().getAssociedComponent();
+			IDiagramComponent associedComponent = lv.getLastPoint().getAssociedComponentView().getAssociedComponent();
 			int id = -1;
 
 			if (associedComponent != null)

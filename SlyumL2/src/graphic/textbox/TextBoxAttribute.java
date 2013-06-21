@@ -9,12 +9,12 @@ import java.text.AttributedString;
 import java.util.Observable;
 import java.util.Observer;
 
-import abstractDiagram.AbstractIDiagramComponent;
-import abstractDiagram.components.AbstractVariable;
 import utility.Utility;
-import classDiagram.IClassDiagramComponent;
-import classDiagram.IClassDiagramComponent.UpdateMessage;
+import abstractDiagram.IDiagramComponent;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
+import abstractDiagram.components.AbstractVariable;
 import classDiagram.components.Attribute;
+import dbDiagram.components.Field;
 
 /**
  * A TextBox is a graphic component from Slyum containing a String. The
@@ -42,9 +42,10 @@ public class TextBoxAttribute extends TextBox implements Observer
 		if (variable instanceof Attribute) {
 			final String isConst = ((Attribute)variable).isConstant() ? " {const}" : "";
 			return ((Attribute)variable).getVisibility().toCar() + " " + ((Attribute)variable).getName() + " : " + ((Attribute)variable).getType() + isConst;
-		} else {
-			return "875"; //TODO
+		} else if (variable instanceof Field){
+			return ((Field)variable).getName() + " : " + ((Field)variable).getType();
 		}
+		return "null";
 	}
 
 	private final AbstractVariable variable;
@@ -75,7 +76,7 @@ public class TextBoxAttribute extends TextBox implements Observer
 	}
 
 	@Override
-	public AbstractIDiagramComponent getAssociedComponent()
+	public IDiagramComponent getAssociedComponent()
 	{
 		return variable;
 	}

@@ -9,8 +9,14 @@ import java.util.Observer;
  * @version 1.0 - 24.07.2011
  * 
  */
-public interface AbstractIDiagramComponent
+public interface IDiagramComponent
 {
+
+	public enum UpdateMessage
+	{
+		ADD_ATTRIBUTE, ADD_METHOD, ADD_ATTRIBUTE_NO_EDIT, ADD_METHOD_NO_EDIT, ADD_FIELD, ADD_FIELD_NO_EDIT, MODIF, SELECT, UNSELECT
+	};
+	
 	public void addObserver(Observer o);
 	public void deleteObserver(Observer o);
 	public int countObservers();

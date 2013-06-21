@@ -1,7 +1,7 @@
 package dbDiagram;
 
 import abstractDiagram.AbstractIComponentsObserver;
-import dbDiagram.components.TableEntity;
+import abstractDiagram.IDiagramComponent;
 import dbDiagram.components.TableEntity;
 import dbDiagram.relationships.Binary;
 
@@ -43,5 +43,5 @@ public interface IDBComponentsObserver extends AbstractIComponentsObserver
 	 * @param component
 	 *            the component to remove.
 	 */
-	public void removeComponent(IDBDiagramComponent component);
+	public void removeComponent(IDiagramComponent component);
 }
