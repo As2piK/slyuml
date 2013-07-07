@@ -71,7 +71,7 @@ public class TableProperties extends GlobalPropreties
 		public void addField(Field field)
 		{
 			data.add(new Object[] { field.getName(), field.getType(), field.getType().getSize(), field.getType().getDefaultValue(), field.isPK(), field.isNullable() });
-
+			
 			field.addObserver(this);
 			mapIndex.put(field, data.size() - 1);
 
@@ -230,6 +230,17 @@ public class TableProperties extends GlobalPropreties
 					
 				case 4: // PK
 					field.setPK((Boolean) data);
+					if (currentObject instanceof TableEntity) {
+						if ((Boolean) data) {
+							((TableEntity)currentObject).getPrimaryKey().addField(field);
+						} else {
+							((TableEntity)currentObject).getPrimaryKey().removeField(field);
+						}
+					}
+					
+					System.out.println(
+							((TableEntity)currentObject).getPrimaryKey().getFields().size());
+					
 					break;
 					
 				case 5: // Nullable
@@ -310,12 +321,13 @@ public class TableProperties extends GlobalPropreties
 
 	JTable fieldsTable;
 	
-	private final JButton btnAddField,
+	private final JButton 
+			//btnAddField,
 			btnRemoveField,
 			btnUpField,
 			btnDownField;
 	
-	private final JLabel imgNoField, imgNoMethod, imgMethodSelected,
+	private final JLabel imgNoField, 
 			imgNoParameter;
 
 	JPanel panelParameters;
@@ -334,16 +346,12 @@ public class TableProperties extends GlobalPropreties
 		btnRemoveField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_red_delete" + small), Color.RED, "Remove");
 		btnUpField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_violet_up" + small), Color.MAGENTA, "Up");
 		btnDownField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_violet_down" + small), Color.MAGENTA, "Down");
-		btnAddField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_plus_blue" + small), Color.BLUE, "Add");
+		//btnAddField = new SButton(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "button_plus_blue" + small), Color.BLUE, "Add");
 		
 		imgNoField = new JLabel(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "empty_field.png"));
-		imgNoMethod = new JLabel(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "empty_method.png"));
-		imgMethodSelected = new JLabel(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "select_method.png"));
 		imgNoParameter = new JLabel(PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "empty_parameter.png"));
 
-		imgNoMethod.setAlignmentX(CENTER_ALIGNMENT);
 		imgNoField.setAlignmentX(CENTER_ALIGNMENT);
-		imgMethodSelected.setAlignmentX(CENTER_ALIGNMENT);
 		imgNoParameter.setAlignmentX(CENTER_ALIGNMENT);
 
 		imgNoParameter.setVisible(false);

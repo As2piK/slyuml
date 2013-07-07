@@ -1,0 +1,16 @@
+package dbDiagram.components;
+
+import java.util.LinkedList;
+
+import dbDiagram.components.dataType.AbstractDataType;
+
+public class PrimaryKey {
+
+	private String pkName;
+	private LinkedList<Field> fields;
+
+	public PrimaryKey(String pkName)
+		this.pkName = pkName;
+	}
+
+}

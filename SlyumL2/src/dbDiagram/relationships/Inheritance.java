@@ -24,9 +24,6 @@ public class Inheritance extends Observable implements IDiagramComponent
 
 		valide &= child != parent;
 
-		for (final TableEntity e : child.getAllChilds())
-			valide &= !parent.equals(e);
-
 		if (!valide)
 			SMessageDialog.showErrorMessage("Error in hierarchical class structure.\nImpossible to create inheritance association.");
 
@@ -45,37 +42,11 @@ public class Inheritance extends Observable implements IDiagramComponent
 	 * @param parent
 	 * the parent entity
 	 */
-	public Inheritance(TableEntity child, TableEntity parent)
+	public Inheritance(TableEntity parent)
 	{
 		init(child, parent);
 
 		id = DBDiagram.getNextId();
-	}
-
-	/**
-	 * Create a new inheritance with the given entities child and parent. Don't
-	 * generate a new id and use this given in parameter.
-	 *
-	 * @param child
-	 * the child entity
-	 * @param parent
-	 * the parent entity
-	 */
-	public Inheritance(TableEntity child, TableEntity parent, int id)
-	{
-		init(child, parent);
-
-		this.id = id;
-	}
-
-	/**
-	 * Get the child for this inheritance.
-	 *
-	 * @return the child for this inheritance
-	 */
-	public TableEntity getChild()
-	{
-		return child;
 	}
 
 	@Override
@@ -145,12 +116,6 @@ public class Inheritance extends Observable implements IDiagramComponent
 
 	public void showOverridesAndImplementations()
 	{
-	}
-
-	@Override
-	public String toString()
-	{
-		return getChild().getName() + " - " + getParent().getName();
 	}
 
 

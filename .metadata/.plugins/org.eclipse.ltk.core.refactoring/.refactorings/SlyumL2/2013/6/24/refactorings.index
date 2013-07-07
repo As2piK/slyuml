@@ -1,0 +1,29 @@
+1370953269016	Rename method 'getDBDiagram'
+1370953273587	Rename field 'dbDiagram'
+1370953427416	Rename type 'PropretiesChanger'
+1370953432630	Copy compilation unit
+1370954075108	Rename type 'ClassPropretiesChanger'
+1370954077530	Delete element
+1370955212438	Rename type 'ClassHierarchicalView'
+1370955318376	Copy compilation unit
+1370955362876	Rename local variable 'a'
+1370955385243	Copy compilation unit
+1370955405147	Rename field 'attribute'
+1370955411206	Rename local variable 'attribute'
+1370955848765	Delete element
+1370955908807	Rename local variable 'classDiagram'
+1370962748024	Rename field 'diagram'
+1370962840968	Rename method 'getDiagram'
+1370962955080	Rename field 'diagram'
+1370963067835	Rename local variable 'diagram'
+1370963134921	Rename method 'getDiagram'
+1370963348436	Rename field 'root'
+1370963434766	Rename local variable 'diagram'
+1370978808320	Rename local variable 'attribute'
+1370978934973	Rename local variable 'attribute'
+1370978963388	Rename local variable 'attribute'
+1370981671430	Rename local variable 'modelAttributes'
+1370981687272	Rename local variable 'attributes'
+1370982609479	Rename method 'updateComponentInformations'
+1371022359566	Rename local variable 'attributes'
+1371022426931	Rename local variable 'modelAttributes'

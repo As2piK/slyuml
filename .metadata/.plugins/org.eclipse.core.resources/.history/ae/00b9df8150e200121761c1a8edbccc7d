@@ -1,0 +1,17 @@
+package dbDiagram.components;
+
+import java.util.LinkedList;
+
+import dbDiagram.components.dataType.AbstractDataType;
+
+public class PrimaryKey {
+
+	private String fkName;
+	private LinkedList<Field> fields;
+
+	public ForeignKey(String name, String fkName, AbstractDataType type)
+	{	super(name, type);
+		this.fkName = fkName;
+	}
+
+}

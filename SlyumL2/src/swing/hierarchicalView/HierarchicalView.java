@@ -127,6 +127,7 @@ public class HierarchicalView extends JPanelRounded implements IClassComponentsO
 		add(scrollPane);
 
 		classDiagram.addComponentsObserver(this);
+		dbDiagram.addComponentsObserver(this);
 
 		setMinimumSize(new Dimension(150, 200));
 		switchVisibleNodes();
@@ -340,15 +341,12 @@ public class HierarchicalView extends JPanelRounded implements IClassComponentsO
 
 	@Override
 	public void addTable(TableEntity component) {
-		
-		addNode(new TableNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class16.png")), entitiesNode);
-		
+		addNode(new TableNodeEntity(component, treeModel, tree, PersonalizedIcon.createImageIcon(Slyum.ICON_PATH + "class16.png")), tableNode);
 	}
 
 	@Override
 	public void addBinary(dbDiagram.relationships.Binary binary) {
-		// TODO Auto-generated method stub
-		
+		addNode(new DBNodeAssociation(binary, treeModel, PersonalizedIcon.createImageIcon("resources/icon/aggregation16.png"), tree), relationNode);
 	}
 
 	@Override

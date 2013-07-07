@@ -1,0 +1,245 @@
+package swing.propretiesView;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.SystemColor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.LinkedList;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import swing.JPanelRounded;
+import swing.Slyum;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
+import dbDiagram.components.Field;
+import dbDiagram.relationships.Binary;
+
+/**
+ * Show the propreties of an UML entity with Swing components. All inner classes
+ * are used for create customized JTable.
+ * 
+ * @author David Miserez
+ * @version 1.0 - 28.07.2011
+ */
+public class DBEntityPropreties extends GlobalPropreties
+{
+	
+	private static DBEntityPropreties instance = new DBEntityPropreties();
+
+	private static final long serialVersionUID = 7817631106855232540L;
+
+	/**
+	 * Get the unique instance of this class.
+	 * 
+	 * @return the unique instance of EntityPropreties
+	 */
+	public static DBEntityPropreties getInstance()
+	{
+		return instance;
+	}
+
+	/**
+	 * Set the given size for preferredSize, maximumSize and minimumSize to the
+	 * given component.
+	 * 
+	 * @param component
+	 *            the component to resize
+	 * @param size
+	 *            the size
+	 */
+	public static void setAllSize(JComponent component, Dimension size)
+	{
+		component.setPreferredSize(size);
+		component.setMaximumSize(size);
+		component.setMinimumSize(size);
+	}
+
+	JTextField textName = new JTextField();
+
+	protected DBEntityPropreties()
+	{
+		String small = ".png";
+		
+		if (Slyum.getSmallIcons())
+			small = "_small.png";
+			
+		setBackground(Color.WHITE);
+		
+		JPanelRounded p = new JPanelRounded();
+		p.setForeground(Color.GRAY);
+		p.setBackground(new Color(240, 240, 240));
+		p.setAlignmentY(TOP_ALIGNMENT);
+		p.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
+		{
+			final GridBagLayout gbl_panel = new GridBagLayout();
+			gbl_panel.columnWidths = new int[] { 0, 0 };
+			gbl_panel.rowHeights = new int[] { 0, 0 };
+			gbl_panel.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+			gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+			p.setLayout(gbl_panel);
+		}
+
+		p.setMaximumSize(new Dimension(0, Integer.MAX_VALUE));
+
+		{
+			final GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+			gbc_btnNewButton.anchor = GridBagConstraints.NORTH;
+			gbc_btnNewButton.gridx = 0;
+			gbc_btnNewButton.gridy = 0;
+			p.add(createEntityPropreties(), gbc_btnNewButton);
+		}
+
+		add(p);
+
+		p = new JPanelRounded();
+		p.setForeground(Color.GRAY);
+		p.setBackground(new Color(240, 240, 240));
+		p.setAlignmentY(TOP_ALIGNMENT);
+		p.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
+		p.setLayout(new BorderLayout());
+		JPanel panel = createWhitePanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
+
+		JPanel panelButton = new JPanel();
+		panelButton.setOpaque(false);
+		panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.PAGE_AXIS));
+
+
+		p.add(panel, BorderLayout.CENTER);
+		p.add(panelButton, BorderLayout.EAST);
+		add(p);
+
+		p = new JPanelRounded();
+		p.setForeground(Color.GRAY);
+		p.setBackground(new Color(240, 240, 240));
+		p.setAlignmentY(TOP_ALIGNMENT);
+		p.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
+		p.setLayout(new BorderLayout());
+		panel = createWhitePanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
+		panel.add(createTitleLabel("Methods"));
+
+		panelButton = new JPanel();
+		panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.PAGE_AXIS));
+		panelButton.setOpaque(false);
+
+		p.add(panel, BorderLayout.CENTER);
+		p.add(panelButton, BorderLayout.EAST);
+		add(p);
+
+		final JPanel btnPanel = new JPanel();
+		btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.LINE_AXIS));
+		
+	}
+
+	public JPanel createEntityPropreties()
+	{
+		final JPanel panel = new JPanel();
+		Dimension size = new Dimension(200, 110);
+		setAllSize(panel, size);
+		panel.setOpaque(false);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		panel.setAlignmentY(TOP_ALIGNMENT);
+		panel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
+
+		final JPanel panelTitle = new JPanel(new FlowLayout());
+		panelTitle.setOpaque(false);
+		panelTitle.add(createTitleLabel("Entity"));
+
+		size = new Dimension(200, 20);
+		setAllSize(panelTitle, new Dimension((int) size.getWidth(), 40));
+		setAllSize(textName, size);
+
+		panelTitle.setAlignmentX(LEFT_ALIGNMENT);
+		textName.setAlignmentX(LEFT_ALIGNMENT);
+
+		// Event
+		textName.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyTyped(KeyEvent e)
+			{
+				if (e.getKeyChar() == '\n')
+				{
+					final Binary entity = (Binary) currentObject;
+
+					entity.setName(textName.getText());
+					entity.notifyObservers();
+				}
+			}
+		});
+
+
+		panel.add(panelTitle);
+		panel.add(textName);
+
+		return panel;
+	}	
+
+	public JLabel createTitleLabel(String text)
+	{
+		final JLabel label = new JLabel(text);
+		label.setFont(label.getFont().deriveFont(20.0f));
+		label.setAlignmentX(CENTER_ALIGNMENT);
+
+		return label;
+	}
+
+	public JPanel createWhitePanel()
+	{
+		final JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.control);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		panel.setAlignmentY(TOP_ALIGNMENT);
+		panel.setOpaque(false);
+		return panel;
+	}
+
+	@Override
+	public void updateComponentInformations(UpdateMessage msg)
+	{
+
+		if (currentObject == null)
+			return;
+
+		if (currentObject instanceof Binary) {
+		
+			final Binary entity = (Binary) currentObject;
+	
+			if (msg != null && msg.equals(UpdateMessage.UNSELECT))
+				if (!entity.getName().equals(textName.getText()))
+					entity.setName(textName.getText());
+					entity.notifyObservers();
+	
+			textName.setText(entity.getName());
+			
+			validate();
+		} else if (currentObject instanceof dbDiagram.components.TableEntity) {
+		
+			final dbDiagram.components.TableEntity entity = (dbDiagram.components.TableEntity) currentObject;
+
+			final LinkedList<Field> field = entity.getFields();
+	
+			if (msg != null && msg.equals(UpdateMessage.UNSELECT))
+				if (!entity.getName().equals(textName.getText()))
+					if (!entity.setName(textName.getText()))
+						textName.setText(entity.getName());
+					else
+						entity.notifyObservers();
+	
+			textName.setText(entity.getName());
+	
+			validate();
+		}
+	}
+}

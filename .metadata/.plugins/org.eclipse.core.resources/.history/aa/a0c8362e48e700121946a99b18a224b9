@@ -1,0 +1,15 @@
+package dbDiagram.components;
+
+import dbDiagram.components.dataType.AbstractDataType;
+
+public class ForeignKey  extends Field {
+
+	private String fkName;
+	
+
+	public ForeignKey(String name, String fkName, AbstractDataType type)
+	{	super(name, type);
+		this.fkName = fkName;
+	}
+
+}

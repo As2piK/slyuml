@@ -1,5 +1,6 @@
 package dbDiagram.relationships;
 
+import dbDiagram.components.ForeignKey;
 import dbDiagram.components.TableEntity;
 
 /**
@@ -11,6 +12,11 @@ import dbDiagram.components.TableEntity;
  */
 public class Binary extends Association
 {
+	
+	private TableEntity source;
+	private TableEntity target;
+	private ForeignKey fk;
+	
 	/**
 	 * Create a new binary association between the entity source and target. Two
 	 * news
@@ -36,8 +42,10 @@ public class Binary extends Association
 		new Role(this, target, "");
 
 		this.directed = directed;
+		this.source = source;
+		this.target = target;
 	}
-
+	
 	/**
 	 * Create a new binary association between the entity source and target. Two
 	 * news
@@ -72,5 +80,20 @@ public class Binary extends Association
 	public String getAssociationType()
 	{
 		return swing.XMLParser.Aggregation.NONE.toString();
+	}
+	
+	public TableEntity getSource() {
+		return source;
+	}
+	public TableEntity getTarget() {
+		return target;
+	}
+	
+	public ForeignKey getFk() {
+		return fk;
+	}
+	
+	public void setFk(ForeignKey fk) {
+		this.fk = fk;
 	}
 }

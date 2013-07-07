@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import swing.Slyum;
+import swing.Slyum.DIAGRAM_TYPE;
 import utility.PersonalizedIcon;
 import abstractDiagram.IDiagramComponent;
 import classDiagram.IClassComponentsObserver;
@@ -169,8 +170,7 @@ public class PropretiesChanger extends JScrollPane implements IClassComponentsOb
 
 	@Override
 	public void addBinary(dbDiagram.relationships.Binary binary) {
-		binary.addObserver(EntityPropreties.getInstance());
-		
+		binary.addObserver(DBEntityPropreties.getInstance());
 	}
 
 	@Override

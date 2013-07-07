@@ -2,6 +2,7 @@ package graphic.textbox;
 
 import graphic.GraphicView;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.font.TextAttribute;
@@ -62,6 +63,12 @@ public class TextBoxAttribute extends TextBox implements Observer
 	{
 		super(parent, getStringFromAttribute(variable));
 
+		if (variable instanceof Field) {
+			if (((Field)variable).isPK()) {
+				//setFont(getFont().deriveFont(Font.BOLD)); TODO Underlined
+			}
+		}
+		
 		if (variable == null)
 			throw new IllegalArgumentException("attribute is null");
 

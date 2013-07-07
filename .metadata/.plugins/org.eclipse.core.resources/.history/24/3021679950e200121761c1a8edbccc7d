@@ -1,0 +1,5 @@
+package dbDiagram.components;
+
+public class ExternalKey {
+
+}

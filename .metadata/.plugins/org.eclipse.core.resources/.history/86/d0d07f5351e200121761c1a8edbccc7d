@@ -1,0 +1,13 @@
+package dbDiagram.components;
+
+import java.util.LinkedList;
+
+public class PrimaryKey extends ExternalKey {
+
+	private LinkedList<Field> fields;
+
+	public PrimaryKey(String pkName) {
+		super(pkName);
+	}
+
+}

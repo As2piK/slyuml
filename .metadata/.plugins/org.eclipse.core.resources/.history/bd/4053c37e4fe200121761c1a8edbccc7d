@@ -1,0 +1,12 @@
+package dbDiagram.components;
+
+public class ForeignKey  extends Field {
+
+	private String fkName;
+	
+	public ForeignKey(String fkName, Field field) {
+		super(field);
+		this.fkName = fkName;
+	}
+
+}

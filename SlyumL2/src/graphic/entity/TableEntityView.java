@@ -289,7 +289,7 @@ public abstract class TableEntityView extends AbstractEntityView
 			if (SMessageDialog.showQuestionMessageYesNo("Are you sur to delete this component and all its associated components?") == JOptionPane.NO_OPTION)
 
 				return;
-
+			
 			if (pressedTextBox != null)
 
 				removeTextBox(pressedTextBox);

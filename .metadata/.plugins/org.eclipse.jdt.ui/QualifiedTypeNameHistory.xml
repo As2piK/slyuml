@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="swing.ClassSPanelFileComponent"/>
-<fullyQualifiedTypeName name="swing.PanelDiagram"/>
-<fullyQualifiedTypeName name="graphic.entity.AbstractEntityView"/>
-<fullyQualifiedTypeName name="graphic.entity.TableEntityView"/>
-<fullyQualifiedTypeName name="graphic.textbox.TextBoxMultiplicity"/>
-<fullyQualifiedTypeName name="dbDiagram.relationships.Multiplicity"/>
-<fullyQualifiedTypeName name="dbDiagram.relationships.Role"/>
 <fullyQualifiedTypeName name="dbDiagram.relationships.Association"/>
 <fullyQualifiedTypeName name="graphic.textbox.DBTextBoxMultiplicity"/>
 <fullyQualifiedTypeName name="graphic.textbox.DBTextBoxRole"/>
@@ -24,7 +17,6 @@
 <fullyQualifiedTypeName name="dbDiagram.IDBDiagramComponent"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="abstractDiagram.AbstractIComponentsObserver"/>
-<fullyQualifiedTypeName name="dbDiagram.IDBComponentsObserver"/>
 <fullyQualifiedTypeName name="classDiagram.IDiagramComponent"/>
 <fullyQualifiedTypeName name="swing.Slyum.DIAGRAM_TYPE"/>
 <fullyQualifiedTypeName name="swing.Slyum"/>
@@ -50,9 +42,7 @@
 <fullyQualifiedTypeName name="swing.propretiesView.TableProperties"/>
 <fullyQualifiedTypeName name="abstractDiagram.IDiagramComponent"/>
 <fullyQualifiedTypeName name="abstractDiagram.IDiagramComponent.UpdateMessage"/>
-<fullyQualifiedTypeName name="dbDiagram.components.Field"/>
 <fullyQualifiedTypeName name="dbDiagram.components.dataType.VarcharDataType"/>
-<fullyQualifiedTypeName name="dbDiagram.components.dataType.IntDataType"/>
 <fullyQualifiedTypeName name="javax.swing.table.TableColumn"/>
 <fullyQualifiedTypeName name="swing.propretiesView.TableProperties.FieldTableModel"/>
 <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
@@ -60,4 +50,14 @@
 <fullyQualifiedTypeName name="dbDiagram.components.dataType.AbstractDataType"/>
 <fullyQualifiedTypeName name="dbDiagram.components.dataType.AbstractDataType.DataType"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="dbDiagram.components.dataType.IntDataType"/>
+<fullyQualifiedTypeName name="dbDiagram.IDBComponentsObserver"/>
+<fullyQualifiedTypeName name="graphic.entity.TableView"/>
+<fullyQualifiedTypeName name="swing.hierarchicalView.DBNodeAssociation"/>
+<fullyQualifiedTypeName name="dbDiagram.components.ForeignKey"/>
+<fullyQualifiedTypeName name="dbDiagram.components.Field"/>
+<fullyQualifiedTypeName name="dbDiagram.components.ExternalKey"/>
+<fullyQualifiedTypeName name="dbDiagram.components.PrimaryKey"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
 </qualifiedTypeNameHistroy>

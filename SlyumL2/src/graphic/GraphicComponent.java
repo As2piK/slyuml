@@ -151,8 +151,9 @@ public abstract class GraphicComponent extends Observable implements ActionListe
 		// Search and remove the UML associated component.
 		final IDiagramComponent associed = getAssociedComponent();
 		
-		if (associed != null)
+		if (associed != null) {
 			parent.getClassDiagram().removeComponent(associed);
+		}
 		
 		// Search and delete all lines (relations, associations, etc...)
 		// associated with this component.

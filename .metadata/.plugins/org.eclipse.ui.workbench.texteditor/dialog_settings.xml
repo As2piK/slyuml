@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="JCombo" key="selection"/>
+		<item value="AddFi" key="selection"/>
 		<list key="findhistory">
-			<item value="JCombo"/>
+			<item value="add"/>
+			<item value="addfi"/>
+			<item value="addb"/>
 			<item value="pk"/>
-			<item value="editor"/>
-			<item value="PK"/>
-			<item value="Check"/>
-			<item value="JCheckBox"/>
-			<item value="JTable"/>
-			<item value="edit"/>
+			<item value="TableEnt"/>
+			<item value="setPK"/>
+			<item value="getname"/>
+			<item value="getName"/>
 		</list>
 		<list key="replacehistory">
 			<item value="IDiagramComponent"/>

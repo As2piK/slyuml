@@ -5,6 +5,8 @@ import graphic.entity.AssociationClassView;
 import graphic.entity.ClassEntityView;
 import graphic.entity.ClassView;
 import graphic.entity.InterfaceView;
+import graphic.entity.TableView;
+import graphic.factory.BinaryDBRelationFactory;
 import graphic.factory.CreateGenericComponent;
 import graphic.factory.MultiFactory;
 import graphic.relations.AggregationView;
@@ -85,6 +87,8 @@ import classDiagram.relationships.InnerClass;
 import classDiagram.relationships.Multi;
 import classDiagram.relationships.Role;
 import dbDiagram.DBDiagram;
+import dbDiagram.IDBComponentsObserver;
+import dbDiagram.components.TableEntity;
 
 /**
  * This class is the main container for all diagrams components view
@@ -96,7 +100,7 @@ import dbDiagram.DBDiagram;
  * @version 1.0 - 25.07.2011
  */
 @SuppressWarnings("serial")
-public class GraphicView extends GraphicComponent implements MouseMotionListener, MouseListener, IClassComponentsObserver, Printable, KeyListener, MouseWheelListener
+public class GraphicView extends GraphicComponent implements MouseMotionListener, MouseListener, IClassComponentsObserver, IDBComponentsObserver, Printable, KeyListener, MouseWheelListener
 {
 	public final static boolean BACKGROUND_GRADIENT = true;
 	public final static boolean CTRL_FOR_GRIP = false;
@@ -499,6 +503,7 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		saveComponentMouseHover = this;
 
 		classDiagram.addComponentsObserver(this);
+		dbDiagram.addComponentsObserver(this);
 
 		setColor(getBasicColor());
 
@@ -1600,9 +1605,11 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		boolean isRecord = Change.isRecord();
 		Change.record();
 
-		for (final GraphicComponent c : selected)
+		for (final GraphicComponent c : selected) {
 
 			c.delete();
+			
+		}
 		
 		if (!isRecord)
 			Change.stopRecord();
@@ -2456,5 +2463,26 @@ public class GraphicView extends GraphicComponent implements MouseMotionListener
 		if (g != null)
 
 			removeComponent(g);
+	}
+
+	@Override
+	public void addTable(TableEntity component) {
+
+		final GraphicComponent result = searchAssociedComponent(component);
+
+		if (result == null)
+			addComponentIn(new TableView(this, component), entities);
+	}
+
+	@Override
+	public void addBinary(dbDiagram.relationships.Binary binary) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeZOrder(TableEntity entity, int index) {
+		// TODO Auto-generated method stub
+		
 	}
 }

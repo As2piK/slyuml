@@ -1,0 +1,7 @@
+package dbDiagram.components;
+
+public abstract class ExternalKey {
+
+	protected String name;
+	
+}

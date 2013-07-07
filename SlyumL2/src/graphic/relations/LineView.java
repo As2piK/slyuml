@@ -78,6 +78,8 @@ public abstract class LineView extends GraphicComponent
 	
 	private boolean acceptGripCreation = false;
 	
+	private GraphicComponent source, target;
+	
 	private BufferBounds[] bb = new BufferBounds[2];
 
 	// More ratio is bigger, more the line near horizontal / vertical degree
@@ -102,6 +104,9 @@ public abstract class LineView extends GraphicComponent
 		if (target == null)
 			throw new IllegalArgumentException("target is null");
 
+		this.source = source;
+		this.target = target;
+		
 		final boolean isBlocked = Change.isBlocked();
 		Change.setBlocked(true);
 		
@@ -867,4 +872,12 @@ public abstract class LineView extends GraphicComponent
 				points.get(i + 1).setAnchor(new Point(anchor2.x, anchor1.y));
 		}
 	}
+	
+	public GraphicComponent getSource() {
+		return source;
+	}
+	public GraphicComponent getTarget() {
+		return target;
+	}
+
 }

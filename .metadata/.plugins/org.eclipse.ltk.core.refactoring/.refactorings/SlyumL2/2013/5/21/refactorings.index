@@ -1,0 +1,109 @@
+1369135130694	Rename field 'KEY_NEW_PROJECT'
+1369135186023	Rename field 'ACTION_NEW_PROJECT'
+1369135299822	Rename field 'ACTION_CLASS_DIAGRAM'
+1369135304930	Rename field 'ACTION_DATABASE_DIAGRAM'
+1369135380087	Copy compilation unit
+1369135666070	Rename type 'CURRENT_DIAGRAM'
+1369135949691	Copy compilation units
+1369135956669	Rename type 'ClassDiagram'
+1369135971619	Rename type 'IComponentsObserver'
+1369135977512	Rename type 'IDiagramComponent'
+1369135986905	Rename type 'IComponentsObserver'
+1369135992010	Rename type 'IDiagramComponent'
+1369136023868	Copy package
+1369136046214	Copy package
+1369136055911	Copy package
+1369136587805	Rename type 'BufferVariable'
+1369136594228	Rename type 'ClassBufferVariable'
+1369136601777	Copy compilation unit
+1369136653968	Copy compilation unit
+1369136719922	Copy compilation unit
+1369136790181	Copy compilation unit
+1369136794717	Rename type 'BufferIndex'
+1369136874336	Copy compilation unit
+1369138348001	Copy compilation unit
+1369138425579	Rename type 'ClassEntity'
+1369138477423	Rename local variable 'classEntity'
+1369138537640	Copy compilation unit
+1369138599471	Rename type 'CreateComponent'
+1369138616683	Copy compilation unit
+1369138645263	Rename field 'classDiagram'
+1369138740548	Copy compilation unit
+1369138756783	Rename type 'ClassDiagram'
+1369138792695	Copy compilation unit
+1369138803500	Rename type 'IClassComponentsObserver'
+1369138884373	Delete element
+1369138918769	Rename field 'classDiagram'
+1369138929698	Rename type 'ClassDiagram'
+1369138935844	Rename local variable 'classDiagram'
+1369138988079	Copy compilation unit
+1369139001210	Rename type 'IClassComponentsObserver'
+1369139120577	Rename type 'AbstractDiagram'
+1369139364599	Rename method 'getClassDiagram'
+1369139707927	Rename type 'EntityView'
+1369139718155	Copy compilation unit
+1369140031645	Copy compilation unit
+1369140039073	Rename type 'Entity'
+1369140043585	Copy compilation unit
+1369140049956	Rename type 'Type'
+1369140106107	Delete element
+1369140107098	Delete element
+1369140109402	Delete element
+1369140174819	Copy compilation unit
+1369140181889	Rename type 'Entity'
+1369140571473	Rename type 'Attribute'
+1369140584855	Rename local variable 'attribute'
+1369140618025	Rename method 'addAttribute'
+1369140622071	Rename local variable 'attribute'
+1369140634327	Rename local variable 'attribute'
+1369140803737	Copy compilation unit
+1369140960526	Rename method 'getAttributes'
+1369140964312	Rename field 'attributes'
+1369140969146	Rename local variable 'a'
+1369140983642	Rename method 'addAttribute'
+1369140988869	Rename local variable 'attribute'
+1369141110776	Rename field 'attribute'
+1369141344404	Rename local variable 'attribute'
+1369141371556	Rename method 'removeAttribute'
+1369141429862	Rename enum constant 'ADD_ATTRIBUTE_NO_EDIT'
+1369141434489	Rename enum constant 'ADD_ATTRIBUTE'
+1369141576925	Copy compilation unit
+1369141586816	Delete element
+1369141624557	Copy compilation unit
+1369141629679	Rename type 'IClassDiagramComponent'
+1369142234178	Rename method 'addClass'
+1369226428163	Copy compilation unit
+1369226435142	Rename type 'Type'
+1369226858145	Rename local variable 'attribute'
+1369228080151	Rename type 'EntityFactory'
+1369228094216	Copy compilation unit
+1369228113188	Copy compilation unit
+1369228117388	Rename type 'ComponentFactory'
+1369229321307	Rename method 'initNewComponent'
+1369229355338	Copy compilation unit
+1369229434264	Rename method 'initNewClassComponent'
+1369234296791	Rename field 'classDiagram'
+1369234316060	Rename method 'getClassDiagram'
+1369234326914	Rename type 'HierarchicalView'
+1369234333648	Copy compilation unit
+1369236181478	Rename local variable 'classDiagram'
+1369236224398	Rename type 'NodeAssociation'
+1369236230875	Copy compilation unit
+1369236256471	Rename type 'IClassDiagramNode'
+1369236344696	Rename type 'NodeEntity'
+1369236350017	Copy compilation unit
+1369236418544	Rename type 'NodeAttribute'
+1369236424902	Copy compilation unit
+1369236447535	Rename field 'attribute'
+1369236457163	Rename local variable 'attribute'
+1369237136401	Copy compilation unit
+1369237193987	Rename local variable 'a'
+1369238461861	Rename type 'DBNodeAttribute'
+1369238514596	Rename type 'HierarchicalDBView'
+1369238522800	Rename type 'HierarchicalClassView'
+1369238877886	Copy compilation unit
+1369238890501	Rename type 'SPanelFileComponent'
+1369239541183	Rename local variable 'dbDiagram'
+1369239564899	Delete element
+1369239570824	Rename type 'PanelDBDiagram'
+1369239846586	Rename type 'PanelDiagram'

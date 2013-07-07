@@ -86,6 +86,7 @@ public class ClassDiagram extends AbstractDiagram implements IClassComponentsObs
 	@Override
 	public void addClass(ClassEntity component)
 	{
+
 		for (final AbstractIComponentsObserver c : observers) {
 
 			((IClassComponentsObserver)c).addClass(component);

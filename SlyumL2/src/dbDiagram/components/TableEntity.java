@@ -1,18 +1,16 @@
 package dbDiagram.components;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import swing.XMLParser.EntityType;
-import utility.SMessageDialog;
 import utility.Utility;
 import abstractDiagram.AbstractEntity;
 import change.BufferCreationField;
 import change.BufferDB;
-import change.BufferDBIndex;
 import change.Change;
+import dbDiagram.relationships.Binary;
 import dbDiagram.relationships.Inheritance;
 import dbDiagram.relationships.Role;
 
@@ -25,6 +23,7 @@ import dbDiagram.relationships.Role;
  */
 public class TableEntity extends AbstractEntity
 {	
+	protected PrimaryKey primaryKey = new PrimaryKey("pk");
 	protected LinkedList<Field> fields = new LinkedList<>();
 	protected List<Inheritance> childs = new LinkedList<>();
 	protected List<Inheritance> parents = new LinkedList<>();
@@ -55,17 +54,31 @@ public class TableEntity extends AbstractEntity
 	 *            the new attribute.
 	 */
 	public void addField(Field field)
-  {
-    if (field == null)
-      throw new IllegalArgumentException("field is null");
+	{
+		if (field == null)
+			throw new IllegalArgumentException("field is null");
 
-    fields.add(field);
-    int i = fields.indexOf(field);
-    Change.push(new BufferCreationField(this, field, true, i));
-    Change.push(new BufferCreationField(this, field, false, i));
+		fields.add(field);
+		int i = fields.indexOf(field);
+		Change.push(new BufferCreationField(this, field, true, i));
+		Change.push(new BufferCreationField(this, field, false, i));
 
-    setChanged();
-  }
+		setChanged();
+	}
+	
+	public void addField(int index, Field field) {
+		
+		if (field == null)
+			throw new IllegalArgumentException("field is null");
+
+		fields.add(index, field);
+		int i = fields.indexOf(field);
+		Change.push(new BufferCreationField(this, field, true, i));
+		Change.push(new BufferCreationField(this, field, false, i));
+
+		setChanged();
+		
+	}
 
 	/**
 	 * Add a new child.
@@ -115,17 +128,6 @@ public class TableEntity extends AbstractEntity
 		setChanged();
 	}
 
-	public LinkedList<TableEntity> getAllChilds()
-	{
-		final LinkedList<TableEntity> allChilds = new LinkedList<TableEntity>();
-		allChilds.add(this);
-
-		for (final Inheritance p : childs)
-			allChilds.addAll(p.getChild().getAllChilds());
-
-		return allChilds;
-	}
-
 	public LinkedList<TableEntity> getAllParents()
 	{
 		final LinkedList<TableEntity> allParents = new LinkedList<TableEntity>();
@@ -150,6 +152,14 @@ public class TableEntity extends AbstractEntity
 			copy.add(f);
 
 		return copy;
+	}
+	
+	public LinkedList<ForeignKey> getForeignKeys() {
+		final LinkedList<ForeignKey> fks = new LinkedList<ForeignKey>();
+		for (final Field f : fields)
+			if (f instanceof ForeignKey)
+				fks.add((ForeignKey)f);
+		return fks;
 	}
 
 	/**
@@ -192,16 +202,6 @@ public class TableEntity extends AbstractEntity
 			isChild |= i.getParent().isChildOf(entity);
 
 		return isChild || equals(entity);
-	}
-
-	public boolean isParentOf(TableEntity entity)
-	{
-		boolean isParent = false;
-
-		for (final Inheritance i : childs)
-			isParent |= i.getChild().isParentOf(entity);
-
-		return isParent || equals(entity);
 	}
 
 	/**
@@ -251,22 +251,22 @@ public class TableEntity extends AbstractEntity
 	/**
 	 * Remove the attribute.
 	 * 
-	 * @param attribute
+	 * @param field
 	 *            the attribute to remove
 	 * @return true if the attribute has been removed; false otherwise
 	 */
-	public boolean removeField(Field attribute)
+	public boolean removeField(Field field)
 	{
-		if (attribute == null)
-			throw new IllegalArgumentException("attribute is null");
+		if (field == null)
+			throw new IllegalArgumentException("field is null");
 
-		int i = fields.indexOf(attribute);
-		
-		if (fields.remove(attribute))
+		int i = fields.indexOf(field);
+
+		if (fields.remove(field))
 		{
-	    Change.push(new BufferCreationField(this, attribute, false, i));
-	    Change.push(new BufferCreationField(this, attribute, true, i));
-	    
+			Change.push(new BufferCreationField(this, field, false, i));
+			Change.push(new BufferCreationField(this, field, true, i));
+
 			setChanged();
 			return true;
 		}
@@ -349,5 +349,9 @@ public class TableEntity extends AbstractEntity
 		xml += getLastBalise(depth + 1);
 
 		return xml + tab + "</entity>";
+	}
+
+	public PrimaryKey getPrimaryKey() {
+		return primaryKey;
 	}
 }
