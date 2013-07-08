@@ -3,6 +3,10 @@ package swing.propretiesView;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.SystemColor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,11 +17,13 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
+import classDiagram.relationships.Role;
 import swing.JPanelRounded;
 import abstractDiagram.IDiagramComponent.UpdateMessage;
 import dbDiagram.components.Field;
@@ -37,6 +43,8 @@ public class DBEntityPropreties extends GlobalPropreties
 	private static DBEntityPropreties instance = new DBEntityPropreties();
 
 	private static final long serialVersionUID = 7817631106855232540L;
+	
+	private JPanel keyPanel = new JPanel();
 
 	/**
 	 * Get the unique instance of this class.
@@ -64,45 +72,105 @@ public class DBEntityPropreties extends GlobalPropreties
 		component.setMinimumSize(size);
 	}
 
-	JTextField textName = new JTextField();
-	JComboBox<Field> fieldComboBox = new JComboBox<Field>();
+	JTextField roleTextField = new JTextField();
+	JTextField textFkName = new JTextField();
 	
-	Field currentSelected;
+	Field currentFKSelected;
+	Field currentPKSelected;
 
 	protected DBEntityPropreties()
 	{		
+		setBorder(null);
+		setBackground(Color.WHITE);
+		createEntityPropreties();
+		createFKPKPanel();
+	}
+
+	private void createFKPKPanel() {
+
+
+		final JPanelRounded RolesPanel = new JPanelRounded();
+		RolesPanel.setForeground(Color.GRAY);
+		RolesPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		final GridBagConstraints gbc_RolesPanel = new GridBagConstraints();
+		gbc_RolesPanel.fill = GridBagConstraints.BOTH;
+		gbc_RolesPanel.gridx = 1;
+		gbc_RolesPanel.gridy = 0;
+		add(RolesPanel, gbc_RolesPanel);
+		final GridBagLayout gbl_RolesPanel = new GridBagLayout();
+		gbl_RolesPanel.columnWidths = new int[] { 0, 0 };
+		gbl_RolesPanel.rowHeights = new int[] { 0, 0, 0 };
+		gbl_RolesPanel.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_RolesPanel.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		RolesPanel.setLayout(gbl_RolesPanel);
+
+		final JLabel lblKeys = new JLabel("Keys");
+		lblKeys.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		final GridBagConstraints gbc_lblKeys = new GridBagConstraints();
+		gbc_lblKeys.insets = new Insets(0, 0, 5, 0);
+		gbc_lblKeys.gridx = 0;
+		gbc_lblKeys.gridy = 0;
+		RolesPanel.add(lblKeys, gbc_lblKeys);
+
+		final JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(null);
+		scrollPane.setPreferredSize(new Dimension(0, 0));
+		final GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		RolesPanel.add(scrollPane, gbc_scrollPane);
+
+		scrollPane.setViewportView(keyPanel);
+		
+	}
+	
+	public void createEntityPropreties()
+	{
 
 		final JPanelRounded relationPanel = new JPanelRounded();
 		relationPanel.setForeground(Color.GRAY);
-		relationPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		add(relationPanel);
+		relationPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		final GridBagConstraints gbc_relationPanel = new GridBagConstraints();
+		gbc_relationPanel.insets = new Insets(0, 0, 0, 5);
+		gbc_relationPanel.fill = GridBagConstraints.BOTH;
+		gbc_relationPanel.gridx = 0;
+		gbc_relationPanel.gridy = 0;
+		add(relationPanel, gbc_relationPanel);
+		final GridBagLayout gbl_relationPanel = new GridBagLayout();
+		gbl_relationPanel.columnWidths = new int[] { 0, 0, 0 };
+		gbl_relationPanel.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_relationPanel.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		gbl_relationPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		relationPanel.setLayout(gbl_relationPanel);
 		
-		relationPanel.add(createEntityPropreties());
-	}
 
-	public JPanel createEntityPropreties()
-	{
-		final JPanel panel = new JPanel();
-		Dimension size = new Dimension(200, 110);
-		setAllSize(panel, size);
-		panel.setOpaque(false);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		panel.setAlignmentY(TOP_ALIGNMENT);
-		panel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
+		final JLabel lblRelation = new JLabel("Relation");
+		final GridBagConstraints gbc_lblRelation = new GridBagConstraints();
+		gbc_lblRelation.gridwidth = 2;
+		gbc_lblRelation.insets = new Insets(0, 0, 5, 0);
+		gbc_lblRelation.gridx = 0;
+		gbc_lblRelation.gridy = 0;
+		relationPanel.add(lblRelation, gbc_lblRelation);
+		lblRelation.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
 
-		final JPanel panelTitle = new JPanel(new FlowLayout());
-		panelTitle.setOpaque(false);
-		panelTitle.add(createTitleLabel("Relation"));
-
-		size = new Dimension(200, 20);
-		setAllSize(panelTitle, new Dimension((int) size.getWidth(), 40));
-		setAllSize(textName, size);
-
-		panelTitle.setAlignmentX(LEFT_ALIGNMENT);
-		textName.setAlignmentX(LEFT_ALIGNMENT);
-
-		// Event
-		textName.addKeyListener(new KeyAdapter() {
+		JLabel lblKeyName = new JLabel("Key name");
+		final GridBagConstraints gbc_lblKeyName = new GridBagConstraints();
+		gbc_lblKeyName.anchor = GridBagConstraints.WEST;
+		gbc_lblKeyName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblKeyName.gridx = 0;
+		gbc_lblKeyName.gridy = 1;
+		relationPanel.add(lblKeyName, gbc_lblKeyName);
+		
+		final GridBagConstraints gbc_keyNameLabel = new GridBagConstraints();
+		gbc_keyNameLabel.anchor = GridBagConstraints.WEST;
+		gbc_keyNameLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_keyNameLabel.gridx = 1;
+		gbc_keyNameLabel.gridy = 1;
+		relationPanel.add(textFkName, gbc_keyNameLabel);
+		
+		textFkName.addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyTyped(KeyEvent e)
@@ -111,68 +179,51 @@ public class DBEntityPropreties extends GlobalPropreties
 				{
 					final Binary entity = (Binary) currentObject;
 
-					entity.setName(textName.getText());
+					//entity.getFk().setName(textFkName.getText()); TODO
 					entity.notifyObservers();
 				}
 			}
 		});
-		
-		fieldComboBox.setAlignmentX(LEFT_ALIGNMENT);
 
-		fieldComboBox.addPopupMenuListener(new PopupMenuListener() {
-			
+		relationPanel.add(textFkName, gbc_keyNameLabel);
+		textFkName.setColumns(10);
+		
+
+		JLabel lblLabel = new JLabel("Label");
+		final GridBagConstraints gbc_lblLabel = new GridBagConstraints();
+		gbc_lblLabel.anchor = GridBagConstraints.WEST;
+		gbc_lblLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLabel.gridx = 0;
+		gbc_lblLabel.gridy = 2;
+		relationPanel.add(lblLabel, gbc_lblLabel);
+		
+		final GridBagConstraints gbc_textFieldLabel = new GridBagConstraints();
+		gbc_textFieldLabel.anchor = GridBagConstraints.WEST;
+		gbc_textFieldLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldLabel.gridx = 1;
+		gbc_textFieldLabel.gridy = 2;
+		relationPanel.add(roleTextField, gbc_textFieldLabel);
+		
+		roleTextField.addKeyListener(new KeyAdapter() {
+
 			@Override
-			public void popupMenuWillBecomeVisible(PopupMenuEvent arg0) {
-				fieldComboBox.removeAllItems();
-				for (Field f : ((Binary)currentObject).getSource().getFields()) {
-					fieldComboBox.addItem(f);
-				}
-				for (ForeignKey f : ((Binary)currentObject).getSource().getForeignKeys()) {
-					if (f.getBinary() == (Binary)currentObject) {
-						currentSelected = f;
-						fieldComboBox.setSelectedItem(f);
-					}
+			public void keyTyped(KeyEvent e)
+			{
+				if (e.getKeyChar() == '\n')
+				{
+					final Binary entity = (Binary) currentObject;
+
+					entity.setLabel(roleTextField.getText());
+					entity.notifyObservers();
 				}
 			}
-			
-			@Override
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				//if (currentSelected != null && currentSelected != fieldComboBox.getSelectedItem()) {
-					
-					System.out.println(currentSelected);
-				
-					//Ajout de la nouvelle FK
-					ForeignKey newFK = new ForeignKey((Field)fieldComboBox.getSelectedItem(), "TODO", (Binary)currentObject);
-					int index = ((Binary)currentObject).getSource().getFields().indexOf((Field)fieldComboBox.getSelectedItem());
-					((Binary)currentObject).getSource().removeField((Field)fieldComboBox.getSelectedItem());
-					((Binary)currentObject).getSource().addField(index, newFK);
-					
-					//Suppression de l'ancienne FK
-					Field newField = new Field(currentSelected);
-					index = ((Binary)currentObject).getSource().getFields().indexOf(currentSelected);
-					((Binary)currentObject).getSource().removeField(currentSelected);
-					((Binary)currentObject).getSource().addField(index, newField);
-					
-					//Field newField = new Field(currentSelected);
-					
-					for (Field f : ((Binary)currentObject).getSource().getFields()) {
-						System.out.println(f.getClass());
-					}
-					
-				//}
-			}
-			
-			@Override
-			public void popupMenuCanceled(PopupMenuEvent arg0) {}
 		});
 
-		panel.add(panelTitle);
-		
-		panel.add(textName);
-		
-		panel.add(fieldComboBox);
+		relationPanel.add(roleTextField, gbc_textFieldLabel);
+		roleTextField.setColumns(10);
 
-		return panel;
+		add(relationPanel, gbl_relationPanel);
+		
 	}	
 
 	public JLabel createTitleLabel(String text)
@@ -206,19 +257,17 @@ public class DBEntityPropreties extends GlobalPropreties
 			final Binary entity = (Binary) currentObject;
 
 			if (msg != null && msg.equals(UpdateMessage.UNSELECT))
-				if (!entity.getName().equals(textName.getText()))
-					entity.setName(textName.getText());
+				if (!entity.getName().equals(roleTextField.getText()))
+					entity.setName(roleTextField.getText());
 			entity.notifyObservers();
 
 			if (msg != null && msg.equals(UpdateMessage.SELECT)) {
-				fieldComboBox.removeAllItems();
-				if (((Binary)currentObject).getSource() != null) {
-					for (Field f : ((Binary)currentObject).getSource().getFields()) {
-						fieldComboBox.addItem(f);
-					}
-				}
+				
+				keyPanel.removeAll();
+				keyPanel.add(new SlyumKeyPanel((Binary)currentObject, true));
+				keyPanel.add(new SlyumKeyPanel((Binary)currentObject, false));
 			}	
-			textName.setText(entity.getName());
+			roleTextField.setText(entity.getName());
 			
 			validate();
 		} else if (currentObject instanceof dbDiagram.components.TableEntity) {
@@ -227,13 +276,13 @@ public class DBEntityPropreties extends GlobalPropreties
 
 	
 			if (msg != null && msg.equals(UpdateMessage.UNSELECT))
-				if (!entity.getName().equals(textName.getText()))
-					if (!entity.setName(textName.getText()))
-						textName.setText(entity.getName());
+				if (!entity.getName().equals(roleTextField.getText()))
+					if (!entity.setName(roleTextField.getText()))
+						roleTextField.setText(entity.getName());
 					else
 						entity.notifyObservers();
 	
-			textName.setText(entity.getName());
+			roleTextField.setText(entity.getName());
 	
 			validate();
 		}

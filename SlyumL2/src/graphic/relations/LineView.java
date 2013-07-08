@@ -78,7 +78,7 @@ public abstract class LineView extends GraphicComponent
 	
 	private boolean acceptGripCreation = false;
 	
-	private GraphicComponent source, target;
+	protected GraphicComponent source, target;
 	
 	private BufferBounds[] bb = new BufferBounds[2];
 

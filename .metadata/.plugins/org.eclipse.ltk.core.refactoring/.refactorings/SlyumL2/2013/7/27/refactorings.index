@@ -5,3 +5,7 @@
 1373212469521	Rename local variable 'attribute'
 1373230802695	Rename local variable 'name'
 1373234259568	Rename local variable 'f'
+1373237546487	Rename field 'fkName'
+1373237633378	Rename field 'textName'
+1373237837449	Rename field 'fieldComboBox'
+1373238107704	Rename field 'currentSelected'

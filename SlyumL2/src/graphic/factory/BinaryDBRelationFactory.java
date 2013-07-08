@@ -2,19 +2,15 @@ package graphic.factory;
 
 import graphic.GraphicComponent;
 import graphic.GraphicView;
-import graphic.entity.ClassView;
-import graphic.entity.ClassEntityView;
 import graphic.entity.TableEntityView;
-import graphic.relations.ClassBinaryView;
 import graphic.relations.DBBinaryView;
-import graphic.relations.MultiLineView;
-import graphic.relations.MultiView;
-
-import java.awt.Point;
-import java.awt.Rectangle;
-
-import dbDiagram.relationships.Binary;
 import utility.SMessageDialog;
+import abstractDiagram.IDiagramComponent.UpdateMessage;
+import dbDiagram.components.Field;
+import dbDiagram.components.ForeignKey;
+import dbDiagram.components.TableEntity;
+import dbDiagram.components.dataType.IntDataType;
+import dbDiagram.relationships.Binary;
 
 
 /**
@@ -52,8 +48,30 @@ public class BinaryDBRelationFactory extends DBRelationFactory
 			final TableEntityView source = (TableEntityView) componentMousePressed;
 			final TableEntityView target = (TableEntityView) componentMouseReleased;
 
+			Field pk = null;
+			
+			for (Field f : ((TableEntity)target.getAssociedComponent()).getFields()) {
+				if (f.isPK()) {
+					pk = f;
+					break;
+				}
+			}
+			
+			if (pk == null) {
+				return null;
+			}
+			
 			final Binary binary = new Binary(source.getComponent(), target.getComponent(), false);
+			
 
+			ForeignKey fk = new ForeignKey("fk_" + source.getComponent(), "fk_" + source.getComponent(), new IntDataType(), binary);
+			
+			source.getComponent().addField(fk);
+			source.getComponent().notifyObservers(UpdateMessage.ADD_FIELD);
+			
+			binary.setFk(fk);
+			binary.setPk(pk);
+			
 			final DBBinaryView b = new DBBinaryView(parent, source, target, binary, mousePressed, mouseReleased, true);
 
 			parent.addLineView(b);

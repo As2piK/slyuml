@@ -263,6 +263,12 @@ public class HierarchicalView extends JPanelRounded implements IClassComponentsO
 		if (result == null)
 			result = searchAssociedNodeIn(o, dependenciesNode);
 
+		if (result == null)
+			result = searchAssociedNodeIn(o, tableNode);
+		
+		if (result == null)
+			result = searchAssociedNodeIn(o, relationNode);
+		
 		return result;
 	}
 
@@ -331,7 +337,7 @@ public class HierarchicalView extends JPanelRounded implements IClassComponentsO
 	@Override
 	public void removeComponent(IDiagramComponent component) {
 		final IDiagramNode associedNode = searchAssociedNode(component);
-
+		
 		if (associedNode != null)
 		{
 			treeModel.removeNodeFromParent((DefaultMutableTreeNode)associedNode);

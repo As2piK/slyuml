@@ -161,6 +161,16 @@ public class TableEntity extends AbstractEntity
 				fks.add((ForeignKey)f);
 		return fks;
 	}
+	
+	public LinkedList<Field> getPrimaryKeys() {
+		final LinkedList<Field> copy = new LinkedList<Field>();
+
+		for (final Field f : fields)
+			if (f.isPK())
+				copy.add(f);
+
+		return copy;
+	}
 
 	/**
 	 * Use in XML exportation. Get the type of the entity.
